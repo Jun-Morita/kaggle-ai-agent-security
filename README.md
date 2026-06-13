@@ -232,6 +232,14 @@ The deterministic score did not predict the public LB well for this candidate, b
 - Previous best: `v002_public_reachable` public score `0.565`
 - Local deterministic smoke score: `0.00`
 
+`submit/v004_trajectory_exfil/` has been submitted as the high-score attempt based on the rank-9 public trajectory-search notebook:
+
+- Kernel: `junichiromorita/ai-agent-security-v004-trajectory-exfil`
+- Version: `1`
+- Submission ref: `53637051`
+- Status: pending as of 2026-06-13 21:15 JST
+- Local deterministic smoke score: `0.00`
+
 ## Current Baseline Knowledge
 
 Saved public notebooks under `references/raw/notebooks/` are ignored by Git; their useful parts are summarized in [references/knowledge/notebooks.md](references/knowledge/notebooks.md).
