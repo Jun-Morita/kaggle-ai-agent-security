@@ -240,6 +240,15 @@ The deterministic score did not predict the public LB well for this candidate, b
 - Status: pending as of 2026-06-13 21:15 JST
 - Local deterministic smoke score: `0.00`
 
+`submit/v005_trajectory_exfil_aggressive/` has been submitted as the aggressive profile variant based on the public highest-score `eda-agent-security-trajectory-search` notebook:
+
+- Kernel: `junichiromorita/ai-agent-security-v005-trajectory-exfil-aggressive`
+- Version: `1`
+- Submission ref: `53641117`
+- Status: pending as of 2026-06-13 23:29 JST
+- Local deterministic smoke score: `0.00`
+- Main change from `v004`: max verified `600`, return target `300`, static fallback `100`, empty-run fallback `32`, search fraction `0.35`, max search `850s`
+
 ## Current Baseline Knowledge
 
 Saved public notebooks under `references/raw/notebooks/` are ignored by Git; their useful parts are summarized in [references/knowledge/notebooks.md](references/knowledge/notebooks.md).
@@ -247,6 +256,7 @@ Saved public notebooks under `references/raw/notebooks/` are ignored by Git; the
 - Official getting started notebook: submission harness and minimal `attack.py` generation pattern.
 - `baseline-solution-4-900`: broad prompt-bank baseline across four predicate families, with snapshot branching and mutation.
 - `verify-and-keep-deterministic-red-team-attack`: fast public-guardrail baseline focused on `EXFILTRATION` and `CONFUSED_DEPUTY`.
+- `eda-agent-security-trajectory-search`: public highest-score trajectory-search notebook; same logic as `17-1` but with `SEARCH_PROFILE = "aggressive"`.
 
 ## Practical Notes
 
