@@ -196,6 +196,25 @@ uv run kaggle competitions submit \
 
 Versions `1-6` were useful only for debugging submission wiring. Future submissions should copy the version 7 pattern: script entrypoint is `attack.py`, notebook GPU is disabled, `/kaggle/working/attack.py` is written, and a placeholder `submission.csv` is emitted for Kaggle's pre-submit check.
 
+## Active Candidate
+
+`submit/v002_public_reachable/` is the first score-improvement candidate after the wiring baseline. It keeps the `v001` submission harness and replaces only the attack logic:
+
+- fast verify-and-keep loop;
+- small public fixture / untrusted-content probe set;
+- direct `http.post` exfil calibration;
+- batched neutral collector URLs to increase tool-call cell diversity;
+- small confused-deputy probe set;
+- limited exfil fallback when local deterministic smoke tests produce no findings.
+
+Current local status:
+
+- `ruff check submit/v002_public_reachable/attack.py`: passed
+- `aicomp validate redteam submit/v002_public_reachable/attack.py`: passed
+- `aicomp test redteam ... --budget-s 60 --agent deterministic`: completed, score `0.00`
+
+The deterministic score is not expected to predict public LB well for this candidate, because the main probes are aimed at public model behavior. Push/submit only after explicitly choosing to spend a Kaggle version/submission attempt.
+
 ## Current Baseline Knowledge
 
 Saved public notebooks under `references/raw/notebooks/` are ignored by Git; their useful parts are summarized in [references/knowledge/notebooks.md](references/knowledge/notebooks.md).
