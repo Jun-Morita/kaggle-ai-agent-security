@@ -3,7 +3,12 @@ set -euo pipefail
 
 cd "$(dirname "$0")"
 
-CONFIG_PATH="${1:-config.yaml}"
+ATTACK_PATH="${1:-attack.py}"
+SDK_ROOT="${SDK_ROOT:-../../data/raw/ai-agent-security-multi-step-tool-attacks}"
 
-# Edit this command for each competition.
-uv run python train.py --config "$CONFIG_PATH"
+PYTHONPATH="$SDK_ROOT${PYTHONPATH:+:$PYTHONPATH}" \
+  uv run python -m aicomp_sdk.cli.main validate redteam "$ATTACK_PATH"
+
+PYTHONPATH="$SDK_ROOT${PYTHONPATH:+:$PYTHONPATH}" \
+  uv run python -m aicomp_sdk.cli.main test redteam "$ATTACK_PATH" \
+  --budget-s 60 --agent deterministic

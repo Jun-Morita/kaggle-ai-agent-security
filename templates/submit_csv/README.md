@@ -1,6 +1,6 @@
-# CSV Submission Template
+# Legacy CSV Submission Template
 
-CSV 直接提出用の最小テンプレート。
+CSV 直接提出用の旧テンプレート。このコンペでは主提出経路ではない。通常は `templates/submit_attack/` を使う。
 
 ```text
 submit/v001_exp001_baseline/
@@ -11,7 +11,8 @@ submit/v001_exp001_baseline/
 
 ## Before Submit
 
-- [ ] 元実験、fold、config、CV を記録した
+- [ ] このコンペでは通常使わない旧テンプレートでよい理由を記録した
+- [ ] 元実験、config、local replay 結果、Kaggle LB 結果を記録した
 - [ ] 行数が sample submission と一致する
 - [ ] required columns が一致する
 - [ ] ID の順序が一致する

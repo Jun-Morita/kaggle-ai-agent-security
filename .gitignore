@@ -206,6 +206,14 @@ tempCodeRunnerFile.py
 # Ruff stuff:
 .ruff_cache/
 
+# Kaggle data and generated datasets
+data/raw/
+data/interim/
+data/processed/
+data/external/
+references/raw/
+.aicomp/
+
 # PyPI configuration file
 .pypirc
 

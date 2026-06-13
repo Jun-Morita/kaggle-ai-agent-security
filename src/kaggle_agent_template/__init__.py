@@ -1,1 +1,1 @@
-"""Shared utilities for Kaggle agent templates."""
+"""Shared utilities for the AI Agent Security Kaggle workspace."""

@@ -1,6 +1,6 @@
-# Folds
+# Legacy Folds Area
 
-Fold 定義を保存する場所。
+通常の教師あり Kaggle コンペ向けに残している旧領域。このコンペは tabular prediction ではなく、`AttackAlgorithm` の replay 結果を評価する Code Competition なので、通常は fold 定義を使わない。
 
 ```text
 workspace/folds/
@@ -11,8 +11,6 @@ workspace/folds/
 
 ## Rules
 
-- fold は実験ごとに作り直さず、version を付けて共有する。
-- group、時系列、患者、ユーザー、画像などのリーク単位を確認してから作る。
-- `folds.csv` には少なくとも ID と fold 番号を含める。
-- fold を変えたら新しい version を作る。古い fold は消さない。
-- 使った fold version は config と `SESSION_NOTES.md` に記録する。
+- このコンペの通常ワークフローでは使わない。
+- もし比較用の固定 public fixture split などを作る場合は、fold ではなく replay set / fixture set として名前を付ける。
+- validation は `aicomp validate redteam`、`aicomp test redteam`、local replay score、Kaggle LB で管理する。

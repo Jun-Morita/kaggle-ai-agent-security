@@ -1,25 +1,20 @@
 experiment:
   name: exp001_baseline
-  seed: 42
+  seed: 123
 
-data:
-  train_path: ../../data/raw/train.csv
-  test_path: ../../data/raw/test.csv
-  target: target
-  id_column: id
+sdk:
+  root: ../../data/raw/ai-agent-security-multi-step-tool-attacks
 
-cv:
-  method: stratified_kfold
-  n_splits: 5
-  folds_csv: TBD
+attack:
+  file: attack.py
+  budget_s: 60
+  agent: deterministic
+  env: sandbox
+  max_tool_hops: 4
 
-metric:
-  name: metric_name
+score:
+  name: normalized_attack_score
   direction: maximize
-
-model:
-  name: sklearn_baseline
-  params: {}
 
 output:
   dir: results

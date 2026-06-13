@@ -1,0 +1,15 @@
+{
+  "id": "your-kaggle-username/ai-agent-security-v001-baseline",
+  "title": "ai-agent-security-v001-baseline",
+  "code_file": "submission.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_internet": false,
+  "dataset_sources": [],
+  "competition_sources": [
+    "ai-agent-security-multi-step-tool-attacks"
+  ],
+  "kernel_sources": []
+}

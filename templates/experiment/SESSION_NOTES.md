@@ -4,11 +4,9 @@
 
 - Experiment:
 - Started:
-- Notebook:
-- Script:
+- Attack file:
 - Config:
-- Fold version:
-- Metric version:
+- SDK version:
 
 ## Hypothesis
 
@@ -16,10 +14,11 @@
 
 ## Validation Setup
 
-- Fold file:
-- Fold reason:
-- Metric implementation:
-- Metric sanity check:
+- Agent:
+- Env:
+- Budget:
+- Guardrail:
+- Replay limits:
 
 ## Changes
 
@@ -46,26 +45,33 @@
 
 ```bash
 ./run.sh
-# or
-./run.sh configs/variant.yaml
+# or validate a variant
+./run.sh configs/variant_attack.py
 ```
 
 - Run metadata:
 
 ## Results
 
-| Metric | CV | LB | Notes |
-|---|---:|---:|---|
+| Check | Score / count | Notes |
+|---|---:|---|
+| validate redteam |  |  |
+| test redteam deterministic |  |  |
+| evaluate redteam gym |  |  |
+| public LB |  |  |
+| private LB |  |  |
 
 ## Run Log
 
-| Config | CV | LB | Status | Notes |
+| Variant | Local score | Public LB | Status | Notes |
 |---|---:|---:|---|---|
 
-## Error Analysis
+## Replay Analysis
 
-- Checked samples:
-- Error patterns:
+- Findings count:
+- Unique cells:
+- Predicates:
+- Non-replayable candidates:
 - Next fix:
 
 ## Decision

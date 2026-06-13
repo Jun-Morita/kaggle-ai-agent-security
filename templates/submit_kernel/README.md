@@ -1,6 +1,6 @@
-# Kaggle Kernel Submission Template
+# Legacy Generic Kaggle Kernel Template
 
-Kaggle kernel 提出用の最小テンプレート。`.py` を正本にして Kaggle script kernel として扱う。
+汎用 CSV / inference kernel 用の旧テンプレート。このコンペは Code Competition なので、通常は `templates/submit_attack/` を使う。
 
 ```text
 submit/v001_exp001_baseline/
@@ -12,7 +12,7 @@ submit/v001_exp001_baseline/
 
 ## Before Submit
 
-- [ ] CSV Competition か Code Competition か確認した
+- [ ] このコンペでは通常使わない旧テンプレートでよい理由を記録した
 - [ ] Kaggle kernel の internet 設定を確認した
 - [ ] input dataset と model path を確認した
 - [ ] `submission.csv` の形式 assert を入れた

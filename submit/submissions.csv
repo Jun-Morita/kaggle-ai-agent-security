@@ -1,1 +1,1 @@
-timestamp,version,source_experiment,fold_version,cv,public_lb,private_lb,file,config_hash,git_sha,references,note
+timestamp,version,source_experiment,local_score,public_lb,private_lb,kernel_slug,attack_file,config_hash,git_sha,references,note
