@@ -26,10 +26,11 @@ Result:
 - Latest local history: `.aicomp/history/attack_20260613_142228.json`
 - Kaggle kernel: `junichiromorita/ai-agent-security-v003-broad-prompt-bank` v1
 - Kaggle submission ref: `53625867`
-- Kaggle status: `PENDING` after repeated CLI checks
-- Pending Kaggle public score
+- Kaggle script version: `326790110`
+- Kaggle status: `Succeeded`
+- Kaggle public score: `0.630`
 
 Notes:
 
 - This is intentionally riskier than `v002`; it spends budget on broader predicate families.
-- Compare against `v002_public_reachable` public score `0.565`.
+- It improved over `v002_public_reachable` public score `0.565` by `+0.065`.

@@ -51,6 +51,7 @@ UV_CACHE_DIR=/tmp/uv-cache \
 - Kernel: `junichiromorita/ai-agent-security-v003-broad-prompt-bank`
 - Version: `1`
 - Submission ref: `53625867`
-- Status: `PENDING` after repeated CLI checks on 2026-06-13
-- Public score: pending
+- Script version: `326790110`
+- Status: `Succeeded`
+- Public score: `0.630`
 - Local deterministic smoke score: `0.00`

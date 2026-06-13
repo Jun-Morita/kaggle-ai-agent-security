@@ -227,7 +227,9 @@ The deterministic score did not predict the public LB well for this candidate, b
 - Kernel: `junichiromorita/ai-agent-security-v003-broad-prompt-bank`
 - Version: `1`
 - Submission ref: `53625867`
-- Status: pending as of 2026-06-13 14:31 JST
+- Script version: `326790110`
+- Public score: `0.630`
+- Previous best: `v002_public_reachable` public score `0.565`
 - Local deterministic smoke score: `0.00`
 
 ## Current Baseline Knowledge
