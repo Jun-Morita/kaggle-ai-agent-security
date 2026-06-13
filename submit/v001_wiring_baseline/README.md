@@ -1,9 +1,11 @@
-# Attack Submission Template
+# v001 Wiring Baseline
 
-Template for Kaggle **AI Agent Security - Multi-Step Tool Attacks** submissions.
+First Kaggle submission candidate for **AI Agent Security - Multi-Step Tool Attacks**.
+
+Purpose: keep the submission wiring fixed and easy to validate before improving attack quality. This baseline is expected to be low-score; use it to confirm `attack.py` generation, SDK validation, local smoke test, and Kaggle kernel push flow.
 
 ```text
-submit/v001_baseline/
+submit/v001_wiring_baseline/
 ├─ README.md
 ├─ attack.py
 └─ kernel-metadata.json
@@ -20,10 +22,10 @@ From the repository root:
 
 ```bash
 PYTHONPATH=data/raw/ai-agent-security-multi-step-tool-attacks \
-  uv run python -m aicomp_sdk.cli.main validate redteam submit/v001_baseline/attack.py
+  uv run python -m aicomp_sdk.cli.main validate redteam submit/v001_wiring_baseline/attack.py
 
 PYTHONPATH=data/raw/ai-agent-security-multi-step-tool-attacks \
-  uv run python -m aicomp_sdk.cli.main test redteam submit/v001_baseline/attack.py \
+  uv run python -m aicomp_sdk.cli.main test redteam submit/v001_wiring_baseline/attack.py \
   --budget-s 60 --agent deterministic
 ```
 
@@ -32,23 +34,23 @@ Use `--env gym` with `evaluate redteam` for public-path parity once the local SD
 ## Kaggle Push
 
 ```bash
-uv run kaggle kernels push -p submit/v001_baseline
-uv run kaggle kernels status your-kaggle-username/ai-agent-security-v001-baseline
+uv run kaggle kernels push -p submit/v001_wiring_baseline
+uv run kaggle kernels status your-kaggle-username/ai-agent-security-v001-wiring-baseline
 ```
 
 ## Competition Submit
 
-Prefer CLI submission when the Kaggle Notebook submit dialog cannot find `attack.py`:
+UI submit may fail with `Could not find provided output file attack.py` even when the Output tab shows `attack.py`. Use CLI submission for the completed kernel version:
 
 ```bash
 uv run kaggle competitions submit \
   ai-agent-security-multi-step-tool-attacks \
-  -k your-kaggle-username/ai-agent-security-v001-baseline \
-  -v 1 \
+  -k junichiromorita/ai-agent-security-v001-wiring-baseline \
+  -v 6 \
   -f submission.csv \
-  -m "v001 baseline"
+  -m "v001 wiring baseline"
 ```
 
-For this competition, `-f submission.csv` refers to the file produced by the competition rerun gateway after it loads `/kaggle/working/attack.py`.
+This consumes a daily submission slot. This baseline is only for wiring confirmation and is expected to score 0.
 
 Record each push and submission in `submit/SUBMISSIONS.md` and `submit/submissions.csv`.

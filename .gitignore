@@ -213,6 +213,7 @@ data/processed/
 data/external/
 references/raw/
 .aicomp/
+submit/**/output/
 
 # PyPI configuration file
 .pypirc

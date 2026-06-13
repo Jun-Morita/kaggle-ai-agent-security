@@ -1,6 +1,6 @@
 {
-  "id": "your-kaggle-username/ai-agent-security-v001-baseline",
-  "title": "ai-agent-security-v001-baseline",
+  "id": "junichiromorita/ai-agent-security-v001-wiring-baseline",
+  "title": "ai-agent-security-v001-wiring-baseline",
   "code_file": "attack.py",
   "language": "python",
   "kernel_type": "script",

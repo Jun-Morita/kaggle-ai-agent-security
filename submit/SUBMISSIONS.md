@@ -2,6 +2,7 @@
 
 | Version | Date | Source experiment | Public LB | Private LB | Kernel / file | References | Notes |
 |---|---|---|---:|---:|---|---|---|
+| v001_wiring_baseline | 2026-06-13 | template wiring | 0.330 |  | `junichiromorita/ai-agent-security-v001-wiring-baseline` v7 | `templates/submit_attack` | Succeeded. Versions 1-6 exposed submission wiring issues. Version 7 disables notebook GPU, writes `/kaggle/working/attack.py`, writes placeholder `submission.csv`, and was accepted by `kaggle competitions submit ... -f submission.csv`. Local validate passed; deterministic smoke 60s completed with attack score 0.00. |
 
 `SUBMISSIONS.md` は人間向けの要約です。比較や再現に使う機械可読ログは `submit/submissions.csv` に残します。
 
