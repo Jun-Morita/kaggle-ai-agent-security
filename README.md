@@ -222,6 +222,14 @@ Kaggle result:
 
 The deterministic score did not predict the public LB well for this candidate, because the main probes are aimed at public model behavior.
 
+`submit/v003_broad_prompt_bank/` has also been submitted as the riskier broad prompt-bank variant:
+
+- Kernel: `junichiromorita/ai-agent-security-v003-broad-prompt-bank`
+- Version: `1`
+- Submission ref: `53625867`
+- Status: pending as of 2026-06-13 14:31 JST
+- Local deterministic smoke score: `0.00`
+
 ## Current Baseline Knowledge
 
 Saved public notebooks under `references/raw/notebooks/` are ignored by Git; their useful parts are summarized in [references/knowledge/notebooks.md](references/knowledge/notebooks.md).
