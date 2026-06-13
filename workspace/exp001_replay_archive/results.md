@@ -24,9 +24,12 @@ Result:
 - SDK deterministic smoke test: completed in about 18.6s
 - Local deterministic score: `0.00`
 - Latest local history: `.aicomp/history/attack_20260613_110405.json`
+- Kaggle kernel: `junichiromorita/ai-agent-security-v002-public-reachable` v1
+- Kaggle public score: `0.565`
+- Previous public score: `0.330` from `v001_wiring_baseline` v7
 
 Notes:
 
 - This candidate is expected to be judged by Kaggle public model behavior rather than deterministic smoke-score parity.
 - The main scoring hypothesis is improved `EXFILTRATION` coverage through neutral URLs and batched `http.post` prompts.
-- Do not record this in `submit/SUBMISSIONS.md` until it is pushed/submitted to Kaggle.
+- This was recorded in `submit/SUBMISSIONS.md` and `submit/submissions.csv` after the Kaggle result was available.

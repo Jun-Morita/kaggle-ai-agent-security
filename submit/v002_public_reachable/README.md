@@ -47,3 +47,11 @@ UV_CACHE_DIR=/tmp/uv-cache \
 ```
 
 Record the result in `submit/SUBMISSIONS.md` and `submit/submissions.csv`.
+
+## Result
+
+- Kernel: `junichiromorita/ai-agent-security-v002-public-reachable`
+- Version: `1`
+- Public score: `0.565`
+- Submitted at: 2026-06-13
+- Local deterministic smoke score: `0.00`

@@ -213,7 +213,14 @@ Current local status:
 - `aicomp validate redteam submit/v002_public_reachable/attack.py`: passed
 - `aicomp test redteam ... --budget-s 60 --agent deterministic`: completed, score `0.00`
 
-The deterministic score is not expected to predict public LB well for this candidate, because the main probes are aimed at public model behavior. Push/submit only after explicitly choosing to spend a Kaggle version/submission attempt.
+Kaggle result:
+
+- Kernel: `junichiromorita/ai-agent-security-v002-public-reachable`
+- Version: `1`
+- Public score: `0.565`
+- Previous baseline: `v001_wiring_baseline` public score `0.330`
+
+The deterministic score did not predict the public LB well for this candidate, because the main probes are aimed at public model behavior.
 
 ## Current Baseline Knowledge
 
