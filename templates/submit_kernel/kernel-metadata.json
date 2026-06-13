@@ -1,0 +1,13 @@
+{
+  "id": "your-kaggle-username/v001-exp001-baseline",
+  "title": "v001 exp001 baseline",
+  "code_file": "inference.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_internet": false,
+  "dataset_sources": [],
+  "competition_sources": [],
+  "kernel_sources": []
+}

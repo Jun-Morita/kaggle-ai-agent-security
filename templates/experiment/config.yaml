@@ -1,0 +1,25 @@
+experiment:
+  name: exp001_baseline
+  seed: 42
+
+data:
+  train_path: ../../data/raw/train.csv
+  test_path: ../../data/raw/test.csv
+  target: target
+  id_column: id
+
+cv:
+  method: stratified_kfold
+  n_splits: 5
+  folds_csv: TBD
+
+metric:
+  name: metric_name
+  direction: maximize
+
+model:
+  name: sklearn_baseline
+  params: {}
+
+output:
+  dir: results
