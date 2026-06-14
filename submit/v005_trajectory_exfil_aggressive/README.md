@@ -49,6 +49,6 @@ UV_CACHE_DIR=/tmp/uv-cache \
 - Version: `1`
 - Submission ref: `53641117`
 - Script version: `326915954`
-- Status: `Notebook Running` after about 9h as of 2026-06-14 morning JST
-- Public score: pending
+- Status: `SUCCEEDED`
+- Public score: `27.150`
 - Local deterministic smoke score: `0.00`

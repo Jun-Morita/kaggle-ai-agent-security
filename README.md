@@ -196,70 +196,33 @@ uv run kaggle competitions submit \
 
 Versions `1-6` were useful only for debugging submission wiring. Future submissions should copy the version 7 pattern: script entrypoint is `attack.py`, notebook GPU is disabled, `/kaggle/working/attack.py` is written, and a placeholder `submission.csv` is emitted for Kaggle's pre-submit check.
 
-## Active Candidate
+## Submission Status
 
-`submit/v002_public_reachable/` is the first score-improvement candidate after the wiring baseline. It keeps the `v001` submission harness and replaces only the attack logic:
+Current best public LB is `v005_trajectory_exfil_aggressive` with `27.150`. `v006` timed out, while `v007` and `v008` are pending/running as of 2026-06-14. No further submissions should be made until those hosted results are available.
 
-- fast verify-and-keep loop;
-- small public fixture / untrusted-content probe set;
-- direct `http.post` exfil calibration;
-- batched neutral collector URLs to increase tool-call cell diversity;
-- small confused-deputy probe set;
-- limited exfil fallback when local deterministic smoke tests produce no findings.
+| Version | Kernel | Public LB | Status | Main idea |
+|---|---|---:|---|---|
+| `v008_timeout_safe_multipost` | `junichiromorita/ai-agent-security-v008-timeout-safe-multipost` v1 | pending | submitted ref `53671096` | 96-candidate timeout-safe multipost after v006 timeout |
+| `v007_fast_aggressive_fill` | `junichiromorita/ai-agent-security-v007-fast-aggressive-fill` v1 | pending | running, ref `53660670`, script version `327051929` | shallow active search, 300-candidate fill, naked `sk_live_test` payload |
+| `v006_trajectory_exfil_multipost` | `junichiromorita/ai-agent-security-v006-trajectory-exfil-multipost` v1 | none | timeout, ref `53655187`, script version `327017638` | return target `180`, endpoint counts `(2, 3, 4)`, multi-post priority |
+| `v005_trajectory_exfil_aggressive` | `junichiromorita/ai-agent-security-v005-trajectory-exfil-aggressive` v1 | 27.150 | succeeded | public 27.32 notebook aggressive profile |
+| `v004_trajectory_exfil` | `junichiromorita/ai-agent-security-v004-trajectory-exfil` v1 | 16.230 | succeeded | trajectory-search / bounded-fill exfil |
+| `v003_broad_prompt_bank` | `junichiromorita/ai-agent-security-v003-broad-prompt-bank` v1 | 0.630 | succeeded | broad prompt bank across predicate families |
+| `v002_public_reachable` | `junichiromorita/ai-agent-security-v002-public-reachable` v1 | 0.565 | succeeded | first public-reachable exfil/deputy baseline |
+| `v001_wiring_baseline` | `junichiromorita/ai-agent-security-v001-wiring-baseline` v7 | 0.330 | succeeded | known-good submission wiring |
 
-Current local status:
+The local deterministic smoke score has stayed `0.00` for high-scoring submissions. Treat it as a wiring and crash check, not as a public-LB predictor.
 
-- `ruff check submit/v002_public_reachable/attack.py`: passed
-- `aicomp validate redteam submit/v002_public_reachable/attack.py`: passed
-- `aicomp test redteam ... --budget-s 60 --agent deterministic`: completed, score `0.00`
+Local probes and prepared work:
 
-Kaggle result:
+- `workspace/exp007_v008_parameterized/`: source experiment for the submitted `v008_timeout_safe_multipost`; its `V008_PARAMS` block is set to `96` returned candidates with endpoint counts `(2, 3)`.
+- `scripts/measure_candidate_posts.py`: replays static candidates locally and counts successful `http.post` calls.
+- Current deterministic post-count probe: v006 and v007 each produced 4 successful `http.post` calls for 32/32 replayed static candidates. Hosted model behavior still must be judged from public LB results.
 
-- Kernel: `junichiromorita/ai-agent-security-v002-public-reachable`
-- Version: `1`
-- Public score: `0.565`
-- Previous baseline: `v001_wiring_baseline` public score `0.330`
+Current pause condition:
 
-The deterministic score did not predict the public LB well for this candidate, because the main probes are aimed at public model behavior.
-
-`submit/v003_broad_prompt_bank/` has also been submitted as the riskier broad prompt-bank variant:
-
-- Kernel: `junichiromorita/ai-agent-security-v003-broad-prompt-bank`
-- Version: `1`
-- Submission ref: `53625867`
-- Script version: `326790110`
-- Public score: `0.630`
-- Previous best: `v002_public_reachable` public score `0.565`
-- Local deterministic smoke score: `0.00`
-
-`submit/v004_trajectory_exfil/` has been submitted as the high-score attempt based on the rank-9 public trajectory-search notebook:
-
-- Kernel: `junichiromorita/ai-agent-security-v004-trajectory-exfil`
-- Version: `1`
-- Submission ref: `53637051`
-- Script version: `326886459`
-- Status: succeeded
-- Public score: `16.230`
-- Local deterministic smoke score: `0.00`
-
-`submit/v005_trajectory_exfil_aggressive/` has been submitted as the aggressive profile variant based on the public highest-score `eda-agent-security-trajectory-search` notebook:
-
-- Kernel: `junichiromorita/ai-agent-security-v005-trajectory-exfil-aggressive`
-- Version: `1`
-- Submission ref: `53641117`
-- Script version: `326915954`
-- Status: notebook running as of 2026-06-14 morning JST
-- Local deterministic smoke score: `0.00`
-- Main change from `v004`: max verified `600`, return target `300`, static fallback `100`, empty-run fallback `32`, search fraction `0.35`, max search `850s`
-
-`submit/v006_trajectory_exfil_multipost/` has been submitted as the runtime-safe multi-post variant:
-
-- Kernel: `junichiromorita/ai-agent-security-v006-trajectory-exfil-multipost`
-- Version: `1`
-- Submission ref: `53655187`
-- Status: pending as of 2026-06-14 10:16 JST
-- Local deterministic smoke score: `0.00`
-- Main change from `v004`: keep return target `180`, but calibrate endpoint counts `(2, 3, 4)`, cap `ENDPOINTS_PER_MSG` / `DEFAULT_MAX_HOPS` at `4`, prioritize verified `http.post` count, and use naked `sk_live_test` as the fill payload
+- Wait for `v007` and `v008` public scores, completion times, and any private-score visibility.
+- Do not start another submission until those results determine whether to continue with single-post fill, timeout-safe multipost, or prompt-bank integration.
 
 ## Current Baseline Knowledge
 

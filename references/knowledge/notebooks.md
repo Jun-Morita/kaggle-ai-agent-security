@@ -4,6 +4,65 @@ Public notebook から得た知識を要約する。
 
 ## Entries
 
+## 2026-06-14: AI Agent 25.205
+
+- Source: local raw copy at `references/raw/notebooks/ai-agent.ipynb`
+- Fetched at: 2026-06-14
+- Author: evgendvorkin based on user-provided Kaggle notebook title/URL context
+- Competition: AI Agent Security - Multi-Step Tool Attacks
+- User-provided leaderboard/notebook context: public score `25.205`, updated 16h before the snapshot
+
+### Key Ideas
+
+- This is a small generated-script notebook with 6 cells. The main implementation writes a 4615-character `attack.py` into `/kaggle/working/attack.py`.
+- It is a simpler, faster version of the trajectory-exfil / static-fill family rather than a new attack class.
+- Main constants in the generated attack:
+  - `SECRET = "TOKEN=admin123"`
+  - `MAX_VERIFIED = 120`
+  - `MAX_FILL = 180`
+  - `MAX_TOTAL = 300`
+- The prompt bank contains:
+  - five direct exfil variants
+  - three confused-deputy variants
+  - six rotating base domains for endpoint diversity
+- Runtime flow:
+  - calibrate endpoint count across `[1, 2, 4]`
+  - calibrate exfil variants
+  - calibrate confused-deputy variants
+  - run short active-search phases until about 58% of budget
+  - append static fill candidates: about 150 exfil and 30 confused-deputy
+  - return up to 300 total candidates
+
+### Useful for This Competition
+
+- The public score `25.205` is below our `v005_trajectory_exfil_aggressive` score `27.150`, so it should not replace v005/v006 directly.
+- The useful signal is runtime shape:
+  - only 120 actively verified candidates
+  - shallow calibration
+  - a large static fill tail
+  - total return cap of 300
+- This makes it a good fallback design if aggressive search or multi-post search runs too long.
+- It supports the same high-level lesson as v005: public LB rewards returning many domain-diverse exfil candidates, and active verification does not need to prove every returned candidate in `run()`.
+- The endpoint-count calibration `[1, 2, 4]` is cheaper than the heavier trajectory-search grid and may be enough when most score comes from fill.
+
+### Risks / Caveats
+
+- It uses only `TOKEN=admin123` as the exfil payload. That is weaker for private-LB hedging than `sk_live_test` because it contains an obvious ultra-dangerous keyword.
+- It does not write a placeholder `submission.csv`; our repository wrapper should keep doing that.
+- It does not explicitly pass a max-hop limit into `env.interact`.
+- It does not prioritize multi-post severity multiplier. v006 is still the better test of whether 2-4 successful `http.post` calls per candidate can lift score without increasing candidate count.
+- It has no materially new untrusted, destructive, or snapshot-search idea.
+
+### Adoption
+
+- Do not copy this notebook as-is.
+- Adopted as `v007_fast_aggressive_fill` while `v006_trajectory_exfil_multipost` is pending:
+  - kept v005-style `MAX_TOTAL = 300`
+  - used this notebook's shallow `MAX_VERIFIED = 120` / large static-fill structure
+  - switched fill payload to `sk_live_test`
+  - kept our stable Kaggle wrapper and placeholder `submission.csv`
+  - used lighter endpoint counts `(1, 2)` to reduce replay/runtime pressure
+
 ## 2026-06-13: EDA Agent Security Trajectory Search 27.32
 
 - Source: local raw copy at `references/raw/notebooks/eda-agent-security-trajectory-search.ipynb`

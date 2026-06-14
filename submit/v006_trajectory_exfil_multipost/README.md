@@ -48,7 +48,9 @@ UV_CACHE_DIR=/tmp/uv-cache \
 - Kernel: `junichiromorita/ai-agent-security-v006-trajectory-exfil-multipost`
 - Version: `1`
 - Submission ref: `53655187`
-- Script version: pending
-- Status: `PENDING` as of 2026-06-14 10:16 JST
-- Public score: pending
+- Script version: `327017638`
+- Status: `Notebook Timeout` as of 2026-06-14 evening JST
+- Public score: none
 - Local deterministic smoke score: `0.00`
+
+Interpretation: `180` candidates with multi-post prompts exceeded the hosted runtime envelope. This does not prove the multi-post prompt failed; it means future multipost variants need a much lower returned-candidate count and shorter active-search budget.
