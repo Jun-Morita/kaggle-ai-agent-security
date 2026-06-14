@@ -46,6 +46,7 @@ UV_CACHE_DIR=/tmp/uv-cache \
 - Kernel: `junichiromorita/ai-agent-security-v004-trajectory-exfil`
 - Version: `1`
 - Submission ref: `53637051`
-- Status: `PENDING` after repeated CLI checks on 2026-06-13
-- Public score: pending
+- Script version: `326886459`
+- Status: `SUCCEEDED`
+- Public score: `16.230`
 - Local deterministic smoke score: `0.00`

@@ -237,7 +237,9 @@ The deterministic score did not predict the public LB well for this candidate, b
 - Kernel: `junichiromorita/ai-agent-security-v004-trajectory-exfil`
 - Version: `1`
 - Submission ref: `53637051`
-- Status: pending as of 2026-06-13 21:15 JST
+- Script version: `326886459`
+- Status: succeeded
+- Public score: `16.230`
 - Local deterministic smoke score: `0.00`
 
 `submit/v005_trajectory_exfil_aggressive/` has been submitted as the aggressive profile variant based on the public highest-score `eda-agent-security-trajectory-search` notebook:
@@ -245,9 +247,19 @@ The deterministic score did not predict the public LB well for this candidate, b
 - Kernel: `junichiromorita/ai-agent-security-v005-trajectory-exfil-aggressive`
 - Version: `1`
 - Submission ref: `53641117`
-- Status: pending as of 2026-06-13 23:29 JST
+- Script version: `326915954`
+- Status: notebook running as of 2026-06-14 morning JST
 - Local deterministic smoke score: `0.00`
 - Main change from `v004`: max verified `600`, return target `300`, static fallback `100`, empty-run fallback `32`, search fraction `0.35`, max search `850s`
+
+`submit/v006_trajectory_exfil_multipost/` has been submitted as the runtime-safe multi-post variant:
+
+- Kernel: `junichiromorita/ai-agent-security-v006-trajectory-exfil-multipost`
+- Version: `1`
+- Submission ref: `53655187`
+- Status: pending as of 2026-06-14 10:16 JST
+- Local deterministic smoke score: `0.00`
+- Main change from `v004`: keep return target `180`, but calibrate endpoint counts `(2, 3, 4)`, cap `ENDPOINTS_PER_MSG` / `DEFAULT_MAX_HOPS` at `4`, prioritize verified `http.post` count, and use naked `sk_live_test` as the fill payload
 
 ## Current Baseline Knowledge
 

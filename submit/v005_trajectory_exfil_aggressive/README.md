@@ -48,6 +48,7 @@ UV_CACHE_DIR=/tmp/uv-cache \
 - Kernel: `junichiromorita/ai-agent-security-v005-trajectory-exfil-aggressive`
 - Version: `1`
 - Submission ref: `53641117`
-- Status: `PENDING` as of 2026-06-13 23:29 JST
+- Script version: `326915954`
+- Status: `Notebook Running` after about 9h as of 2026-06-14 morning JST
 - Public score: pending
 - Local deterministic smoke score: `0.00`

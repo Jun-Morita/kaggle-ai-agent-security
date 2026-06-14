@@ -26,11 +26,13 @@ Result:
 - Latest local history: `.aicomp/history/attack_20260613_232733.json`
 - Kaggle kernel: `junichiromorita/ai-agent-security-v005-trajectory-exfil-aggressive` v1
 - Kaggle submission ref: `53641117`
-- Kaggle status: `PENDING` as of 2026-06-13 23:29 JST
+- Kaggle script version: `326915954`
+- Kaggle status: `Notebook Running` after about 9h as of 2026-06-14 morning JST
 - Pending Kaggle public score
 
 Notes:
 
 - Compare against `v003_broad_prompt_bank` public score `0.630`.
-- `v004_trajectory_exfil` remains pending when this variant is prepared.
+- `v004_trajectory_exfil` later scored `16.230`, confirming the base trajectory-search approach.
 - Public reference target is `eda-agent-security-trajectory-search` public score `27.32`.
+- Runtime is a concern: if this run times out, build a capped aggressive variant instead of increasing search budget further.
