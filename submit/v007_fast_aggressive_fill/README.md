@@ -51,6 +51,11 @@ UV_CACHE_DIR=/tmp/uv-cache \
 - Version: `1`
 - Submission ref: `53660670`
 - Script version: `327051929`
-- Status: `Notebook Running` after about 5h as of 2026-06-14 evening JST
-- Public score: pending
+- Status: `Notebook Timeout`
+- Public score: none
 - Local deterministic smoke score: `0.00`
+
+Interpretation:
+
+- The 300-candidate fast-fill hedge did not finish in hosted evaluation.
+- Treat this as another runtime failure for repeated-post prompt families at high returned-candidate counts, not as evidence that the underlying single-post v005 approach stopped working.

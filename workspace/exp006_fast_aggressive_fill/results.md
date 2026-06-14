@@ -28,8 +28,8 @@ Result:
 - Kaggle kernel: `junichiromorita/ai-agent-security-v007-fast-aggressive-fill` v1
 - Kaggle submission ref: `53660670`
 - Kaggle script version: `327051929`
-- Kaggle status: `Notebook Running` after about 5h as of 2026-06-14 evening JST
-- Kaggle public score: pending
+- Kaggle status: `Notebook Timeout`
+- Kaggle public score: none
 
 Notes:
 
@@ -41,3 +41,4 @@ Notes:
   - output: `workspace/exp006_fast_aggressive_fill/post_count_probe.json`
   - result: 32/32 replayed candidates produced 4 successful `http.post` calls.
   - caveat: v007 prompts specify 2 endpoints, but the deterministic agent repeats until max hops. Treat this only as evidence that repeated post behavior is locally reachable.
+- Hosted evaluation timed out. Do not reuse this exact high-candidate repeated-post profile for v009.

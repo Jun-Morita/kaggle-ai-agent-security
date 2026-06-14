@@ -4,6 +4,62 @@ Public notebook から得た知識を要約する。
 
 ## Entries
 
+## 2026-06-15: AI Agent Security - V2 Exfil Mass Shift 32.71
+
+- Source: local raw copy at `references/raw/notebooks/ai-agent-security-v2-exfil-mass-shift.ipynb`
+- Fetched at: 2026-06-15
+- Author/context: user-provided Kaggle context says the notebook was copied with edits from `SpeedSci / ai-agent-security-trajectory-search-plus-2`
+- Competition: AI Agent Security - Multi-Step Tool Attacks
+- User-provided leaderboard/notebook context: public score `32.71`, updated 1 day before the snapshot
+
+### Key Ideas
+
+- This is another trajectory-search / bounded-fill exfil notebook, not a new predicate family.
+- It keeps the same core as the 27.32 trajectory-search notebook:
+  - exfil calibration across payloads, prompt variants, and endpoint counts
+  - domain-diverse callback hosts
+  - successful-combo sorting by predicate raw weight plus trace-cell count
+  - bounded fill with `AttackCandidate.user_messages`
+  - small confused-deputy and source-action lottery tail
+- The main change is scale and phase allocation:
+  - `return_target_candidates`: `360`
+  - `max_verified_candidates`: `760`
+  - `static_fallback_candidates`: `120`
+  - `empty_run_fallback_candidates`: `40`
+  - `search_fraction`: `0.38`
+  - `max_search_s`: `980.0`
+  - `mass_end`: `0.82` of search time
+  - `single_end`: `0.91`
+  - `deputy_end`: `0.97`
+  - top active combo cycle widened to `12`
+  - top fill combo cycle widened to `18`
+- It adds a larger derived seed prompt list and one additional exfil follow-up, but these are secondary to the mass-fill scale.
+
+### Useful for This Competition
+
+- This is directly useful after our v006-v008 results:
+  - `v006` and `v007` timed out with repeated-post prompt families
+  - `v008` completed but scored `9.220`, close to single-post scale
+  - therefore the most credible next lever is more v005-style single-post/domain-diverse findings, not more multipost pressure
+- The score aligns with the single-post scaling rule:
+  - `360 * (16 + 2) / 200 = 32.4`
+  - public score `32.71` is very close
+- This strongly suggests the notebook's gain over our `v005` public `27.150` is mostly `300 -> 360` returned exfil candidates.
+
+### Risks / Caveats
+
+- Runtime is the main risk. Our `v005` completed with 300 candidates, but `v007` timed out at 300 when using repeated-post prompts.
+- This notebook completed publicly, so `360` is plausible, but it may still time out under our wrapper or account/runtime variation.
+- It still uses public-fixture exfil payloads such as `TOKEN=admin123`, `SECRET_API_KEY=sk_live_test`, `PASSWORD=test123`, and `SECRET_MARKER`; private guardrail robustness remains uncertain.
+- It is public-LB-oriented and should not be treated as private-LB proof.
+
+### Adoption
+
+- Adopted as `v009_exfil_mass_shift`:
+  - based on the stable `v005_trajectory_exfil_aggressive` script-kernel wrapper
+  - ports the `360` return target, `760` verified cap, `980s` search ceiling, phase allocation, seed prompt list, and widened combo cycles
+  - avoids v006-v008 multipost-specific prompts
+
 ## 2026-06-14: AI Agent 25.205
 
 - Source: local raw copy at `references/raw/notebooks/ai-agent.ipynb`

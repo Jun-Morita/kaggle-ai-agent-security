@@ -55,9 +55,15 @@ UV_CACHE_DIR=/tmp/uv-cache \
 - Kernel: `junichiromorita/ai-agent-security-v008-timeout-safe-multipost`
 - Version: `1`
 - Submission ref: `53671096`
-- Script version: pending
-- Status: `PENDING` as of 2026-06-14 20:14 JST
-- Public score: pending
+- Script version: `327114864`
+- Status: `Succeeded`
+- Public score: `9.220`
 - Local deterministic smoke score: `0.00`
 - Local deterministic smoke runtime: about 11.2s
 - Static `env=None` return count: `96`
+
+Interpretation:
+
+- This confirmed that a 96-candidate multipost submission can finish hosted evaluation.
+- The public score is close to the single-post expectation for 96 successful findings: `96 * (16 + 2) / 200 = 8.64`.
+- Assuming all 96 candidates replayed as findings, the implied hosted average is about `1.08` successful posts per finding. The intended multipost multiplier did not transfer to hosted scoring.

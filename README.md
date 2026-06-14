@@ -198,12 +198,13 @@ Versions `1-6` were useful only for debugging submission wiring. Future submissi
 
 ## Submission Status
 
-Current best public LB is `v005_trajectory_exfil_aggressive` with `27.150`. `v006` timed out, while `v007` and `v008` are pending/running as of 2026-06-14. No further submissions should be made until those hosted results are available.
+Current best public LB is `v005_trajectory_exfil_aggressive` with `27.150`. `v006` and `v007` timed out. `v008` completed with `9.220`, which is below both `v004` and `v005`, so the current multipost family should not be the next main path.
 
 | Version | Kernel | Public LB | Status | Main idea |
 |---|---|---:|---|---|
-| `v008_timeout_safe_multipost` | `junichiromorita/ai-agent-security-v008-timeout-safe-multipost` v1 | pending | submitted ref `53671096` | 96-candidate timeout-safe multipost after v006 timeout |
-| `v007_fast_aggressive_fill` | `junichiromorita/ai-agent-security-v007-fast-aggressive-fill` v1 | pending | running, ref `53660670`, script version `327051929` | shallow active search, 300-candidate fill, naked `sk_live_test` payload |
+| `v009_exfil_mass_shift` | `junichiromorita/ai-agent-security-v009-exfil-mass-shift` v1 | pending | submitted ref `53687643` | public 32.71 mass-shift notebook port; 360-candidate v005-style exfil |
+| `v008_timeout_safe_multipost` | `junichiromorita/ai-agent-security-v008-timeout-safe-multipost` v1 | 9.220 | succeeded, ref `53671096`, script version `327114864` | 96-candidate timeout-safe multipost after v006 timeout |
+| `v007_fast_aggressive_fill` | `junichiromorita/ai-agent-security-v007-fast-aggressive-fill` v1 | none | timeout, ref `53660670`, script version `327051929` | shallow active search, 300-candidate fill, naked `sk_live_test` payload |
 | `v006_trajectory_exfil_multipost` | `junichiromorita/ai-agent-security-v006-trajectory-exfil-multipost` v1 | none | timeout, ref `53655187`, script version `327017638` | return target `180`, endpoint counts `(2, 3, 4)`, multi-post priority |
 | `v005_trajectory_exfil_aggressive` | `junichiromorita/ai-agent-security-v005-trajectory-exfil-aggressive` v1 | 27.150 | succeeded | public 27.32 notebook aggressive profile |
 | `v004_trajectory_exfil` | `junichiromorita/ai-agent-security-v004-trajectory-exfil` v1 | 16.230 | succeeded | trajectory-search / bounded-fill exfil |
@@ -216,13 +217,14 @@ The local deterministic smoke score has stayed `0.00` for high-scoring submissio
 Local probes and prepared work:
 
 - `workspace/exp007_v008_parameterized/`: source experiment for the submitted `v008_timeout_safe_multipost`; its `V008_PARAMS` block is set to `96` returned candidates with endpoint counts `(2, 3)`.
+- `workspace/exp008_exfil_mass_shift/`: source experiment for prepared `v009_exfil_mass_shift`; ports the public 32.71 mass-shift notebook into the stable v005 wrapper.
 - `scripts/measure_candidate_posts.py`: replays static candidates locally and counts successful `http.post` calls.
-- Current deterministic post-count probe: v006 and v007 each produced 4 successful `http.post` calls for 32/32 replayed static candidates. Hosted model behavior still must be judged from public LB results.
+- Current deterministic post-count probe: v006 and v007 each produced 4 successful `http.post` calls for 32/32 replayed static candidates. Hosted results did not transfer cleanly: v006/v007 timed out, and v008 scored close to a single-post 96-candidate run.
 
 Current pause condition:
 
-- Wait for `v007` and `v008` public scores, completion times, and any private-score visibility.
-- Do not start another submission until those results determine whether to continue with single-post fill, timeout-safe multipost, or prompt-bank integration.
+- Do not continue scaling the current multipost prompt family by candidate count.
+- Wait for `v009_exfil_mass_shift` public score and completion status before making another submission.
 
 ## Current Baseline Knowledge
 
