@@ -119,6 +119,31 @@ PYTHONPATH=data/raw/ai-agent-security-multi-step-tool-attacks \
 
 Use `deterministic` for quick offline checks. Use `evaluate redteam ... --env gym` when checking public-path parity.
 
+## Public GGUF Validation
+
+The deterministic local smoke score is a crash and wiring check, not a Public LB predictor. For prompt behavior, use the public Kaggle notebook `AAS | Local validation`:
+
+- Source: <https://www.kaggle.com/code/llkh0a/aas-local-validation>
+- Local raw copy: `references/raw/notebooks/aas-local-validation/`
+- Repo workflow: `workspace/exp011_aas_local_validation/`
+
+This notebook runs the competition SDK against public `gpt_oss` and `gemma` GGUF model sources, then reports `gpt_oss_public`, `gemma_public`, and `local_public_mean`. It also writes per-model framework logs and compact finding summaries, which are useful for inspecting whether a candidate family produces replayable `http.post` findings.
+
+Build validation kernels for the current pending submissions:
+
+```bash
+./workspace/exp011_aas_local_validation/run.sh
+```
+
+Push one analysis kernel when ready:
+
+```bash
+UV_CACHE_DIR=/tmp/uv-cache \
+  uv run kaggle kernels push -p workspace/exp011_aas_local_validation/generated/v010
+```
+
+This is an analysis workflow only. It validates public guardrail behavior and does not guarantee private-LB robustness. It also does not remove replay cost: even static `AttackCandidate` lists are replayed by the evaluator.
+
 ## Workflow
 
 1. Read [competition/overview.md](competition/overview.md), [references/knowledge/sdk_docs.md](references/knowledge/sdk_docs.md), and [references/knowledge/notebooks.md](references/knowledge/notebooks.md).
@@ -224,11 +249,12 @@ Local probes and prepared work:
 - `workspace/exp010_single_breadth_500/`: source experiment for submitted `v011_single_breadth_500`; uses the same single-hop family but raises target to 500.
 - `scripts/measure_candidate_posts.py`: replays static candidates locally and counts successful `http.post` calls.
 - Current deterministic post-count probe: v006 and v007 each produced 4 successful `http.post` calls for 32/32 replayed static candidates. Hosted results did not transfer cleanly: v006/v007 timed out, and v008 scored close to a single-post 96-candidate run.
+- `workspace/exp011_aas_local_validation/`: public GGUF validation workflow prepared from `AAS | Local validation`; first targets are pending `v010` and `v011`.
 
 Current pause condition:
 
 - Do not continue scaling the current multipost prompt family by candidate count.
-- Wait for `v010_replay_dense_boundary` and `v011_single_breadth_500` public scores and completion statuses before making another submission.
+- Wait for `v010_replay_dense_boundary` and `v011_single_breadth_500` public scores, and use `exp011` public local validation before choosing the next submission.
 
 ## Current Baseline Knowledge
 

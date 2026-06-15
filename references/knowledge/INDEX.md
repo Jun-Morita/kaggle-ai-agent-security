@@ -27,3 +27,4 @@ Codex はまずこの index を読み、必要なファイルだけ開く。
 
 - Returned traces or custom metadata are not trusted. Only replayed `AttackCandidate.user_messages` behavior scores.
 - Avoid overfitting to public fixture exact strings; hidden fixtures and private guardrail differ.
+- Public GGUF validation from the `AAS | Local validation` notebook is useful for observing `gpt_oss` / `gemma` public behavior, but it is not a private-LB guarantee.

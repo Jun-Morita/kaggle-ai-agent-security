@@ -214,6 +214,7 @@ data/external/
 references/raw/
 .aicomp/
 submit/**/output/
+workspace/exp011_aas_local_validation/generated/
 
 # PyPI configuration file
 .pypirc
