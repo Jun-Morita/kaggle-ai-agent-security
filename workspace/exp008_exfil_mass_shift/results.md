@@ -27,9 +27,9 @@ Result:
 - Static `env=None` return count: `120`
 - Kaggle kernel: `junichiromorita/ai-agent-security-v009-exfil-mass-shift` v1
 - Kaggle submission ref: `53687643`
-- Kaggle script version: pending
-- Kaggle status: `PENDING` as of 2026-06-15 06:17 JST
-- Kaggle public score: pending
+- Kaggle script version: `327223458`
+- Kaggle status: `Notebook Timeout`
+- Kaggle public score: none
 
 Notes:
 
@@ -38,3 +38,4 @@ Notes:
 - This is not a multipost experiment. It treats v008 as evidence that hosted scoring did not realize repeated-post multipliers and instead scales v005-style mass exfil candidates.
 - Local deterministic score remains a wiring check only. v004/v005 also scored `0.00` locally and succeeded on public LB.
 - Kernel push succeeded as version `1`; competition submit succeeded after waiting for the kernel status to become `COMPLETE`.
+- Hosted evaluation timed out. Treat `360` returned candidates and `980s` search ceiling as too heavy for this runtime envelope.

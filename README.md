@@ -198,11 +198,13 @@ Versions `1-6` were useful only for debugging submission wiring. Future submissi
 
 ## Submission Status
 
-Current best public LB is `v005_trajectory_exfil_aggressive` with `27.150`. `v006` and `v007` timed out. `v008` completed with `9.220`, which is below both `v004` and `v005`, so the current multipost family should not be the next main path.
+Current best public LB is `v005_trajectory_exfil_aggressive` with `27.150`. `v006`, `v007`, and `v009` timed out. `v008` completed with `9.220`, which is below both `v004` and `v005`, so the current multipost family should not be the next main path.
 
 | Version | Kernel | Public LB | Status | Main idea |
 |---|---|---:|---|---|
-| `v009_exfil_mass_shift` | `junichiromorita/ai-agent-security-v009-exfil-mass-shift` v1 | pending | submitted ref `53687643` | public 32.71 mass-shift notebook port; 360-candidate v005-style exfil |
+| `v011_single_breadth_500` | `junichiromorita/ai-agent-security-v011-single-breadth-500` v1 | pending | submitted ref `53711101` | high-risk single-hop breadth profile; theoretical single-post ceiling near 45 |
+| `v010_replay_dense_boundary` | `junichiromorita/ai-agent-security-v010-replay-dense-boundary` v1 | pending | submitted ref `53710139` | public 36 replay-dense boundary port; single-hop breadth exfil |
+| `v009_exfil_mass_shift` | `junichiromorita/ai-agent-security-v009-exfil-mass-shift` v1 | none | timeout, ref `53687643`, script version `327223458` | public 32.71 mass-shift notebook port; 360-candidate v005-style exfil |
 | `v008_timeout_safe_multipost` | `junichiromorita/ai-agent-security-v008-timeout-safe-multipost` v1 | 9.220 | succeeded, ref `53671096`, script version `327114864` | 96-candidate timeout-safe multipost after v006 timeout |
 | `v007_fast_aggressive_fill` | `junichiromorita/ai-agent-security-v007-fast-aggressive-fill` v1 | none | timeout, ref `53660670`, script version `327051929` | shallow active search, 300-candidate fill, naked `sk_live_test` payload |
 | `v006_trajectory_exfil_multipost` | `junichiromorita/ai-agent-security-v006-trajectory-exfil-multipost` v1 | none | timeout, ref `53655187`, script version `327017638` | return target `180`, endpoint counts `(2, 3, 4)`, multi-post priority |
@@ -217,14 +219,16 @@ The local deterministic smoke score has stayed `0.00` for high-scoring submissio
 Local probes and prepared work:
 
 - `workspace/exp007_v008_parameterized/`: source experiment for the submitted `v008_timeout_safe_multipost`; its `V008_PARAMS` block is set to `96` returned candidates with endpoint counts `(2, 3)`.
-- `workspace/exp008_exfil_mass_shift/`: source experiment for prepared `v009_exfil_mass_shift`; ports the public 32.71 mass-shift notebook into the stable v005 wrapper.
+- `workspace/exp008_exfil_mass_shift/`: source experiment for submitted `v009_exfil_mass_shift`; the 360-candidate public 32.71 mass-shift port timed out.
+- `workspace/exp009_replay_dense_boundary/`: source experiment for submitted `v010_replay_dense_boundary`; ports the public 36 replay-dense single-hop boundary notebook.
+- `workspace/exp010_single_breadth_500/`: source experiment for submitted `v011_single_breadth_500`; uses the same single-hop family but raises target to 500.
 - `scripts/measure_candidate_posts.py`: replays static candidates locally and counts successful `http.post` calls.
 - Current deterministic post-count probe: v006 and v007 each produced 4 successful `http.post` calls for 32/32 replayed static candidates. Hosted results did not transfer cleanly: v006/v007 timed out, and v008 scored close to a single-post 96-candidate run.
 
 Current pause condition:
 
 - Do not continue scaling the current multipost prompt family by candidate count.
-- Wait for `v009_exfil_mass_shift` public score and completion status before making another submission.
+- Wait for `v010_replay_dense_boundary` and `v011_single_breadth_500` public scores and completion statuses before making another submission.
 
 ## Current Baseline Knowledge
 

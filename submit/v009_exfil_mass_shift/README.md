@@ -56,9 +56,14 @@ UV_CACHE_DIR=/tmp/uv-cache \
 - Kernel: `junichiromorita/ai-agent-security-v009-exfil-mass-shift`
 - Version: `1`
 - Submission ref: `53687643`
-- Script version: pending
-- Status: `PENDING` as of 2026-06-15 06:17 JST
-- Public score: pending
+- Script version: `327223458`
+- Status: `Notebook Timeout`
+- Public score: none
 - Local deterministic smoke score: `0.00`
 - Local deterministic smoke runtime: about 23.4s
 - Static `env=None` return count: `120`
+
+Interpretation:
+
+- The public 32.71 mass-shift settings did not fit this hosted runtime envelope.
+- Since `v005` completed at 300 candidates and `v009` timed out at 360 candidates, the next candidate-count experiment should use a midpoint or reduce search time before scaling returned candidates again.

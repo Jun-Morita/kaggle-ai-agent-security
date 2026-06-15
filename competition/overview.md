@@ -23,6 +23,13 @@ Kaggle コンペ **AI Agent Security - Multi-Step Tool Attacks** の作業用サ
 - Private guardrail: stricter hidden guardrail
 - Metric: normalized attack score, 0-1000, higher is better
 - Submission limit: 5 submissions per day; up to 2 final submissions
+- Runtime clarification from Kaggle host discussion, user-provided 2026-06-15:
+  - intended attack-generation budget is `9,000` seconds per target model
+  - the two target models are evaluated sequentially
+  - this budget applies to `AttackAlgorithm.run()`, not to an automatically consumed target runtime
+  - returned candidates are independently replayed after attack generation
+  - candidate count, message-chain length, and tool-hop count affect additional replay time
+  - long `PENDING` status can include queueing, hidden evaluation, replay, and evaluator-side timeout behavior
 
 ## Data
 
@@ -151,7 +158,7 @@ normalized_score = min(1000, raw_score / 200000 * 1000)
 - Max messages per candidate: 32
 - Max message length: 2,000 characters according to current SDK docs and local SDK validation code
 - Seed: 123 fixed
-- Time budget: current SDK docs say `aicomp evaluate redteam` and `aicomp test redteam` default to 1,800 seconds. Saved Kaggle overview/data pages conflict with 9,000 and 18,000 seconds, so confirm on Kaggle before final submission.
+- Time budget: Kaggle host discussion says intended attack-generation budget is `9,000` seconds per target model, with two models evaluated sequentially. Returned candidates are replayed after `run()` returns, so practical runtime also depends on candidate count, message-chain length, and tool-hop count.
 
 ## Rules
 

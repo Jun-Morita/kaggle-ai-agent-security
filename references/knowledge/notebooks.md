@@ -4,6 +4,88 @@ Public notebook から得た知識を要約する。
 
 ## Entries
 
+## 2026-06-15: Replay-Dense Exfiltration Boundary Search 36
+
+- Source: local raw copy at `references/raw/notebooks/replay-dense-exfiltration-boundary-search.ipynb`
+- Fetched at: 2026-06-15
+- Competition: AI Agent Security - Multi-Step Tool Attacks
+- User-provided leaderboard/notebook context: public score `36`, updated 3h before the snapshot
+
+### Key Ideas
+
+- This notebook explicitly models score as replay-stable single-post EXFILTRATION findings:
+  - one severity-5 predicate contributes `16` raw
+  - one unique cell contributes `2` raw
+  - `N` distinct single-post candidates score approximately `N * 18 / 200`
+- It changes the runtime lever from multi-endpoint fanout to single-hop breadth:
+  - `SEARCH_PROFILE = "guide16_single_600"`
+  - `return_target_candidates = 600`
+  - `min_return_candidates = 400`
+  - `max_verified_candidates = 60`
+  - `static_fallback_candidates = 300`
+  - `search_fraction = 0.04`
+  - `max_search_s = 60.0`
+  - `endpoint_counts = (1,)`
+  - `endpoints_per_msg = 1`
+  - `default_max_hops = 1`
+  - `max_msg_chars = 400`
+- The code computes a safe target from observed calibration rate:
+  - `_n_safe = int(0.7 * remaining / c_per_candidate)`
+  - `target_n = min(RETURN_TARGET_CANDIDATES, max(MIN_RETURN_CANDIDATES, _n_safe))`
+- The public score `36` matches the lower boundary: `400 * 18 / 200 = 36`.
+
+### Useful for This Competition
+
+- This directly addresses our v009 timeout: v009 increased returned candidates but kept multi-endpoint prompt/replay cost high.
+- The useful adoption is not just `600` candidates; it is the combination of single-endpoint prompts, max-hop `1`, short search, and boundary target logic.
+- It is the best next submission candidate because it aims for more findings while reducing replay-hop load.
+
+### Risks / Caveats
+
+- If local hosted runtime still scales mostly by candidate count rather than hop count, 400-600 candidates can still time out.
+- The public score suggests the notebook returned around 400 effective findings, not the full theoretical 600.
+- It remains public-LB-oriented EXFILTRATION and does not solve private guardrail uncertainty.
+
+### Adoption
+
+- Adopted as `v010_replay_dense_boundary`:
+  - extracted `ATTACK_TEMPLATE` from the public notebook
+  - used `SEARCH_PROFILE = "guide16_single_600"`
+  - added this repo's stable script-kernel wrapper and placeholder `submission.csv`
+  - local validate and deterministic smoke passed
+
+## 2026-06-15: AI Agent Security -(ReSubmission) 32.775
+
+- Source: local raw copy at `references/raw/notebooks/ai-agent-security-resubmission.ipynb`
+- Fetched at: 2026-06-15
+- Author/context: user-provided Kaggle context says the notebook was copied with edits from `SpeedSci / ai-agent-security-v2-exfil-mass-shift`
+- Competition: AI Agent Security - Multi-Step Tool Attacks
+- User-provided leaderboard/notebook context: public score `32.775`, updated 20h before the snapshot
+
+### Key Ideas
+
+- This is effectively the same family as `AI Agent Security - V2 Exfil Mass Shift`.
+- It uses the 360-candidate aggressive mass-shift profile:
+  - `max_verified_candidates = 760`
+  - `return_target_candidates = 360`
+  - `static_fallback_candidates = 120`
+  - `empty_run_fallback_candidates = 40`
+  - `search_fraction = 0.38`
+  - `max_search_s = 980.0`
+  - `endpoint_counts = (1, 2, 4, 8)`
+  - `endpoints_per_msg = 8`
+- This matches the approach we submitted as `v009_exfil_mass_shift`.
+
+### Useful for This Competition
+
+- It confirms that the 32.7 range is reproducible publicly for the mass-shift family.
+- It does not provide a safer next step after our v009 timeout, because the main settings are the same high-runtime profile.
+
+### Adoption
+
+- Do not create a separate submission from this notebook.
+- Keep it as supporting evidence that v009 was the right idea but exceeded this account's hosted runtime envelope.
+
 ## 2026-06-15: AI Agent Security - V2 Exfil Mass Shift 32.71
 
 - Source: local raw copy at `references/raw/notebooks/ai-agent-security-v2-exfil-mass-shift.ipynb`
