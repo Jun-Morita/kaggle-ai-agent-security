@@ -24,3 +24,4 @@ Notes:
 - Pushed v010 validation kernel: https://www.kaggle.com/code/junichiromorita/aas-local-validation-v010-replay-dense-boundary
 - Pushed v011 validation kernel: https://www.kaggle.com/code/junichiromorita/aas-local-validation-v011-single-breadth-500
 - Kaggle status after push: both `KernelWorkerStatus.RUNNING`.
+- End-of-day state: leave both validation kernels running and record outputs after completion.

@@ -225,6 +225,14 @@ Versions `1-6` were useful only for debugging submission wiring. Future submissi
 
 Current best public LB is `v005_trajectory_exfil_aggressive` with `27.150`. `v006`, `v007`, and `v009` timed out. `v008` completed with `9.220`, which is below both `v004` and `v005`, so the current multipost family should not be the next main path.
 
+Current strategy rules:
+
+- Treat multipost as retired unless GGUF validation proves more than one successful replayed `http.post` per candidate on both public models.
+- Optimize the product of returned candidate count and validation rate. With single-post EXFILTRATION, public score is approximately `0.09 * successful single-hop findings`.
+- Keep prompt chains single-hop, short, and direct when testing breadth; every wasted hop is likely a zero-score replay.
+- Gate the next competition submission on `exp011_aas_local_validation` instead of blind daily submissions.
+- Preserve a private-LB hedge: final candidates should not all be the same neutral-URL public EXFILTRATION trick. Keep one mixed, private-robust family with `sk_live_test` and lower-scoring but more diverse predicate coverage.
+
 | Version | Kernel | Public LB | Status | Main idea |
 |---|---|---:|---|---|
 | `v011_single_breadth_500` | `junichiromorita/ai-agent-security-v011-single-breadth-500` v1 | pending | submitted ref `53711101` | high-risk single-hop breadth profile; theoretical single-post ceiling near 45 |
@@ -255,6 +263,7 @@ Current pause condition:
 
 - Do not continue scaling the current multipost prompt family by candidate count.
 - Wait for `v010_replay_dense_boundary` and `v011_single_breadth_500` public scores, and use `exp011` public local validation before choosing the next submission.
+- For final-submission planning, reserve one slot for best public single-hop breadth and one slot for a private-robust mixed strategy unless private evidence says otherwise.
 
 ## Current Baseline Knowledge
 

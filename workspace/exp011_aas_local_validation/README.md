@@ -75,3 +75,14 @@ Decision rule:
 - If local score is high but LB times out, reduce candidate count or message-chain length.
 - If local score is low and LB is also low, change prompt family before submitting again.
 - If local score is high but private later collapses, keep it as a public-LB tool only and pivot private strategy separately.
+
+Record these fields for each run:
+
+- `gpt_oss_public`
+- `gemma_public`
+- `local_public_mean`
+- `findings_count`
+- `unique_cells`
+- `evaluation_time_s`
+- `wall_time_s`
+- qualitative tool-event notes, especially whether each candidate spends its first hop on `http.post`
