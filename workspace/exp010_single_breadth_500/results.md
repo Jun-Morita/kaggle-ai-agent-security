@@ -28,8 +28,8 @@ Result:
 - Kaggle kernel: `junichiromorita/ai-agent-security-v011-single-breadth-500` v1
 - Kaggle submission ref: `53711101`
 - Kaggle script version: pending
-- Kaggle status: `PENDING` as of 2026-06-15 21:49 JST
-- Kaggle public score: pending
+- Kaggle status: `COMPLETE` as of 2026-06-16
+- Kaggle public score: `32.370`
 
 Notes:
 
@@ -38,3 +38,4 @@ Notes:
 - This is the high-risk single-hop breadth profile: theoretical public score is `500 * 18 / 200 = 45`.
 - Static profile check: `SEARCH_PROFILE=single_breadth_500`, `RETURN_TARGET_CANDIDATES=500`, `MIN_RETURN_CANDIDATES=360`, `DEFAULT_MAX_HOPS=1`, `ENDPOINTS_PER_MSG=1`, `MAX_SEARCH_S=240.0`.
 - Kernel push succeeded as version `1`; competition submit succeeded after waiting for the kernel status to become `COMPLETE`.
+- Result is below v010 `36.000`; simply increasing breadth to 500 did not improve public LB.

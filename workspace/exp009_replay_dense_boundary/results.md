@@ -28,8 +28,8 @@ Result:
 - Kaggle kernel: `junichiromorita/ai-agent-security-v010-replay-dense-boundary` v1
 - Kaggle submission ref: `53710139`
 - Kaggle script version: pending
-- Kaggle status: `PENDING` as of 2026-06-15 21:15 JST
-- Kaggle public score: pending
+- Kaggle status: `COMPLETE` as of 2026-06-16
+- Kaggle public score: `36.000`
 
 Notes:
 
@@ -38,3 +38,4 @@ Notes:
 - This is a replay-hop reduction experiment, not another multi-endpoint mass-shift run.
 - Static profile check: `SEARCH_PROFILE=guide16_single_600`, `RETURN_TARGET_CANDIDATES=600`, `MIN_RETURN_CANDIDATES=400`, `DEFAULT_MAX_HOPS=1`, `ENDPOINTS_PER_MSG=1`.
 - Kernel push succeeded as version `1`; competition submit succeeded after waiting for the kernel status to become `COMPLETE`.
+- This matches the public `Replay-Dense Exfiltration Boundary Search` notebook score and is the current best submission.

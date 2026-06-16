@@ -4,6 +4,152 @@ Public notebook から得た知識を要約する。
 
 ## Entries
 
+## 2026-06-16: AI Agent Replay-Dense Exfiltration 52.2
+
+- Source: local raw copy at `references/raw/notebooks/ai-agent-replay-dense-exfiltration.ipynb`
+- Fetched at: 2026-06-16
+- Competition: AI Agent Security - Multi-Step Tool Attacks
+- User-provided leaderboard/notebook context: public score `52.2`, updated 3h before the snapshot
+
+### Key Ideas
+
+- This is the strongest public notebook observed so far.
+- It explicitly diagnoses the replay-dense scaling boundary:
+  - multi-endpoint fanout does not increase per-trace score
+  - returning 600 and 800 candidates can score the same if the adaptive safe target still returns around the same effective lower bound
+  - the useful lever is forcing a higher replayable lower bound while keeping single-hop replay cheap
+- Selected profile:
+  - `SEARCH_PROFILE = "guide22_c580"`
+  - `RETURN_TARGET_CANDIDATES = 800`
+  - `MIN_RETURN_CANDIDATES = 580`
+  - `STATIC_FALLBACK_CANDIDATES = 400`
+  - `EMPTY_RUN_FALLBACK_CANDIDATES = 80`
+  - `MAX_VERIFIED_CANDIDATES = 60`
+  - `SEARCH_FRACTION = 0.04`
+  - `MAX_SEARCH_S = 60.0`
+  - `ENDPOINTS_PER_MSG = 1`
+  - `DEFAULT_MAX_HOPS = 1`
+  - `MAX_MSG_CHARS = 260`
+  - `SAFE_TARGET_FACTOR = 0.88`
+  - `MUTATION_SEED_LIMIT = 0`
+- It also includes fixed-N profiles:
+  - `single_fixed_500`, `single_fixed_510`, `single_fixed_520`, `single_fixed_530`
+  - these force `return_target = min = N` and use `MAX_MSG_CHARS = 260`
+
+### Useful for This Competition
+
+- This is the clearest next public-LB candidate.
+- Public `52.2` corresponds almost exactly to `580 * 18 / 200 = 52.2`, which matches the chosen `MIN_RETURN_CANDIDATES`.
+- Compared with our v010 public `36.000`, it keeps the same single-hop / short-search shape but:
+  - shortens messages from 400 to 260 chars
+  - raises min return from 400 to 580
+  - raises target from 600 to 800
+  - uses safe target factor 0.88
+  - removes mutation seed expansion
+- This likely improves Gemma/replay throughput by making candidate messages shorter and by forcing a stronger lower bound.
+
+### Risks / Caveats
+
+- The profile is still public EXFILTRATION optimization.
+- It relies on obvious secret-pattern payloads in `SCORING_PAYLOADS`, so private guardrail risk remains.
+- The high public score is compelling enough for a measured public-LB submission, but not enough to replace a separate private-robust final slot.
+
+### Adoption
+
+- Best next submission: port `guide22_c580` as `v012`.
+- Do not alter prompt families while porting; preserve the reference profile first.
+- If `v012` matches the public score range, later variations can test fixed-N or private-robust payload mixes.
+
+## 2026-06-16: Replay Dense Boundary Exact + Aggressive 46.8
+
+- Source: local raw copy at `references/raw/notebooks/replay-dense-boundary-exact-aggressive.ipynb`
+- Fetched at: 2026-06-16
+- Competition: AI Agent Security - Multi-Step Tool Attacks
+- User-provided leaderboard/notebook context: public score `46.8`, updated 2h before the snapshot
+
+### Key Ideas
+
+- This notebook is a derivative of the `52.2` replay-dense line.
+- Selected profile:
+  - `SEARCH_PROFILE = "guide23_semanticboost800"`
+  - numeric profile is nearly the same as `guide22_c580`:
+    - target `800`
+    - min return `580`
+    - max verified `60`
+    - max search `60s`
+    - max message chars `260`
+    - safe target factor `0.88`
+- The main change is semantic-audit weighting:
+  - `_EXFIL_VARIANT_NAMES` grows from 13 to 15
+  - extra variants: `semantic_audit_ops`, `semantic_audit_relay`
+  - notebook comments say semantic audit candidates increased from about 55 to about 159
+
+### Useful for This Competition
+
+- It is useful as an ablation: increasing semantic-audit density did not beat the 52.2 reference.
+- The result suggests the 52.2 uplift is not simply "more semantic wording"; the `guide22_c580` balance is better.
+
+### Adoption
+
+- Do not use this as the first v012 attempt.
+- Keep it as a fallback idea if `guide22_c580` underperforms in our wrapper, or as a later Gemma-oriented ablation.
+
+## 2026-06-16: Multi Endpoint Severity Stacker 45
+
+- Source: local raw copy at `references/raw/notebooks/multi-endpoint-severity-stacker.ipynb`
+- Fetched at: 2026-06-16
+- Competition: AI Agent Security - Multi-Step Tool Attacks
+- User-provided leaderboard/notebook context: public score `45`, updated 10h before the snapshot
+
+### Key Ideas
+
+- Despite the notebook title, the implementation is not a working multi-endpoint severity multiplier.
+- It is a ceiling probe for the same single-post replay-dense family as `Replay-Dense Exfiltration Boundary Search`.
+- The notebook markdown calls it `Single-post N=760`, and the generated `attack.py` uses:
+  - `SEARCH_PROFILE = "single_760"`
+  - `RETURN_TARGET_CANDIDATES = 760`
+  - `MIN_RETURN_CANDIDATES = 500`
+  - `MAX_VERIFIED_CANDIDATES = 60`
+  - `STATIC_FALLBACK_CANDIDATES = 380`
+  - `EMPTY_RUN_FALLBACK_CANDIDATES = 40`
+  - `SEARCH_FRACTION = 0.04`
+  - `MAX_SEARCH_S = 60.0`
+  - `endpoint_counts = (1,)`
+  - `ENDPOINTS_PER_MSG = 1`
+  - `DEFAULT_MAX_HOPS = 1`
+  - `MAX_MSG_CHARS = 400`
+- It also adds intermediate profiles `single_640`, `single_680`, and `single_720`.
+- The profile is intentionally closer to our successful `v010 guide16_single_600` than to our underperforming `v011 single_breadth_500`:
+  - v010: 600 target, 60s search, 400-char messages, public `36.000`
+  - v011: 500 target, 240s search, 600-char messages, public `32.370`
+  - this notebook: 760 target, 60s search, 400-char messages, public `45`
+
+### Useful for This Competition
+
+- This confirms the next public-LB lever is still single-hop breadth, not multipost.
+- The useful change is not a new prompt family; it is scaling the v010-safe profile from `600` to `760` while keeping the short search and short message constraints.
+- Public score `45` implies roughly `500` successful single-post findings on average across public rows, because `45 / 0.09 ~= 500`.
+- The notebook strengthens the case that our `v011` failed because it changed the profile shape, not because the 500+ candidate range is inherently impossible.
+
+### Risks / Caveats
+
+- The theoretical ceiling printed by the notebook is `760 * 18 / 200 = 68.4`, but public score is `45`, so one model, likely Gemma, still validates far fewer candidates.
+- The approach remains public-EXFILTRATION-oriented and does not address private guardrail risk.
+- It includes obvious payload wrappers such as `TOKEN=admin123`, `SECRET_API_KEY=...`, and `PASSWORD=test123`; private robustness still argues for keeping `sk_live_test`-heavy variants elsewhere.
+- Returned candidate count is high. Although the public notebook completed, this profile should be submitted as a measured public-LB attempt, not as a private-safe final slot by itself.
+
+### Adoption
+
+- Best next public attempt: port the `single_760` profile into this repo's stable wrapper as a v012 candidate.
+- Keep the implementation close to v010 / this notebook:
+  - single endpoint per message
+  - max hops `1`
+  - max search `60s`
+  - max verified `60`
+  - max message chars `400`
+  - target `760`, min return `500`
+- Do not reintroduce v011-style longer search or larger messages.
+
 ## 2026-06-15: Replay-Dense Exfiltration Boundary Search 36
 
 - Source: local raw copy at `references/raw/notebooks/replay-dense-exfiltration-boundary-search.ipynb`

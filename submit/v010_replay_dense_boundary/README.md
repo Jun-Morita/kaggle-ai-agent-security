@@ -58,8 +58,8 @@ UV_CACHE_DIR=/tmp/uv-cache \
 - Version: `1`
 - Submission ref: `53710139`
 - Script version: pending
-- Status: `PENDING` as of 2026-06-15 21:15 JST
-- Public score: pending
+- Status: `COMPLETE` as of 2026-06-16
+- Public score: `36.000`
 - Local deterministic smoke score: `0.00`
 - Local deterministic smoke runtime: about 5.5s
 - Static `env=None` return count: `300`
