@@ -29,10 +29,11 @@ Result:
 - Kaggle kernel: `junichiromorita/ai-agent-security-v012-replay-dense-c580`
 - Kaggle kernel version: `1`
 - Kaggle submission ref: `53744896`
-- Kaggle status: `PENDING` as of 2026-06-16 22:21 JST
-- Kaggle public score: pending
+- Kaggle status: `COMPLETE` with blank public score as of 2026-06-17 20:57 JST
+- Kaggle public score: none; treat as no-score / timeout
 
 Notes:
 
 - This is the first attempt after v010 `36.000` and public `52.2` notebook analysis.
 - Preserve `guide22_c580` settings; do not mix in semantic boost or private payload changes in this run.
+- Hosted result indicates `MIN_RETURN_CANDIDATES=580` / guide22 shape is too aggressive for this account/runtime path, despite the public reference score.

@@ -48,8 +48,8 @@ UV_CACHE_DIR=/tmp/uv-cache   uv run kaggle competitions submit   ai-agent-securi
 - Kernel: `junichiromorita/ai-agent-security-v012-replay-dense-c580`
 - Version: `1`
 - Submission ref: `53744896`
-- Status: `PENDING` as of 2026-06-16 22:21 JST
-- Public score: pending
+- Status: `COMPLETE` with blank public score as of 2026-06-17 20:57 JST
+- Public score: none; treat as no-score / timeout
 - Local deterministic smoke score: `0.00`
 - Local deterministic smoke runtime: about 7.8s
 - Static `env=None` return count: `400`

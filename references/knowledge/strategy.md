@@ -138,3 +138,32 @@ Rationale: private guardrail may inspect data payloads more strictly than public
 - Preserve the reference settings and prompt balance for the first submission.
 - Keep `guide23_semanticboost800` as a later ablation, not the first next submission.
 - Continue treating this as a public score path separate from private-robust final-slot design.
+
+## 2026-06-17: guide22 Runtime Failure
+
+### New Results
+
+- `v012_replay_dense_c580`: complete with blank public score; treat as no-score / timeout.
+- `v013_replay_dense_c640`: complete with blank public score; treat as no-score / timeout.
+- `v010_replay_dense_boundary`: remains current best at public `36.000`.
+
+### Interpretation
+
+- The public `guide22_c580` / `guide22_c640` profiles did not transfer to this hosted submission path, despite public notebooks reporting `52.2` and higher theoretical ceilings.
+- The failure mode is runtime/no-score, not a lower but valid score. The high lower-bound return targets are therefore beyond the stable envelope here.
+- `guide16_single_600` remains the proven safe replay-dense boundary in this repo.
+
+### Next Direction
+
+- Do not submit more guide22 high-min-return variants blindly.
+- If continuing the replay-dense path, reduce returned count/message pressure toward the v010-safe envelope and test one variable at a time.
+- Prioritize fixing Gemma validation or getting a hosted-runtime proxy before spending more daily submissions on count scaling.
+
+### Follow-up Submission
+
+- `v014_replay_dense_classic500` was submitted as a runtime-safe recovery test.
+- It uses `guide20_classic500`: target `800`, min return `500`, static fallback `400`, max verified `60`, max search `60s`, max message chars `260`, safe target factor `0.78`.
+- Interpretation gate: if v014 also no-scores, the stable hosted boundary is probably close to v010's effective `400`; if it completes above v010, then `500` is usable for the next controlled step.
+- `v015_replay_dense_n800` was submitted as a safer backup while v014 is pending.
+- It uses `guide18_n800`: target `800`, min return `400`, static fallback `400`, max verified `60`, max search `60s`, max message chars `400`.
+- Interpretation gate: if v015 completes and v014 no-scores, the lower bound matters more than target/static count; if both no-score, even the raised target/static count may be too expensive.

@@ -29,10 +29,11 @@ Result:
 - Kaggle kernel: `junichiromorita/ai-agent-security-v013-replay-dense-c640`
 - Kaggle kernel version: `1`
 - Kaggle submission ref: `53745360`
-- Kaggle status: `PENDING` as of 2026-06-16 22:36 JST
-- Kaggle public score: pending
+- Kaggle status: `COMPLETE` with blank public score as of 2026-06-17 20:57 JST
+- Kaggle public score: none; treat as no-score / timeout
 
 Notes:
 
 - High-risk / high-return follow-up to v012.
 - This is public-LB upside, not a private-robust hedge.
+- Hosted result confirms the `guide22_c640` lower bound is also beyond the stable runtime envelope here.
