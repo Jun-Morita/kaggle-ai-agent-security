@@ -167,3 +167,60 @@ Rationale: private guardrail may inspect data payloads more strictly than public
 - `v015_replay_dense_n800` was submitted as a safer backup while v014 is pending.
 - It uses `guide18_n800`: target `800`, min return `400`, static fallback `400`, max verified `60`, max search `60s`, max message chars `400`.
 - Interpretation gate: if v015 completes and v014 no-scores, the lower bound matters more than target/static count; if both no-score, even the raised target/static count may be too expensive.
+
+## 2026-06-18: v014 Becomes Current Best
+
+### New Results
+
+- `v014_replay_dense_classic500`: public `45.000`, complete, current best.
+- `v015_replay_dense_n800`: public `36.000`, complete, tied with v010.
+
+### Interpretation
+
+- `MIN_RETURN_CANDIDATES=500` is inside the hosted runtime envelope when paired with short `MAX_MSG_CHARS=260`, search `60s`, and safe factor `0.78`.
+- v014's public `45.000` corresponds to the expected single-post scale for about `500` successful findings.
+- v015 proves that raising `RETURN_TARGET_CANDIDATES` / `STATIC_FALLBACK_CANDIDATES` while keeping `MIN_RETURN_CANDIDATES=400` is not enough; it matched v010.
+- The useful boundary is now between v014's `500` floor and the failed guide22 `580` floor.
+
+### Next Direction
+
+- Use v014 as the public baseline.
+- Next count-scaling test should be a controlled `guide20_classic520` or `guide20_classic540`, not another guide22-style jump.
+- Keep an eye on runtime: v012/v013 still show that `580+` floors can no-score.
+
+### Follow-up Submission
+
+- `v016_replay_dense_classic520` was submitted as the next controlled count-scaling test.
+- It uses `guide20_classic520`: target `800`, min return `520`, static fallback `400`, max verified `60`, max search `60s`, max message chars `260`, safe target factor `0.78`.
+- Interpretation gate: if v016 completes above `45.000`, the next controlled step is likely `guide20_classic540`; if it no-scores, v014's `500` floor is close to the stable hosted boundary.
+- `v017_replay_dense_classic540` was also submitted as an upper controlled step while v016 is pending.
+- It uses `guide20_classic540`: target `800`, min return `540`, static fallback `400`, max verified `60`, max search `60s`, max message chars `260`, safe target factor `0.8`.
+- Interpretation gate: if v017 completes near `48.6`, the runtime boundary is above 540; if it no-scores while v016 completes, the usable window is around 520.
+
+## 2026-06-18: v017 Pushes the Boundary
+
+### New Results
+
+- `v017_replay_dense_classic540`: public `48.600`, complete, current best.
+- `v016_replay_dense_classic520`: complete with blank public score; treat as no-score / evaluator timeout.
+
+### Interpretation
+
+- v017 exactly matches the single-post scale for 540 findings: `540 * 18 / 200 = 48.6`.
+- v016 no-scored while v017 succeeded, so the v016 result is not a pure count-boundary signal. It is likely evaluator variance or a profile-specific runtime quirk.
+- The usable floor is at least `540`; the failed guide22 `580+` variants still indicate risk above that range.
+
+### Next Direction
+
+- Use v017 as the public baseline.
+- Next public-upside test should be a custom `classic560` profile: same shape as v017, `MIN_RETURN_CANDIDATES=560`, likely `SAFE_TARGET_FACTOR=0.82`, expected public `50.4` if it completes.
+- If preserving a safer submission slot matters, custom `classic550` is a lower-risk midpoint with expected public `49.5`.
+- Do not jump directly back to guide22 `580+` without a runtime proxy.
+
+### Follow-up Submission
+
+- `v018_replay_dense_classic560` was submitted as the main public-upside boundary test.
+- It uses custom `classic560`: target `800`, min return `560`, static fallback `400`, max verified `60`, max search `60s`, max message chars `260`, safe target factor `0.82`.
+- `v019_replay_dense_classic570` was submitted as a higher-risk boundary probe.
+- It uses custom `classic570`: target `800`, min return `570`, static fallback `400`, max verified `60`, max search `60s`, max message chars `260`, safe target factor `0.84`.
+- Interpretation gate: if v018 completes and v019 no-scores, use the 560 floor as the next baseline; if v019 completes, the usable boundary is very close to guide22's failed 580 floor.

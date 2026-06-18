@@ -223,7 +223,7 @@ Versions `1-6` were useful only for debugging submission wiring. Future submissi
 
 ## Submission Status
 
-Current best public LB is `v010_replay_dense_boundary` with `36.000`. `v014_replay_dense_classic500` and `v015_replay_dense_n800` are pending as runtime-safe recovery attempts after `v012_replay_dense_c580` and high-risk `v013_replay_dense_c640` completed with blank public scores. `v006`, `v007`, and `v009` also timed out. `v008` completed with `9.220`, which is below both `v004` and `v005`, so the current multipost family should not be the next main path.
+Current best public LB is `v017_replay_dense_classic540` with `48.600`. It extends the successful v014 line by raising `MIN_RETURN_CANDIDATES` from `500` to `540`. `v018_replay_dense_classic560` and `v019_replay_dense_classic570` are pending as the next boundary probes; `v016_replay_dense_classic520` no-scored despite the lower floor, so treat that result as evaluator variance or profile-specific overhead rather than a clean count boundary.
 
 Current strategy rules:
 
@@ -235,8 +235,12 @@ Current strategy rules:
 
 | Version | Kernel | Public LB | Status | Main idea |
 |---|---|---:|---|---|
-| `v015_replay_dense_n800` | `junichiromorita/ai-agent-security-v015-replay-dense-n800` v1 | pending | pending, ref `53775486` | safe backup `guide18_n800`; target 800 / min 400 / static 400 |
-| `v014_replay_dense_classic500` | `junichiromorita/ai-agent-security-v014-replay-dense-classic500` v1 | pending | pending, ref `53775306` | runtime-safe `guide20_classic500`; target 800 / min 500 / safe target 0.78 |
+| `v019_replay_dense_classic570` | `junichiromorita/ai-agent-security-v019-replay-dense-classic570` v1 | pending | pending, ref `53808128` | high-upside custom `classic570`; expected 51.3 if complete |
+| `v018_replay_dense_classic560` | `junichiromorita/ai-agent-security-v018-replay-dense-classic560` v1 | pending | pending, ref `53808088` | main custom `classic560`; expected 50.4 if complete |
+| `v017_replay_dense_classic540` | `junichiromorita/ai-agent-security-v017-replay-dense-classic540` v1 | 48.600 | complete, ref `53788043` | current best; controlled `guide20_classic540`; target 800 / min 540 / safe target 0.8 |
+| `v016_replay_dense_classic520` | `junichiromorita/ai-agent-security-v016-replay-dense-classic520` v1 | none | no-score, ref `53787950` | controlled `guide20_classic520`; likely evaluator variance because v017 succeeded |
+| `v015_replay_dense_n800` | `junichiromorita/ai-agent-security-v015-replay-dense-n800` v1 | 36.000 | complete, ref `53775486` | safe backup `guide18_n800`; matched v010 |
+| `v014_replay_dense_classic500` | `junichiromorita/ai-agent-security-v014-replay-dense-classic500` v1 | 45.000 | complete, ref `53775306` | current best; runtime-safe `guide20_classic500`; target 800 / min 500 / safe target 0.78 |
 | `v013_replay_dense_c640` | `junichiromorita/ai-agent-security-v013-replay-dense-c640` v1 | none | no-score / timeout, ref `53745360` | high-risk `guide22_c640`; target 800 / min 640 / safe target 0.9 |
 | `v012_replay_dense_c580` | `junichiromorita/ai-agent-security-v012-replay-dense-c580` v1 | none | no-score / timeout, ref `53744896` | direct public `guide22_c580` port from `AI Agent: Replay-Dense Exfiltration`; target 800 / min 580 |
 | `v011_single_breadth_500` | `junichiromorita/ai-agent-security-v011-single-breadth-500` v1 | 32.370 | complete, ref `53711101` | high-risk single-hop breadth profile; theoretical single-post ceiling near 45 |
@@ -263,6 +267,10 @@ Local probes and prepared work:
 - `workspace/exp013_replay_dense_c640/`: source experiment for submitted `v013_replay_dense_c640`; high-risk follow-up that raises the guide22 lower bound to 640.
 - `workspace/exp014_replay_dense_classic500/`: source experiment for submitted `v014_replay_dense_classic500`; lowers the forced return floor to 500 after v012/v013 no-score results.
 - `workspace/exp015_replay_dense_n800/`: source experiment for submitted `v015_replay_dense_n800`; keeps the v010-safe lower bound 400 while raising target/static count.
+- `workspace/exp016_replay_dense_classic520/`: source experiment for submitted `v016_replay_dense_classic520`; raises v014's lower bound from 500 to 520.
+- `workspace/exp017_replay_dense_classic540/`: source experiment for submitted `v017_replay_dense_classic540`; raises the controlled lower bound to 540.
+- `workspace/exp018_replay_dense_classic560/`: source experiment for submitted `v018_replay_dense_classic560`; custom 560 floor after v017 succeeded.
+- `workspace/exp019_replay_dense_classic570/`: source experiment for submitted `v019_replay_dense_classic570`; high-upside boundary probe near the failed 580+ range.
 - `scripts/measure_candidate_posts.py`: replays static candidates locally and counts successful `http.post` calls.
 - Current deterministic post-count probe: v006 and v007 each produced 4 successful `http.post` calls for 32/32 replayed static candidates. Hosted results did not transfer cleanly: v006/v007 timed out, and v008 scored close to a single-post 96-candidate run.
 - `workspace/exp011_aas_local_validation/`: public GGUF validation workflow prepared from `AAS | Local validation`; first targets are pending `v010` and `v011`.
@@ -272,7 +280,7 @@ Current pause condition:
 - Do not continue scaling the current multipost prompt family by candidate count.
 - Use `v010_replay_dense_boundary` as the current public baseline.
 - Current public-LB candidate is the submitted `v012_replay_dense_c580`, a close port of public `AI Agent: Replay-Dense Exfiltration` / `guide22_c580`.
-- `v014_replay_dense_classic500` tests whether a 500 lower-bound replay-dense profile is inside the hosted runtime envelope. `v015_replay_dense_n800` is the lower-risk backup with min return 400 and target/static 400.
+- `v017_replay_dense_classic540` shows that a 540 lower-bound replay-dense profile is inside the hosted runtime envelope and improves public LB to `48.600`. `v018` and `v019` now test custom 560/570 floors; avoid jumping back to guide22 `580+` until those resolve.
 - Use `exp011` public local validation output as a diagnostic only; current gpt_oss-only validation overpredicts LB and gemma validation failed to load.
 - For final-submission planning, reserve one slot for best public single-hop breadth and one slot for a private-robust mixed strategy unless private evidence says otherwise.
 

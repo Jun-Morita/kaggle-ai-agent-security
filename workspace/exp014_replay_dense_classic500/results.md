@@ -29,10 +29,11 @@ Result:
 - Kaggle kernel: `junichiromorita/ai-agent-security-v014-replay-dense-classic500`
 - Kaggle kernel version: `1`
 - Kaggle submission ref: `53775306`
-- Kaggle status: `PENDING` as of 2026-06-17 21:21 JST
-- Kaggle public score: pending
+- Kaggle status: `COMPLETE` as of 2026-06-18 06:11 JST
+- Kaggle public score: `45.000`
 
 Notes:
 
 - This is the first post-guide22-timeout recovery attempt.
 - The target public range is above v010 `36.000` but below the failed guide22 `580+` floor.
+- Result is a new repo best. `MIN_RETURN_CANDIDATES=500` is inside the hosted runtime envelope, while guide22 `580+` was not.

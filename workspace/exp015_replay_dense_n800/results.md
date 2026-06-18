@@ -29,10 +29,11 @@ Result:
 - Kaggle kernel: `junichiromorita/ai-agent-security-v015-replay-dense-n800`
 - Kaggle kernel version: `1`
 - Kaggle submission ref: `53775486`
-- Kaggle status: `PENDING` as of 2026-06-17 21:28 JST
-- Kaggle public score: pending
+- Kaggle status: `COMPLETE` as of 2026-06-18 06:11 JST
+- Kaggle public score: `36.000`
 
 Notes:
 
 - Safe backup while v014 is pending.
 - If this no-scores, even the `400` floor plus raised target/static count is too much for hosted runtime.
+- Result matched v010. Keeping `MIN_RETURN_CANDIDATES=400` while raising target/static count did not improve public LB.
