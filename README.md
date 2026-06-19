@@ -129,7 +129,7 @@ The deterministic local smoke score is a crash and wiring check, not a Public LB
 
 This notebook runs the competition SDK against public `gpt_oss` and `gemma` GGUF model sources, then reports `gpt_oss_public`, `gemma_public`, and `local_public_mean`. It also writes per-model framework logs and compact finding summaries, which are useful for inspecting whether a candidate family produces replayable `http.post` findings.
 
-Build validation kernels for the current pending submissions:
+Build validation kernels for selected submissions:
 
 ```bash
 ./workspace/exp011_aas_local_validation/run.sh
@@ -223,7 +223,7 @@ Versions `1-6` were useful only for debugging submission wiring. Future submissi
 
 ## Submission Status
 
-Current best public LB is `v017_replay_dense_classic540` with `48.600`. It extends the successful v014 line by raising `MIN_RETURN_CANDIDATES` from `500` to `540`. `v018_replay_dense_classic560` and `v019_replay_dense_classic570` are pending as the next boundary probes; `v016_replay_dense_classic520` no-scored despite the lower floor, so treat that result as evaluator variance or profile-specific overhead rather than a clean count boundary.
+Current best public LB is `v019_replay_dense_classic570` with `51.300`. It extends the successful classic line by raising `MIN_RETURN_CANDIDATES` from `540` to `570`; `v018_replay_dense_classic560` also completed at `50.400`. The score continues to match the single-post scale exactly: `score ~= candidate_count * 18 / 200`. `v020_static625_short_direct` and `v021_static700_short_direct` are pending as static short-message public-upside candidates with expected public `56.250` and `63.000` if they complete.
 
 Current strategy rules:
 
@@ -235,9 +235,11 @@ Current strategy rules:
 
 | Version | Kernel | Public LB | Status | Main idea |
 |---|---|---:|---|---|
-| `v019_replay_dense_classic570` | `junichiromorita/ai-agent-security-v019-replay-dense-classic570` v1 | pending | pending, ref `53808128` | high-upside custom `classic570`; expected 51.3 if complete |
-| `v018_replay_dense_classic560` | `junichiromorita/ai-agent-security-v018-replay-dense-classic560` v1 | pending | pending, ref `53808088` | main custom `classic560`; expected 50.4 if complete |
-| `v017_replay_dense_classic540` | `junichiromorita/ai-agent-security-v017-replay-dense-classic540` v1 | 48.600 | complete, ref `53788043` | current best; controlled `guide20_classic540`; target 800 / min 540 / safe target 0.8 |
+| `v021_static700_short_direct` | `junichiromorita/ai-agent-security-v021-static700-short-direct` v1 | pending | pending, ref `53846620` | high-upside static 700 short-message extension; expected 63.000 if complete |
+| `v020_static625_short_direct` | `junichiromorita/ai-agent-security-v020-static625-short-direct` v1 | pending | pending, ref `53846429` | direct static 625 short-message public-upside port; expected 56.250 if complete |
+| `v019_replay_dense_classic570` | `junichiromorita/ai-agent-security-v019-replay-dense-classic570` v1 | 51.300 | complete, ref `53808128` | current best; high-upside custom `classic570`; target 800 / min 570 / safe target 0.84 |
+| `v018_replay_dense_classic560` | `junichiromorita/ai-agent-security-v018-replay-dense-classic560` v1 | 50.400 | complete, ref `53808088` | custom `classic560`; target 800 / min 560 / safe target 0.82 |
+| `v017_replay_dense_classic540` | `junichiromorita/ai-agent-security-v017-replay-dense-classic540` v1 | 48.600 | complete, ref `53788043` | controlled `guide20_classic540`; target 800 / min 540 / safe target 0.8 |
 | `v016_replay_dense_classic520` | `junichiromorita/ai-agent-security-v016-replay-dense-classic520` v1 | none | no-score, ref `53787950` | controlled `guide20_classic520`; likely evaluator variance because v017 succeeded |
 | `v015_replay_dense_n800` | `junichiromorita/ai-agent-security-v015-replay-dense-n800` v1 | 36.000 | complete, ref `53775486` | safe backup `guide18_n800`; matched v010 |
 | `v014_replay_dense_classic500` | `junichiromorita/ai-agent-security-v014-replay-dense-classic500` v1 | 45.000 | complete, ref `53775306` | current best; runtime-safe `guide20_classic500`; target 800 / min 500 / safe target 0.78 |
@@ -269,8 +271,10 @@ Local probes and prepared work:
 - `workspace/exp015_replay_dense_n800/`: source experiment for submitted `v015_replay_dense_n800`; keeps the v010-safe lower bound 400 while raising target/static count.
 - `workspace/exp016_replay_dense_classic520/`: source experiment for submitted `v016_replay_dense_classic520`; raises v014's lower bound from 500 to 520.
 - `workspace/exp017_replay_dense_classic540/`: source experiment for submitted `v017_replay_dense_classic540`; raises the controlled lower bound to 540.
-- `workspace/exp018_replay_dense_classic560/`: source experiment for submitted `v018_replay_dense_classic560`; custom 560 floor after v017 succeeded.
-- `workspace/exp019_replay_dense_classic570/`: source experiment for submitted `v019_replay_dense_classic570`; high-upside boundary probe near the failed 580+ range.
+- `workspace/exp018_replay_dense_classic560/`: source experiment for submitted `v018_replay_dense_classic560`; custom 560 floor, public `50.400`.
+- `workspace/exp019_replay_dense_classic570/`: source experiment for submitted `v019_replay_dense_classic570`; custom 570 floor, public `51.300`, current best.
+- `workspace/exp020_static625_short_direct/`: source experiment for submitted `v020_static625_short_direct`; static 625 short-message direct exfil plan, pending, expected public `56.250` if complete.
+- `workspace/exp021_static700_short_direct/`: source experiment for submitted `v021_static700_short_direct`; static 700 short-message high-upside extension, pending, expected public `63.000` if complete.
 - `scripts/measure_candidate_posts.py`: replays static candidates locally and counts successful `http.post` calls.
 - Current deterministic post-count probe: v006 and v007 each produced 4 successful `http.post` calls for 32/32 replayed static candidates. Hosted results did not transfer cleanly: v006/v007 timed out, and v008 scored close to a single-post 96-candidate run.
 - `workspace/exp011_aas_local_validation/`: public GGUF validation workflow prepared from `AAS | Local validation`; first targets are pending `v010` and `v011`.
@@ -278,9 +282,11 @@ Local probes and prepared work:
 Current pause condition:
 
 - Do not continue scaling the current multipost prompt family by candidate count.
-- Use `v010_replay_dense_boundary` as the current public baseline.
-- Current public-LB candidate is the submitted `v012_replay_dense_c580`, a close port of public `AI Agent: Replay-Dense Exfiltration` / `guide22_c580`.
-- `v017_replay_dense_classic540` shows that a 540 lower-bound replay-dense profile is inside the hosted runtime envelope and improves public LB to `48.600`. `v018` and `v019` now test custom 560/570 floors; avoid jumping back to guide22 `580+` until those resolve.
+- Use `v019_replay_dense_classic570` as the current public baseline.
+- `v018` and `v019` show that custom classic 560/570 floors are inside the hosted runtime envelope and scale exactly to `50.400` / `51.300`.
+- The current pending public-upside tests are `v020_static625_short_direct` and `v021_static700_short_direct`.
+- As of the 2026-06-19 end-of-day check, both v020 and v021 are still `PENDING`; do not create another submission until these results are known.
+- If v020/v021 no-score, fall back to custom `classic575` first, with expected public `51.750` if it completes. A custom `classic580` is the high-risk follow-up with expected public `52.200`, but guide22 `580+` no-scored, so use the classic shape and keep runtime pressure minimal.
 - Use `exp011` public local validation output as a diagnostic only; current gpt_oss-only validation overpredicts LB and gemma validation failed to load.
 - For final-submission planning, reserve one slot for best public single-hop breadth and one slot for a private-robust mixed strategy unless private evidence says otherwise.
 

@@ -29,10 +29,11 @@ Result:
 - Kaggle kernel: `junichiromorita/ai-agent-security-v019-replay-dense-classic570`
 - Kaggle kernel version: `1`
 - Kaggle submission ref: `53808128`
-- Kaggle status: `PENDING` as of 2026-06-18 21:31 JST
-- Kaggle public score: pending
+- Kaggle status: `COMPLETE` as of 2026-06-19 19:47 JST
+- Kaggle public score: `51.300`
 
 Notes:
 
 - High-upside boundary probe after v017.
-- This is close to the failed guide22 `580+` range and may no-score.
+- Result exactly matches the expected single-post scale: `570 * 18 / 200 = 51.3`.
+- This is the current best public result. The usable hosted boundary is now very close to the failed guide22 `580+` range.

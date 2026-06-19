@@ -29,10 +29,11 @@ Result:
 - Kaggle kernel: `junichiromorita/ai-agent-security-v018-replay-dense-classic560`
 - Kaggle kernel version: `1`
 - Kaggle submission ref: `53808088`
-- Kaggle status: `PENDING` as of 2026-06-18 21:31 JST
-- Kaggle public score: pending
+- Kaggle status: `COMPLETE` as of 2026-06-19 19:47 JST
+- Kaggle public score: `50.400`
 
 Notes:
 
 - Main public-upside attempt after v017.
-- If it completes near `50.4`, the next safe step may be `classic570`.
+- Result exactly matches the expected single-post scale: `560 * 18 / 200 = 50.4`.
+- The 560 floor is inside the hosted runtime envelope.

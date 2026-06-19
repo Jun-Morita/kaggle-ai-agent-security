@@ -23,7 +23,7 @@ Key settings:
 
 Expected interpretation:
 
-- if it completes near `50.4`, the 560 floor is inside the hosted runtime envelope;
+- it completed near `50.4`, so the 560 floor is inside the hosted runtime envelope;
 - if it no-scores, v017's 540 floor is close to the stable boundary;
 - if it lands near `48.6`, the higher floor did not convert into extra validated findings.
 
@@ -60,8 +60,8 @@ UV_CACHE_DIR=/tmp/uv-cache \
 - Kernel: `junichiromorita/ai-agent-security-v018-replay-dense-classic560`
 - Version: `1`
 - Submission ref: `53808088`
-- Status: `PENDING` as of 2026-06-18 21:31 JST
-- Public score: pending
+- Status: `COMPLETE` as of 2026-06-19 19:47 JST
+- Public score: `50.400`
 - Local deterministic smoke score: `0.00`
 - Local deterministic smoke runtime: about 6.6s
 - Static `env=None` return count: `400`

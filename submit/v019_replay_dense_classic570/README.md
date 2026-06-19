@@ -23,7 +23,7 @@ Key settings:
 
 Expected interpretation:
 
-- if it completes near `51.3`, the usable boundary is just below guide22's failed `580+` range;
+- it completed near `51.3`, so the usable boundary is just below guide22's failed `580+` range;
 - if it no-scores, the safe boundary is likely between 560 and 570;
 - if it lands near v017, the higher floor did not convert into extra validated findings.
 
@@ -60,8 +60,8 @@ UV_CACHE_DIR=/tmp/uv-cache \
 - Kernel: `junichiromorita/ai-agent-security-v019-replay-dense-classic570`
 - Version: `1`
 - Submission ref: `53808128`
-- Status: `PENDING` as of 2026-06-18 21:31 JST
-- Public score: pending
+- Status: `COMPLETE` as of 2026-06-19 19:47 JST
+- Public score: `51.300`
 - Local deterministic smoke score: `0.00`
 - Local deterministic smoke runtime: about 6.7s
 - Static `env=None` return count: `400`
