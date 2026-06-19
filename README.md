@@ -223,20 +223,28 @@ Versions `1-6` were useful only for debugging submission wiring. Future submissi
 
 ## Submission Status
 
-Current best public LB is `v019_replay_dense_classic570` with `51.300`. It extends the successful classic line by raising `MIN_RETURN_CANDIDATES` from `540` to `570`; `v018_replay_dense_classic560` also completed at `50.400`. The score continues to match the single-post scale exactly: `score ~= candidate_count * 18 / 200`. `v020_static625_short_direct` and `v021_static700_short_direct` are pending as static short-message public-upside candidates with expected public `56.250` and `63.000` if they complete.
+Current best confirmed public LB is `v019_replay_dense_classic570` with `51.300`. It extends the successful classic line by raising `MIN_RETURN_CANDIDATES` from `540` to `570`; `v018_replay_dense_classic560` also completed at `50.400`. The score continues to match the single-post scale exactly for the successful classic family: `score ~= candidate_count * 18 / 200`.
+
+On 2026-06-20, `v020_static625_short_direct` and `v021_static700_short_direct` completed with blank public scores, so the earlier static short-direct interpretation of public `agi-ai-agent-security` should be treated as stale. Pulling the actual Kaggle kernel revealed that the public high-score notebook is `V26`: `208` candidates, each with `web.search` followed by two short `POST ... body=TOKEN=admin123` messages. The repo now has two pending web2post submissions based on that corrected read:
+
+- `v022_web2post_short_208_timeflat`: direct public V26 transplant, `208` candidates / `624` user messages.
+- `v023_web2post_short_240_push`: high-risk scale-up, `240` candidates / `720` user messages.
 
 Current strategy rules:
 
 - Treat multipost as retired unless GGUF validation proves more than one successful replayed `http.post` per candidate on both public models.
 - Optimize the product of returned candidate count and validation rate. With single-post EXFILTRATION, public score is approximately `0.09 * successful single-hop findings`.
-- Keep prompt chains single-hop, short, and direct when testing breadth; every wasted hop is likely a zero-score replay.
-- Gate the next competition submission on `exp011_aas_local_validation` instead of blind daily submissions.
+- Keep prompt chains short and low-overhead. Single-hop classic remains the confirmed safe baseline; web2post is the current public-upside branch while `v022/v023` are pending.
+- Do not continue static short-direct `v020/v021` style unless new evidence explains the blank scores.
+- Use `KaggleApi.competition_submit_code()` directly if `uv run kaggle competitions submit ...` returns a generic `400` for code submissions.
 - Preserve a private-LB hedge: final candidates should not all be the same neutral-URL public EXFILTRATION trick. Keep one mixed, private-robust family with `sk_live_test` and lower-scoring but more diverse predicate coverage.
 
 | Version | Kernel | Public LB | Status | Main idea |
 |---|---|---:|---|---|
-| `v021_static700_short_direct` | `junichiromorita/ai-agent-security-v021-static700-short-direct` v1 | pending | pending, ref `53846620` | high-upside static 700 short-message extension; expected 63.000 if complete |
-| `v020_static625_short_direct` | `junichiromorita/ai-agent-security-v020-static625-short-direct` v1 | pending | pending, ref `53846429` | direct static 625 short-message public-upside port; expected 56.250 if complete |
+| `v023_web2post_short_240_push` | `junichiromorita/ai-agent-security-v023-web2post-short-240-push` v1 | pending | pending, ref `53862892` | high-risk public V26 scale-up; 240 candidates / 720 messages; theoretical 79.2 if fully followed |
+| `v022_web2post_short_208_timeflat` | `junichiromorita/ai-agent-security-v022-web2post-short-208-timeflat` v1 | pending | pending, ref `53862744` | corrected public V26 transplant; 208 candidates / 624 messages |
+| `v021_static700_short_direct` | `junichiromorita/ai-agent-security-v021-static700-short-direct` v1 | none | complete / no-score, ref `53846620` | stale static 700 interpretation of public notebook; blank public score |
+| `v020_static625_short_direct` | `junichiromorita/ai-agent-security-v020-static625-short-direct` v1 | none | complete / no-score, ref `53846429` | stale static 625 interpretation of public notebook; blank public score |
 | `v019_replay_dense_classic570` | `junichiromorita/ai-agent-security-v019-replay-dense-classic570` v1 | 51.300 | complete, ref `53808128` | current best; high-upside custom `classic570`; target 800 / min 570 / safe target 0.84 |
 | `v018_replay_dense_classic560` | `junichiromorita/ai-agent-security-v018-replay-dense-classic560` v1 | 50.400 | complete, ref `53808088` | custom `classic560`; target 800 / min 560 / safe target 0.82 |
 | `v017_replay_dense_classic540` | `junichiromorita/ai-agent-security-v017-replay-dense-classic540` v1 | 48.600 | complete, ref `53788043` | controlled `guide20_classic540`; target 800 / min 540 / safe target 0.8 |
@@ -273,20 +281,22 @@ Local probes and prepared work:
 - `workspace/exp017_replay_dense_classic540/`: source experiment for submitted `v017_replay_dense_classic540`; raises the controlled lower bound to 540.
 - `workspace/exp018_replay_dense_classic560/`: source experiment for submitted `v018_replay_dense_classic560`; custom 560 floor, public `50.400`.
 - `workspace/exp019_replay_dense_classic570/`: source experiment for submitted `v019_replay_dense_classic570`; custom 570 floor, public `51.300`, current best.
-- `workspace/exp020_static625_short_direct/`: source experiment for submitted `v020_static625_short_direct`; static 625 short-message direct exfil plan, pending, expected public `56.250` if complete.
-- `workspace/exp021_static700_short_direct/`: source experiment for submitted `v021_static700_short_direct`; static 700 short-message high-upside extension, pending, expected public `63.000` if complete.
+- `workspace/exp020_static625_short_direct/`: source experiment for submitted `v020_static625_short_direct`; completed with blank public score.
+- `workspace/exp021_static700_short_direct/`: source experiment for submitted `v021_static700_short_direct`; completed with blank public score.
+- `workspace/exp022_web2post_short_208_timeflat/`: source experiment for submitted `v022_web2post_short_208_timeflat`; direct public V26 web2post transplant, pending.
+- `workspace/exp023_web2post_short_240_push/`: source experiment for submitted `v023_web2post_short_240_push`; candidate-count scale-up of v022, pending.
 - `scripts/measure_candidate_posts.py`: replays static candidates locally and counts successful `http.post` calls.
 - Current deterministic post-count probe: v006 and v007 each produced 4 successful `http.post` calls for 32/32 replayed static candidates. Hosted results did not transfer cleanly: v006/v007 timed out, and v008 scored close to a single-post 96-candidate run.
 - `workspace/exp011_aas_local_validation/`: public GGUF validation workflow prepared from `AAS | Local validation`; first targets are pending `v010` and `v011`.
 
 Current pause condition:
 
-- Do not continue scaling the current multipost prompt family by candidate count.
+- Do not continue scaling the stale static short-direct family.
 - Use `v019_replay_dense_classic570` as the current public baseline.
 - `v018` and `v019` show that custom classic 560/570 floors are inside the hosted runtime envelope and scale exactly to `50.400` / `51.300`.
-- The current pending public-upside tests are `v020_static625_short_direct` and `v021_static700_short_direct`.
-- As of the 2026-06-19 end-of-day check, both v020 and v021 are still `PENDING`; do not create another submission until these results are known.
-- If v020/v021 no-score, fall back to custom `classic575` first, with expected public `51.750` if it completes. A custom `classic580` is the high-risk follow-up with expected public `52.200`, but guide22 `580+` no-scored, so use the classic shape and keep runtime pressure minimal.
+- The current pending public-upside tests are `v022_web2post_short_208_timeflat` and `v023_web2post_short_240_push`.
+- Wait for v022/v023 before adding another web2post scale-up.
+- If v022/v023 no-score or underperform, fall back to custom `classic575` first, with expected public `51.750` if it completes. A custom `classic580` is the high-risk follow-up with expected public `52.200`, but guide22 `580+` no-scored, so use the classic shape and keep runtime pressure minimal.
 - Use `exp011` public local validation output as a diagnostic only; current gpt_oss-only validation overpredicts LB and gemma validation failed to load.
 - For final-submission planning, reserve one slot for best public single-hop breadth and one slot for a private-robust mixed strategy unless private evidence says otherwise.
 
