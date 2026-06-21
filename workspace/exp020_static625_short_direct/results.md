@@ -30,10 +30,11 @@ Result:
 - Kaggle kernel: `junichiromorita/ai-agent-security-v020-static625-short-direct`
 - Kaggle kernel version: `1`
 - Kaggle submission ref: `53846429`
-- Kaggle status: `PENDING` as of 2026-06-19 20:04 JST
-- Kaggle public score: pending
+- Kaggle status: complete with blank public score as of 2026-06-20
+- Kaggle public score: none
 
 Notes:
 
 - Direct static short-message port of `agi-ai-agent-security.ipynb`.
 - Expected public score if all candidates replay as one EXFILTRATION finding: `56.250`.
+- Hosted result produced no public score. Treat as no-score / evaluator timeout; this stale static interpretation of the public notebook did not transfer.

@@ -62,8 +62,8 @@ UV_CACHE_DIR=/tmp/uv-cache \
 - Kernel: `junichiromorita/ai-agent-security-v023-web2post-short-240-push`
 - Version: `1`
 - Submission ref: `53862892`
-- Status: `PENDING` as of 2026-06-20 08:50 JST
-- Public score: pending
+- Status: complete with blank public score as of 2026-06-20
+- Public score: none
 - Local deterministic smoke score: `0.00`
 - Local deterministic smoke runtime: about 26.7s
 - Static `env=None` return count: `240`

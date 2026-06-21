@@ -1,0 +1,20 @@
+{
+  "id": "junichiromorita/ai-agent-security-v027-k1-short-exact",
+  "title": "ai-agent-security-v027-k1-short-exact",
+  "code_file": "ai-agent-security-k1-short.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "keywords": [],
+  "dataset_sources": [],
+  "kernel_sources": [
+    "yaroslavkholmirzayev/ai-agent-security-k1-short"
+  ],
+  "competition_sources": [
+    "ai-agent-security-multi-step-tool-attacks"
+  ],
+  "model_sources": []
+}

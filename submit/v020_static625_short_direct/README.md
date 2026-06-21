@@ -51,8 +51,8 @@ UV_CACHE_DIR=/tmp/uv-cache \
 - Kernel: `junichiromorita/ai-agent-security-v020-static625-short-direct`
 - Version: `1`
 - Submission ref: `53846429`
-- Status: `PENDING` as of 2026-06-19 20:04 JST
-- Public score: pending
+- Status: complete with blank public score as of 2026-06-20
+- Public score: none
 - Local deterministic smoke score: `0.00`
 - Local deterministic smoke runtime: about 34.7s
 - Static `env=None` return count: `625`

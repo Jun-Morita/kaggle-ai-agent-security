@@ -30,8 +30,8 @@ Result:
 - Kaggle kernel: `junichiromorita/ai-agent-security-v023-web2post-short-240-push`
 - Kaggle kernel version: `1`
 - Kaggle submission ref: `53862892`
-- Kaggle status: `PENDING` as of 2026-06-20 08:50 JST
-- Kaggle public score: pending
+- Kaggle status: complete with blank public score as of 2026-06-20
+- Kaggle public score: none
 
 Notes:
 
@@ -39,3 +39,4 @@ Notes:
 - It intentionally keeps the public V26 candidate generation shape and changes only the candidate count.
 - The pulled public kernel output reports proxy validation `http.post` success `416/416`, source success `0/208`, proxy normalized score `35.36`, and public notebook score `56.25`.
 - Submitted via `KaggleApi.competition_submit_code()` after the kernel completed.
+- Hosted result produced no public score. Treat as no-score / evaluator timeout; the 720-message scale-up exceeded the usable hosted envelope or did not transfer.

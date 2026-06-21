@@ -30,10 +30,11 @@ Result:
 - Kaggle kernel: `junichiromorita/ai-agent-security-v021-static700-short-direct`
 - Kaggle kernel version: `1`
 - Kaggle submission ref: `53846620`
-- Kaggle status: `PENDING` as of 2026-06-19 20:11 JST
-- Kaggle public score: pending
+- Kaggle status: complete with blank public score as of 2026-06-20
+- Kaggle public score: none
 
 Notes:
 
 - High-upside static short-message extension of `v020`.
 - Expected public score if all candidates replay as one EXFILTRATION finding: `63.000`.
+- Hosted result produced no public score. Treat as no-score / evaluator timeout; stop scaling this static short-direct family.
