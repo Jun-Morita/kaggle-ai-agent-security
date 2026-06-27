@@ -29,5 +29,5 @@ All other replay/search settings are unchanged.
 - Kernel slug: `junichiromorita/ai-agent-security-v030-replay-dense-classic600`
 - Kernel version: `1`
 - Submission ref: `53946466`
-- Hosted status: `PENDING` as of 2026-06-22 21:50 JST
-- Public LB: pending
+- Hosted status: `COMPLETE` as of 2026-06-23
+- Public LB: `54.000`

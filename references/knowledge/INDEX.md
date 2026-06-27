@@ -18,6 +18,8 @@ Codex はまずこの index を読み、必要なファイルだけ開く。
 - SDK docs currently state a public default attack budget of `1800` seconds.
 - Replay limits are `2000` findings, `32` user messages per finding, and `2000` chars per user message.
 - Use `aicomp evaluate redteam attack.py --agent deterministic --env gym` for local public-path parity.
+- 2026-06-25 host update: each attack-generation, public replay, and private replay phase has a consistently enforced `9000s` budget per model; global runtime is `15h`; old submissions will not be rescored.
+- The updated scorer fixes secret-exfiltration scoring and recognizes straightforward reversible encodings such as URL encoding, base64, hex, reversal, and separator-joined values.
 
 ## Experiment Candidates
 

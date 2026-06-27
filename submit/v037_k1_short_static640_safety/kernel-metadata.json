@@ -1,0 +1,20 @@
+{
+  "id": "junichiromorita/ai-agent-security-v037-k1-static640",
+  "title": "ai-agent-security-v037-k1-static640",
+  "code_file": "ai-agent-security-working-diary.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "keywords": [],
+  "dataset_sources": [],
+  "kernel_sources": [
+    "kokinnwakashuu/ai-agent-security-working-diary"
+  ],
+  "competition_sources": [
+    "ai-agent-security-multi-step-tool-attacks"
+  ],
+  "model_sources": []
+}

@@ -2,6 +2,38 @@
 
 提出結果、公開 notebook、discussion、ユーザー提供の助言から抽出した方針メモ。
 
+## 2026-06-25: Evaluator Update Changes the Operating Baseline
+
+### New Evidence
+
+- Host discussion `Evaluator update and FAQ` says the evaluator update has been deployed.
+- Phase budgets are now consistently enforced at `9000s` per model for:
+  - attack generation
+  - public replay
+  - private replay
+- Kaggle global runtime limit is now `15h`, but `AttackAlgorithm.run()` still has its own phase budget.
+- If any phase exceeds budget, the submission fails without score.
+- Secret-exfiltration scoring now uses active replay environment / authoritative replay trace and recognizes URL encoding, base64, hex, reversal, and separator-joined values.
+- Existing submissions will not be rescored; earlier approaches must be resubmitted to get post-update behavior.
+- `v034_classic610` and `v035_classic605` completed after this update with public `0.540`, despite being minimal diffs from successful pre-update `v030_classic600`.
+
+### Interpretation
+
+- Treat 2026-06-25 as an evaluator regime change. Pre-update public scores remain useful history, but new submissions may not follow the same exact scaling law.
+- `v030=54.000` remains the current confirmed best, but it is a pre-update result. A post-update baseline may be needed before continuing optimization.
+- The collapse of `v034/v035` means do not blindly submit more `classic6xx` variants by only increasing `MIN_RETURN_CANDIDATES`.
+- Replay runtime is now an explicit first-class constraint. Candidate count must be chosen to fit public and private replay, not only attack-generation runtime.
+- Encoded exfiltration is newly worth testing because the scorer explicitly recognizes reversible encodings.
+
+### Next Direction
+
+- First establish a post-update control. Options:
+  - resubmit exact `v030` as a clean post-update baseline;
+  - or submit a smaller controlled classic variant that is safely below the observed replay boundary.
+- In parallel, design a compact encoded-exfil probe with a modest candidate count to test whether the updated scorer rewards transformed secrets.
+- Avoid large static transfers and naive count scaling until a post-update score baseline is known.
+- Keep final strategy flexible: the private replay phase now has explicit fail-fast behavior, so a slightly lower-scoring but replay-cheap and robust submission may be preferable to a high-count public-only run.
+
 ## 2026-06-15: Post-v008/v009 Strategy
 
 ### Current Evidence

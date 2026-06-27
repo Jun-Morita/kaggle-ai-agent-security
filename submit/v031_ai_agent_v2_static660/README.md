@@ -35,8 +35,8 @@ UV_CACHE_DIR=/tmp/uv-cache \
 - Kernel: `junichiromorita/ai-agent-security-v031-ai-agent-v2-static660`
 - Version: `1`
 - Submission ref: `53946504`
-- Status: `PENDING` as of 2026-06-22 21:51 JST
-- Public score: pending
+- Status: `COMPLETE` with blank public score as of 2026-06-23
+- Public score: none
 - Local deterministic smoke score: `0.00`
 - Local deterministic smoke runtime: about 36.4s
 - Static `env=None` return count: `660`

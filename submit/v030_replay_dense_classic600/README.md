@@ -45,8 +45,8 @@ UV_CACHE_DIR=/tmp/uv-cache \
 - Kernel: `junichiromorita/ai-agent-security-v030-replay-dense-classic600`
 - Version: `1`
 - Submission ref: `53946466`
-- Status: `PENDING` as of 2026-06-22 21:50 JST
-- Public score: pending
+- Status: `COMPLETE` as of 2026-06-23
+- Public score: `54.000`
 - Local deterministic smoke score: `0.00`
 - Local deterministic smoke runtime: about 6.6s
 - Static `env=None` return count: `400`

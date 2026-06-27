@@ -28,5 +28,5 @@ Expected public score if it transfers: near `59.46`.
 - Kernel slug: `junichiromorita/ai-agent-security-v031-ai-agent-v2-static660`
 - Kernel version: `1`
 - Submission ref: `53946504`
-- Hosted status: `PENDING` as of 2026-06-22 21:51 JST
-- Public LB: pending
+- Hosted status: `COMPLETE` with blank public score as of 2026-06-23
+- Public LB: none
