@@ -13,8 +13,9 @@ are recognized.
 - Kernel: `junichiromorita/ai-agent-security-v047-encoded-marker-n160`
 - Kernel version: `1`
 - Submission ref: `54111527`
-- Status: pending as of 2026-06-27
-- Public score:
+- Status: `COMPLETE` as of 2026-06-28
+- Public score: `0.000`
 - Local deterministic smoke score: `0.00`
 - Local deterministic smoke runtime: about 11.6s
 - Static return count: `160`
+- Interpretation: encoded marker payloads did not score in this prompt form.
