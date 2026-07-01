@@ -18,8 +18,9 @@ into the known-successful envelope.
 - Kernel: `junichiromorita/ai-agent-security-v050-omega-urad-hybrid335`
 - Kernel version: `1`
 - Submission ref: `54170993`
-- Status: pending as of 2026-06-29
+- Status: `COMPLETE` with blank public score as of 2026-07-01
 - Public score:
 - Local deterministic smoke score: `0.00`
 - Local deterministic smoke runtime: about 22.4s
 - Static return count: `335`
+- Treat as no-score / replay timeout.

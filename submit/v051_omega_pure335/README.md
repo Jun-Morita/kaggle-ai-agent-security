@@ -16,8 +16,9 @@ count as successful `v043`.
 - Kernel: `junichiromorita/ai-agent-security-v051-omega-pure335`
 - Kernel version: `1`
 - Submission ref: `54171148`
-- Status: pending as of 2026-06-29
+- Status: `COMPLETE` with blank public score as of 2026-07-01
 - Public score:
 - Local deterministic smoke score: `0.00`
 - Local deterministic smoke runtime: about 17.9s
 - Static return count: `335`
+- Treat as no-score / replay timeout.
