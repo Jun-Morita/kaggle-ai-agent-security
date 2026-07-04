@@ -10,9 +10,9 @@ tool-intent budget with fewer candidates.
 
 - Kaggle kernel: `junichiromorita/ai-agent-security-v052-multiturn-hybrid335msg` v1
 - Submission ref: `54212725`
-- Public LB: blank / no-score as of 2026-07-01
+- Public LB: none; Kaggle UI reported `Submission Format Error` as of 2026-07-04
 - Local deterministic score: `0.00`
 - Local deterministic runtime: about 15.8s
 - Static return count: `215`
 - Static user-message count: `335`
-- Notes: py_compile, ruff, SDK validate, deterministic smoke, kernel push, and competition submit passed. Treat result as no-score / replay timeout; `335` user messages in this shape are too heavy.
+- Notes: py_compile, ruff, SDK validate, deterministic smoke, kernel push, and competition submit passed. Treat result as hosted-evaluation failure; `335` user messages in this shape are too heavy.

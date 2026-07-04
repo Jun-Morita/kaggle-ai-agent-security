@@ -15,7 +15,7 @@ Static adoption from public `multi-turn-exfiltration-with-adaptive-burst`.
 - Kernel: `junichiromorita/ai-agent-security-v052-multiturn-hybrid335msg`
 - Kernel version: `1`
 - Submission ref: `54212725`
-- Status: complete with blank public score as of 2026-07-01
+- Status: `Submission Format Error` in Kaggle UI as of 2026-07-04
 - Public score:
 - Local deterministic smoke score: `0.00`
 - Local deterministic smoke runtime: about 15.8s
@@ -24,5 +24,5 @@ Static adoption from public `multi-turn-exfiltration-with-adaptive-burst`.
 
 ## Interpretation
 
-- Treat as no-score / replay timeout.
+- Treat as hosted-evaluation failure.
 - `335` user messages in this static multi-turn shape exceed the current practical replay envelope.

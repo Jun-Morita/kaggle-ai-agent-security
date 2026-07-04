@@ -16,9 +16,9 @@ count as successful `v043`.
 - Kernel: `junichiromorita/ai-agent-security-v051-omega-pure335`
 - Kernel version: `1`
 - Submission ref: `54171148`
-- Status: `COMPLETE` with blank public score as of 2026-07-01
+- Status: `Submission Format Error` in Kaggle UI as of 2026-07-04
 - Public score:
 - Local deterministic smoke score: `0.00`
 - Local deterministic smoke runtime: about 17.9s
 - Static return count: `335`
-- Treat as no-score / replay timeout.
+- Treat as hosted-evaluation failure; pure Omega N335 did not preserve `v043` behavior.

@@ -154,7 +154,7 @@ Public notebook から得た知識を要約する。
   - burst mode can use up to 8 tool hops
   - fallback `SAFE_BASE_N=600` is too large for our current wrapper evidence
   - recent `v050/v051` results show even small composition changes around the
-    `v043` envelope can no-score
+    `v043` envelope can fail with `Submission Format Error`
 - The public notebook may rely on hosted behavior that does not transfer through
   our script-kernel path.
 
@@ -169,8 +169,8 @@ Public notebook から得た知識を要約する。
 - Result update:
   - `v053` completed with public `21.500`, below both `v043=30.170` and the
     full `250`-message theoretical `22.5`.
-  - `v052` completed with blank public score, so `335` user messages in this
-    shape exceed the current practical replay envelope.
+  - `v052` ended as `Submission Format Error`, so `335` user messages in this
+    shape exceed the current practical hosted envelope.
 - Current conclusion: multi-turn compression is not the next main lever unless a
   public notebook proves a more efficient chain. For now, prefer one-message
   `SECRET_MARKER` candidates with runtime-aware count sizing.

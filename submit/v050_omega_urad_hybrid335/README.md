@@ -18,9 +18,9 @@ into the known-successful envelope.
 - Kernel: `junichiromorita/ai-agent-security-v050-omega-urad-hybrid335`
 - Kernel version: `1`
 - Submission ref: `54170993`
-- Status: `COMPLETE` with blank public score as of 2026-07-01
+- Status: `Submission Format Error` in Kaggle UI as of 2026-07-04
 - Public score:
 - Local deterministic smoke score: `0.00`
 - Local deterministic smoke runtime: about 22.4s
 - Static return count: `335`
-- Treat as no-score / replay timeout.
+- Treat as hosted-evaluation failure; the hybrid did not preserve `v043` behavior.

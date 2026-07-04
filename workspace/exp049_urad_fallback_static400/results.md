@@ -11,10 +11,10 @@ tests that prompt family without adaptive probing or multi-hop replay cost.
 
 - Kaggle kernel: `junichiromorita/ai-agent-security-v049-urad-fallback-static400` v1
 - Submission ref: `54122297`
-- Public LB: none; complete with blank public score as of 2026-06-29
+- Public LB: none; Kaggle UI reported `Submission Format Error` as of 2026-07-04
 - Local deterministic score: `0.00`
 - Local deterministic runtime: about 21.9s
 - Static return count: `400`
 - Notes: py_compile, ruff, SDK validate, and deterministic smoke passed.
-- Interpretation: no-score / replay timeout; `400` URAD fallback-style static
+- Interpretation: hosted-evaluation failure; `400` URAD fallback-style static
   candidates exceeded the current wrapper envelope.

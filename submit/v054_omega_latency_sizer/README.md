@@ -14,9 +14,13 @@ Low-risk adaptive follow-up to `v043`.
 - Kernel: `junichiromorita/ai-agent-security-v054-omega-latency-sizer`
 - Kernel version: `1`
 - Submission ref: `54234607`
-- Status: pending as of 2026-07-01
+- Status: `Submission Format Error` in Kaggle UI as of 2026-07-04
 - Public score:
 - Local deterministic smoke score: `0.00`
 - Local deterministic smoke runtime: about 9.5s
 - Static env-none return count: `335`
 - Hash: `e9a7a52d939d`
+
+## Interpretation
+
+- Runtime-aware sizing did not transfer safely in this wrapper.
