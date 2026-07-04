@@ -24,4 +24,8 @@ variant uses 300 one-message candidates that ask the target to open either
 
 ## Result
 
-Pending Kaggle submission.
+- Kernel `junichiromorita/ai-agent-security-v056-jed-indirect-marker300` version 1 pushed and completed.
+- Hosted output includes `attack.py` and `submission.csv`.
+- Kaggle CLI competition registration initially failed when using `-f attack.py`.
+- API error body showed this competition requires the named submission output to be `submission.csv`.
+- Submitted with `-f submission.csv` as ref `54325979`; status `PENDING` as of 2026-07-04.
