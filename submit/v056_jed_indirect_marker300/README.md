@@ -13,8 +13,8 @@ Transfer of the public `jed-indirect-marker300` notebook.
 - Kernel: `junichiromorita/ai-agent-security-v056-jed-indirect-marker300`
 - Kernel version: `1`
 - Submission ref: `54325979`
-- Status: `PENDING` as of 2026-07-04
-- Public score: pending
+- Status: `Submission Format Error` as of 2026-07-04
+- Public score: none
 - SDK validate: passed
 - Local deterministic smoke score: `0.00`
 - Local deterministic smoke runtime: about 19.9s

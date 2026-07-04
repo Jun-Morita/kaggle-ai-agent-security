@@ -31,4 +31,5 @@ than attack-generation runtime.
 - Kernel `junichiromorita/ai-agent-security-v057-jed-indirect-marker360` version 1 pushed and completed.
 - Hosted output includes `attack.py` and `submission.csv`.
 - Kaggle CLI competition registration initially failed when using `-f attack.py`.
-- Submitted with `-f submission.csv` as ref `54325987`; status `PENDING` as of 2026-07-04.
+- Submitted with `-f submission.csv` as ref `54325987`.
+- Kaggle UI later reported `Submission Format Error` as of 2026-07-04.
