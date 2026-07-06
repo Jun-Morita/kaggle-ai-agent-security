@@ -16,8 +16,8 @@ Slightly more aggressive variant of public notebook `attack-single-900`.
 - Kernel: `junichiromorita/ai-agent-security-v059-attack-single-900-pctl075`
 - Kernel version: `1`
 - Submission ref: `54330100`
-- Status: `PENDING` as of 2026-07-04
-- Public score: pending
+- Status: `COMPLETE` as of 2026-07-05
+- Public score: `45.585`
 - SDK validate: passed
 - Local deterministic smoke score: `0.00`
 - Local deterministic smoke runtime: about 10.4s

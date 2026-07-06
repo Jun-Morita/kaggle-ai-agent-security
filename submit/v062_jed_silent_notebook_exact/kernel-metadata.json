@@ -1,0 +1,15 @@
+{
+  "id": "junichiromorita/ai-agent-security-v062-jed-silent-notebook-exact",
+  "title": "ai-agent-security-v062-jed-silent-notebook-exact",
+  "code_file": "jed-attack-silent-no-output-30pct-faster.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_internet": false,
+  "dataset_sources": [],
+  "competition_sources": [
+    "ai-agent-security-multi-step-tool-attacks"
+  ],
+  "kernel_sources": []
+}

@@ -33,4 +33,5 @@ The exact transfer is the right first test before inventing hybrids.
 - `uv run ruff check submit/v059_attack_single_900_pctl075/attack.py`: passed
 - `aicomp_sdk.cli.main validate redteam`: passed
 - deterministic smoke: `0.00`, about 10.4s
-- Submitted to Kaggle as ref `54330100`; status `PENDING` as of 2026-07-04.
+- Submitted to Kaggle as ref `54330100`.
+- Completed with public `45.585` as of 2026-07-05.

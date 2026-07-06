@@ -1,0 +1,15 @@
+{
+  "id": "junichiromorita/ai-agent-security-v064-july-safe-edge-prune",
+  "title": "ai-agent-security-v064-july-safe-edge-prune",
+  "code_file": "lb51-255-july-safe-edge-prune.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_internet": false,
+  "dataset_sources": [],
+  "competition_sources": [
+    "ai-agent-security-multi-step-tool-attacks"
+  ],
+  "kernel_sources": []
+}

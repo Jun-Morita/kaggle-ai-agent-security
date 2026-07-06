@@ -16,8 +16,8 @@ Exact-style transfer of public notebook `attack-single-900`.
 - Kernel: `junichiromorita/ai-agent-security-v058-attack-single-900-exact`
 - Kernel version: `1`
 - Submission ref: `54330052`
-- Status: `PENDING` as of 2026-07-04
-- Public score: pending
+- Status: `COMPLETE` as of 2026-07-05
+- Public score: `45.495`
 - SDK validate: passed
 - Local deterministic smoke score: `0.00`
 - Local deterministic smoke runtime: about 10.3s
