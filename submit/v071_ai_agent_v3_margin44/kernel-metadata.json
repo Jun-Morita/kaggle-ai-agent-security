@@ -1,0 +1,15 @@
+{
+  "id": "junichiromorita/ai-agent-security-v071-ai-agent-v3-margin44",
+  "title": "ai-agent-security-v071-ai-agent-v3-margin44",
+  "code_file": "ai-agent-v3-1-2-single-post-exfiltration.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_internet": false,
+  "dataset_sources": [],
+  "competition_sources": [
+    "ai-agent-security-multi-step-tool-attacks"
+  ],
+  "kernel_sources": []
+}

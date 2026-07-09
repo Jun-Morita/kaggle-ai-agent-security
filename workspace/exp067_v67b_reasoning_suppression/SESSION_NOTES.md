@@ -35,5 +35,9 @@ mix that caused `v066` to no-score.
 ## Result
 
 - Submitted as ref `54406496`; status `PENDING` as of 2026-07-07.
+- Completed with blank public score as of 2026-07-07. Treat as no-score /
+  `Submission Format Error` class.
+- The public v67b reasoning-suppression improvement did not transfer through
+  this close notebook-form copy.
 - Notebook hash: `ebbfad0a998c`.
 - Hosted `attack.py` hash: `f64cf392e547`.

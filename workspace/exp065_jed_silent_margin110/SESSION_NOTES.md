@@ -20,6 +20,10 @@ same compact prompt and notebook execution form.
 - Kernel pushed and completed as
   `junichiromorita/ai-agent-security-v065-jed-silent-margin110` version 1.
 - Hosted output contains `attack.py` and `submission.csv`.
-- Submitted as ref `54396186`; status `PENDING` as of 2026-07-06.
+- Submitted as ref `54396186`.
+- Completed with blank public score as of 2026-07-07. Treat as no-score /
+  `Submission Format Error` class.
+- Reducing the deadline guard multiplier from `1.2` to `1.1` was too risky in
+  this active-verifier notebook form.
 - Notebook hash: `c10bcf4e0095`.
 - Hosted `attack.py` hash: `ded1e15773ab`.

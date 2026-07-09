@@ -24,8 +24,8 @@ Close notebook-form transfer of public `AI Agent Security v67b Pilkwang Jul5 56.
 - Kernel: `junichiromorita/ai-agent-security-v067-v67b-reasoning-suppression`
 - Kernel version: `1`
 - Submission ref: `54406496`
-- Status: `PENDING` as of 2026-07-07
-- Public score: pending
+- Status: complete with blank public score as of 2026-07-07
+- Public score: none
 - Hosted output: `attack.py` and `submission.csv` confirmed
 - Notebook hash: `ebbfad0a998c`
 - Hosted `attack.py` hash: `f64cf392e547`

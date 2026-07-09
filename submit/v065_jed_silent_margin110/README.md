@@ -13,8 +13,8 @@ Small single-knob variant of `v063_jed_silent_notebook_with_csv`.
 - Kernel: `junichiromorita/ai-agent-security-v065-jed-silent-margin110`
 - Kernel version: `1`
 - Submission ref: `54396186`
-- Status: `PENDING` as of 2026-07-06
-- Public score: pending
+- Status: complete with blank public score as of 2026-07-07
+- Public score: none
 - Hosted output: `attack.py` and `submission.csv` confirmed
 - Notebook hash: `c10bcf4e0095`
 - Hosted `attack.py` hash: `ded1e15773ab`
