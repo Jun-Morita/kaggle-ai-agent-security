@@ -4,6 +4,118 @@ Kaggle discussion から得た知識を要約する。
 
 ## Entries
 
+## 2026-07-13: Crossing 60 Throughput Model
+
+- Source: https://www.kaggle.com/competitions/ai-agent-security-multi-step-tool-attacks/discussion/723698
+- Raw copy: `references/raw/discussions/crossing-60-throughput-model-20260713.txt`
+- Fetched at: 2026-07-13
+- Author: Pilkwang Kim
+- Competition: AI Agent Security - Multi-Step Tool Attacks
+
+### Key Ideas
+
+- Clean single-post `EXFILTRATION` is effectively fixed at `18 raw` per successful candidate:
+  - severity-5 exfiltration contributes `16`
+  - one unique score cell contributes `2`
+- Therefore public score is mostly a throughput problem: how many replay-successful single-post candidates fit in the hosted budget.
+- A single successful `http.post` candidate costs two generations during replay:
+  - the tool-call generation that emits `http.post`
+  - the follow-up / wrap-up generation after the tool call
+- The public score is averaged across two target models. The reasoning-heavy model is usually the bottleneck; gains come from shortening its deliberation.
+- Reported effective ideas:
+  - make the post instruction look routine / low-salience so the reasoning model deliberates less
+  - collapse the post-call wrap-up to a short deterministic terminal token
+- Reported dead ends:
+  - multi-post / multi-hop severity stacking
+  - explicit natural-language "no reasoning" instructions
+  - exotic payload encodings when compared with clean single-post `SECRET_MARKER`
+  - margin micro-tuning beyond broad safe ranges
+- Stacking `EXFILTRATION` with untrusted-source based predicates is described as structurally closed: the guardrail taint window covers the predicate source window, so arming the second predicate also blocks the post.
+
+### Useful for This Competition
+
+- Treat `v079`-style live-fill as a strong baseline because it matches the current public single-post optimum family.
+- The next useful lever is not a new payload but lower replay latency per candidate.
+- Optimize prompt shape for:
+  - short first-hop tool-call generation
+  - short second-hop terminal generation
+  - low reasoning salience
+- Do not spend more daily submissions on multi-post severity stacking unless a public notebook demonstrates a reproducible breakthrough.
+- Do not pursue `EXFILTRATION + UNTRUSTED_TO_ACTION` stacking under the current public guardrail.
+- If using a mixed predicate hedge, treat `CONFUSED_DEPUTY` as a small private-risk hedge or empirical probe, not the main public-score lever.
+
+### Risks / Caveats
+
+- This is a participant analysis, not an official host statement.
+- Public score variance is material. Re-submitting a known good configuration can draw a better runtime / GPU tail, but it consumes the daily quota.
+- The discussion is public-leaderboard oriented. Private replay and hidden guardrails can still change the best final-submission choice.
+- Per-model specialization remains unresolved. If we can infer model row behavior cheaply, adaptive routing may still help.
+
+### Experiment Candidates
+
+- Build the next branch around `v079` with throughput-focused changes only:
+  - routine / low-salience post instruction variants
+  - one-token terminal variants
+  - tighter margin only when live latency probe is fast
+  - tiny unverified tail only after validated fill
+- Keep exact `v079` as the fallback if a variant reduces compliance.
+- Record estimated successful candidate count from LB score using `score / 0.09` for single-post submissions.
+
+## 2026-07-13: Runtime, Replay, and Submission Format Errors
+
+- Sources:
+  - https://www.kaggle.com/competitions/ai-agent-security-multi-step-tool-attacks/discussion/714340
+  - https://www.kaggle.com/competitions/ai-agent-security-multi-step-tool-attacks/discussion/718901
+  - https://www.kaggle.com/competitions/ai-agent-security-multi-step-tool-attacks/discussion/724592
+  - https://www.kaggle.com/competitions/ai-agent-security-multi-step-tool-attacks/discussion/724875
+- Raw copies:
+  - `references/raw/discussions/private-leaderboard-static-replay-20260713.txt`
+  - `references/raw/discussions/submission-format-error-20260713.txt`
+  - `references/raw/discussions/per-model-budget-vs-15h-cap-20260713.txt`
+  - `references/raw/discussions/final-leaderboard-scoring-20260713.txt`
+- Fetched at: 2026-07-13
+- Authors: Manish Bhatt and Kaggle participants
+- Competition: AI Agent Security - Multi-Step Tool Attacks
+
+### Key Ideas
+
+- Private leaderboard uses static replay of the returned candidate portfolio, not a fresh rerun of `AttackAlgorithm.run()`.
+- Public leaderboard is a development signal; it does not guarantee transfer to private guardrails.
+- The `15h` Kaggle job limit is a global ceiling, not an additional budget for `AttackAlgorithm.run()`.
+- Official FAQ states each phase has a `9000s` per-model cap:
+  - attack generation
+  - public replay
+  - private replay
+- `Submission Format Error` can cover several failure classes:
+  - true output / serialization mistakes
+  - missing or invalid `submission.csv` in the committed notebook output
+  - replay timeout or evaluator-side failures surfaced under the same UI label
+- A discussion on final leaderboard scoring exists, but the saved copy had no definitive answer at fetch time.
+
+### Useful for This Competition
+
+- For this repo, no-score / format-error submissions should be analyzed as possible replay-timeout events first, not only as code-generation bugs.
+- Candidate count, message length, and chain length are all score-critical runtime variables.
+- Static portfolios can be good because they avoid attack-generation time, but they still pay full replay cost.
+- Final slots should not be selected only by highest public score if the strategy is a narrow public guardrail trick.
+
+### Risks / Caveats
+
+- Kaggle UI does not expose exact phase timing, so we must infer whether failure happened during generation, public replay, private replay, or packaging.
+- The same candidate count can sometimes pass or fail due hosted variability.
+- Private replay is hidden until final scoring, so private-risk hedges remain partly speculative.
+
+### Experiment Candidates
+
+- Track every format-error submission with:
+  - candidate count
+  - message count per candidate
+  - estimated token length
+  - whether `attack.py` and `submission.csv` were visible in notebook output
+  - closest successful sibling submission
+- Prefer one known-good public single-post exfil slot and one diversified private-hedge slot when final submission selection matters.
+- Avoid increasing candidate count unless a nearby lower-count profile has already completed.
+
 ## 2026-06-25: Evaluator Update and FAQ
 
 - Source: https://www.kaggle.com/competitions/ai-agent-security-multi-step-tool-attacks/discussion/712642
