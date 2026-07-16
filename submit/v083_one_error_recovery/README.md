@@ -21,8 +21,15 @@ Submitted as Kaggle Kernel version 1.
 
 - Kernel: `junichiromorita/ai-agent-security-v083-one-error`
 - Submission ref: `54689109`
-- Status: `PENDING` as of 2026-07-14.
+- Status: `COMPLETE` as of 2026-07-15.
+- Public LB: blank / no-score.
 - Validation:
   - Ruff passed.
   - SDK `validate redteam` passed.
   - Deterministic smoke completed with score `0.00`.
+
+## Result
+
+The submission completed with a blank public score. Treat as no-score /
+evaluator failure. The one-transient-error recovery change did not rescue the
+`v079` family under the current grader instability.

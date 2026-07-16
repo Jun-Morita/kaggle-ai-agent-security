@@ -34,4 +34,10 @@ failure before the useful candidate budget is exhausted.
 
 - Kernel: `junichiromorita/ai-agent-security-v083-one-error` v1
 - Submission ref: `54689109`
-- Status: `PENDING` as of 2026-07-14.
+- Status: `COMPLETE` as of 2026-07-15.
+- Public LB: blank / no-score.
+
+## Result
+
+The submission completed with blank public score. Treat as no-score / evaluator
+failure. One-error recovery is not sufficient under the current grader state.

@@ -1,0 +1,15 @@
+{
+  "id": "junichiromorita/ai-agent-security-v088-mm16-safe65",
+  "title": "ai-agent-security-v088-mm16-safe65",
+  "code_file": "multimessage-m16.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_internet": false,
+  "dataset_sources": [],
+  "competition_sources": [
+    "ai-agent-security-multi-step-tool-attacks"
+  ],
+  "kernel_sources": []
+}

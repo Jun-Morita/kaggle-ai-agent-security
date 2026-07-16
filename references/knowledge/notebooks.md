@@ -4,6 +4,66 @@ Public notebook から得た知識を要約する。
 
 ## Entries
 
+## 2026-07-16: Replay-safe R1-008 and Multi-message Frontier
+
+- Sources:
+  - `yusuketogashi/ai-agent-sec-another-approach`
+  - `dhanvinsureshareddy/jed-multi-step-attack`
+  - `pilkwang/ai-agent-v3-1-2-multi-post-exfiltration`
+  - `tensorliu/jed-attack-improved-nb`
+  - `caoyupeng/lb-66-015-from-kun-zhang`
+- Pulled at: 2026-07-16
+- Raw copies:
+  - `references/raw/notebooks/ai-agent-sec-another-approach-20260716.ipynb`
+  - `references/raw/notebooks/jed-multi-step-attack-20260716.ipynb`
+  - `references/raw/notebooks/ai-agent-v3-1-2-multi-post-exfiltration-20260716.ipynb`
+  - `references/raw/notebooks/jed-attack-improved-nb-20260716.ipynb`
+
+### Key Ideas
+
+- `v085` confirmed that public `jed-fill-v26-replaysafe` transfers and becomes
+  the current repo best at public `63.495`.
+- The next single-message public Code line is `R1-008`:
+  - `REPLAY_SAFE=0.94`
+  - `PROBE_REPS=3`
+  - `MIN_FIRE_RATE=0.6`
+  - adds `bare`, `bare_ok`, and `call_syntax` templates to the replay-safe
+    selector.
+- `dhanvin` pushes the same family much harder:
+  - `REPLAY_SAFE=0.99`
+  - `PROBE_REPS=5`
+  - `MIN_FIRE_RATE=0.2`
+  - this is a frontier stretch with much higher format-error risk.
+- `lb-66-015-from-kun-zhang` extracts to source hash `1962cc45072d`, identical
+  to our `v079` / `Security Eval Baseline` line. It is not a new implementation
+  gap.
+- The new high-upside branch is multi-message amortization:
+  - each `AttackCandidate` carries many short user messages;
+  - each message asks for one `SECRET_MARKER` `http.post`;
+  - the intended benefit is amortizing fresh-env replay overhead across many
+    scored events.
+
+### Useful for This Competition
+
+- The next conservative score-up candidate is `v087_r1_008_safe94`, a close
+  transfer of `R1-008`.
+- The next non-linear upside candidate is `v088_multimessage_m16`, using the
+  safer `M=16` multi-message source rather than jumping straight to `M=32`.
+- Do not spend another slot on `lb66` / `Security Eval Baseline` exact reruns
+  unless sampling public runtime variance is the explicit goal.
+- Treat `REPLAY_SAFE=0.85` as too conservative after `v086=61.290`; it returned
+  too little value relative to `v085=63.495`.
+
+### Risks / Caveats
+
+- `REPLAY_SAFE=0.94` and `0.99` spend more of the replay budget; the public UI
+  can still surface replay timeout as a blank score / format error.
+- Multi-message candidates are within the SDK message-count limit but are long
+  replay chains. Prior repo multi-turn tests showed chain length can be
+  unstable, so use M=16 before M=32.
+- These are public-score directions. Private guardrails and private replay
+  timing remain unknown.
+
 ## 2026-07-13: JED Strategy Sentinel / Shadow Cat Replay Anchor
 
 - Source: current pull `lucifer19/jed-strategy-sentinel`

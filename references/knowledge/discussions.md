@@ -4,6 +4,45 @@ Kaggle discussion から得た知識を要約する。
 
 ## Entries
 
+## 2026-07-16: Post-v085 Strategy Update
+
+- Sources:
+  - Kaggle submissions checked with CLI on 2026-07-16
+  - Prior discussion notes `Crossing 60 Throughput Model`
+  - Prior runtime / replay / format-error FAQ notes
+- Current best: `v085_jed_fill_v26_replaysafe`, public `63.495`
+
+### Key Ideas
+
+- `v085` validates the replay-cost-capped fill model: measuring candidate replay
+  cost during search is better than filling only against the generation
+  deadline.
+- `v086` lowered `REPLAY_SAFE` from `0.90` to `0.85` and dropped to `61.290`,
+  so extra safety alone is not the right next move.
+- The discussion-derived throughput model still holds for single-message
+  candidates: score gains come from either more replay-safe successful posts or
+  fewer seconds per successful post.
+- Current public Code suggests two distinct next levers:
+  - slightly more aggressive replay-safe single-message fill (`REPLAY_SAFE=0.94`);
+  - multi-message amortization to get multiple scored posts per replayed
+    candidate.
+
+### Useful for This Competition
+
+- Prepare one incremental single-message candidate and one independent
+  high-upside multi-message candidate rather than two tiny margin tweaks.
+- Continue treating blank public score as likely replay / evaluator failure
+  unless the notebook output is missing `submission.csv`.
+- Use `v085` as the baseline for future comparisons, not `v079`.
+
+### Risks / Caveats
+
+- Public Code can be sorted by hidden public score through Kaggle CLI, but the
+  CLI list does not print the score itself. Source comments and notebook titles
+  must be treated as hints, not authoritative results.
+- Browser access to Kaggle discussion bodies is inconsistent; rely on saved raw
+  discussion copies where available.
+
 ## 2026-07-13: Crossing 60 Throughput Model
 
 - Source: https://www.kaggle.com/competitions/ai-agent-security-multi-step-tool-attacks/discussion/723698

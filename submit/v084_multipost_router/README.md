@@ -22,7 +22,14 @@ Submitted as Kaggle Kernel version 1.
 
 - Kernel: `junichiromorita/ai-agent-security-v084-multipost-router`
 - Submission ref: `54689110`
-- Status: `PENDING` as of 2026-07-14.
+- Status: `COMPLETE` as of 2026-07-15.
+- Public LB: blank / no-score.
 - Validation:
   - SDK `validate redteam` passed.
   - Deterministic smoke completed with score `0.00`.
+
+## Result
+
+The submission completed with blank public score. Treat as no-score / evaluator
+failure. The multi-post routed profile is likely too heavy for the current
+runtime/replay envelope.

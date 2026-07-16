@@ -45,4 +45,10 @@ High.
 
 - Kernel: `junichiromorita/ai-agent-security-v084-multipost-router` v1
 - Submission ref: `54689110`
-- Status: `PENDING` as of 2026-07-14.
+- Status: `COMPLETE` as of 2026-07-15.
+- Public LB: blank / no-score.
+
+## Result
+
+The submission completed with blank public score. Treat as no-score / evaluator
+failure. The profile is likely outside the current replay/runtime envelope.
