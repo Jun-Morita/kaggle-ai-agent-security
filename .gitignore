@@ -211,6 +211,9 @@ data/raw/
 data/interim/
 data/processed/
 data/external/
+data/discussions.db
+data/kernels.db
+data/notebooks/
 references/raw/
 .aicomp/
 submit/**/output/

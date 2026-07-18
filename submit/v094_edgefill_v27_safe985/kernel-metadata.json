@@ -1,0 +1,15 @@
+{
+  "id": "junichiromorita/ai-agent-security-v094-edgefill-v27-safe985",
+  "title": "ai-agent-security-v094-edgefill-v27-safe985",
+  "code_file": "edgefill-v27-safe985.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_internet": false,
+  "dataset_sources": [],
+  "competition_sources": [
+    "ai-agent-security-multi-step-tool-attacks"
+  ],
+  "kernel_sources": []
+}
