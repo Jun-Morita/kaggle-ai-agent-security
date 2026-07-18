@@ -19,11 +19,12 @@ Prepared follow-up to `v085`.
 
 ## Status
 
-Submitted to Kaggle.
+Complete.
 
 - SDK validate: passed.
 - Deterministic smoke: passed with score `0.00`.
 - Notebook embedded source hash: matches experiment `attack.py`.
 - Kernel: `junichiromorita/ai-agent-security-v087-r1-008-safe94` version 1
 - Competition submission ref: `54761706`
-- Status: pending as of 2026-07-16
+- Public score: `76.950` as of 2026-07-17
+- Status: current confirmed best; improved over `v085=63.495` by `+13.455`

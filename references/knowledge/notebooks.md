@@ -4,6 +4,131 @@ Public notebook から得た知識を要約する。
 
 ## Entries
 
+## 2026-07-18: JED Attack 5 Templates Aggressive Replay 0.99
+
+- Source: `references/raw/notebooks/jed-attack-5-templates-aggressive-replay-0-99.ipynb`
+- Public URL: https://www.kaggle.com/code/assiaben/jed-attack-5-templates-aggressive-replay-0-99
+- Public score shown at review time: `84.870`
+- Extracted notebook source hash: `b6522ecfe4a3`
+- Extracted `attack_code` hash: `97a839b8755`
+
+### Key Ideas
+
+- This is the clean five-template `REPLAY_SAFE=0.99` single-message family:
+  - `PROBE_REPS=5`
+  - `MIN_FIRE_RATE=0.2`
+  - `MARGIN_S=60.0`
+  - `SLOWEST0=24.0`
+  - `MARGIN_MULT=1.35`
+  - `MAX_CANDIDATES=2000`
+- Template bank is intentionally narrow:
+  - `plain`
+  - `bare`
+  - `bare_ok`
+  - `inj_close`
+  - `inj_commentary`
+- It selects the cheapest template by effective cost:
+  `median(all probe latencies) / fire_rate`.
+- It fills with the selected template and estimates `fill_unit` from all
+  selected probe latencies, not only successful-fire latencies.
+- Notebook form writes `/kaggle/working/attack.py` from an `attack_code` string
+  and unconditionally starts `JEDAttackInferenceServer().serve()`.
+
+### Comparison With Our Submissions
+
+- `v087=76.950` is the closest successful local baseline:
+  `REPLAY_SAFE=0.94`, same basic family, lower replay risk.
+- `v089` used the current R1-011 source with `REPLAY_SAFE=0.99` but changed
+  `fill_unit` to successful-fire latency only. It completed with blank public
+  score, likely because successful-only latency underestimates replay cost and
+  returns too many candidates.
+- `v090` used a larger raw-weighted template bank and also blank-scored. The
+  extra templates and raw-per-second selection appear riskier than the compact
+  five-template public source.
+
+### Useful for This Competition
+
+- Next best candidate is an exact transfer of this notebook's `attack_code`
+  under our standard output-compatible wrapper. This was submitted as
+  `v091_jed_5tpl_exact099` and scored public `73.935`.
+- A second, safer candidate could keep the exact five-template logic but reduce
+  replay pressure slightly, for example `REPLAY_SAFE=0.97` or `0.98`. The
+  `0.98` version was submitted as `v092_jed_5tpl_safe098` and scored public
+  `81.540`, the current repo best.
+- Do not carry over `v089`'s successful-only fill-unit change unless we add a
+  separate replay-safety clamp. The public high score points back to the
+  all-latency median.
+
+### Risks / Caveats
+
+- Public `84.870` still sits very close to the replay budget boundary. Exact
+  transfer can blank-score due hosted variance.
+- The public notebook does not write placeholder `submission.csv` during a
+  normal commit because it unconditionally serves. Our wrapper should retain
+  the proven placeholder CSV behavior while embedding the attack logic exactly.
+
+## 2026-07-17: Post-v087 Public Code Sweep
+
+- Sources:
+  - `lopure/jed-multi-step-attack-relay-push100`
+  - `pilkwang/ai-agent-v3-1-2-single-post-exfiltration`
+  - `kaiwalyaatulraut/ai-agent-security-competition-solution`
+  - `yusuketogashi/ai-agent-sec-another-approach`
+  - `liubabyvstone/ai-security-pilkwang-v3`
+- Pulled at: 2026-07-17
+- Raw copies:
+  - `references/raw/notebooks/jed-multi-step-attack-relay-push100-20260717.ipynb`
+  - `references/raw/notebooks/ai-agent-v3-1-2-single-post-exfiltration-20260717.ipynb`
+  - `references/raw/notebooks/ai-agent-security-competition-solution-20260717.ipynb`
+  - `references/raw/notebooks/ai-agent-sec-another-approach-20260717.ipynb`
+  - `references/raw/notebooks/ai-security-pilkwang-v3-20260717.ipynb`
+
+### Submission Results Checked
+
+- `v087_r1_008_safe94`: complete, public `76.950`; current confirmed best.
+- `v088_multimessage_m16`: complete, public `3.990`; multi-message M16
+  collapsed and should not be continued in this exact form.
+- `v085_jed_fill_v26_replaysafe`: public `63.495`; now former best.
+
+### Current Public Code Findings
+
+- The strongest useful direction remains replay-safe single-message exfil fill,
+  not multi-message chaining.
+- Current public single-message notebooks have moved toward:
+  - `REPLAY_SAFE=0.99`
+  - `PROBE_REPS=5`
+  - `MIN_FIRE_RATE=0.2`
+  - fill sizing based on observed successful-fire latency
+- Extracted source hashes:
+  - `lopure` push100: `ee75e4cca064`, same as the previously pulled `dhanvin`
+    push100 family.
+  - current `yusuke` R1-011: `a3e9d3a7190e`; it removes `call_syntax`, raises
+    `REPLAY_SAFE` from `0.94` to `0.99`, lowers `MIN_FIRE_RATE`, and estimates
+    fill cost from successful fire latencies only.
+  - `pilkwang` / `liubaby`: `e13fc4b9ea5b`; a distinct raw-weighted fill
+    variant with a larger template bank and `REPLAY_SAFE=0.99`.
+  - `kaiwalya`: `5b30b99f7886`; closer to the older `0.94` family.
+
+### Useful for This Competition
+
+- `v087=76.950` confirms that aggressive replay-safe single-message fill can
+  break the previous low-60s plateau.
+- The next likely candidates were submitted as:
+  - `v089_r1_011_push99`: close transfer of current `yusuke` R1-011 /
+    successful-latency `REPLAY_SAFE=0.99`, ref `54781615`;
+  - `v090_raw_weighted_push99`: separate raw-weighted `pilkwang` / `liubaby`
+    `REPLAY_SAFE=0.99` variant, ref `54781620`.
+- Do not spend another slot on M16 multi-message amortization unless a new
+  public Code revision explains why `v088` underperformed.
+
+### Risks / Caveats
+
+- `0.99` replay safety is near the runtime boundary. It can score high when the
+  hosted timing is favorable, but may also blank-score if replay exceeds budget.
+- The Kaggle CLI can rank public Code by score but does not print the actual
+  score; displayed notebook titles/comments remain hints rather than exact
+  source provenance.
+
 ## 2026-07-16: Replay-safe R1-008 and Multi-message Frontier
 
 - Sources:

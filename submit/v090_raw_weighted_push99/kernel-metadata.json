@@ -1,0 +1,15 @@
+{
+  "id": "junichiromorita/ai-agent-security-v090-raw-weighted-push99",
+  "title": "ai-agent-security-v090-raw-weighted-push99",
+  "code_file": "raw-weighted-push99.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_internet": false,
+  "dataset_sources": [],
+  "competition_sources": [
+    "ai-agent-security-multi-step-tool-attacks"
+  ],
+  "kernel_sources": []
+}

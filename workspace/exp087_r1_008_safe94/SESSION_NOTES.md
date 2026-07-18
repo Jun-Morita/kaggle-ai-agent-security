@@ -44,4 +44,7 @@ variant.
 
 - Kernel: `junichiromorita/ai-agent-security-v087-r1-008-safe94` version 1
 - Competition submission ref: `54761706`
-- Status: pending as of 2026-07-16
+- Status: complete as of 2026-07-17
+- Public score: `76.950`
+- Result: current confirmed best, improving over `v085=63.495` by `+13.455`.
+  This validates the more aggressive replay-safe single-message fill direction.

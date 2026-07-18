@@ -1,0 +1,15 @@
+{
+  "id": "junichiromorita/ai-agent-security-v091-jed-5tpl-exact099",
+  "title": "ai-agent-security-v091-jed-5tpl-exact099",
+  "code_file": "jed-5tpl-exact099.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_internet": false,
+  "dataset_sources": [],
+  "competition_sources": [
+    "ai-agent-security-multi-step-tool-attacks"
+  ],
+  "kernel_sources": []
+}

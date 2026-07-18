@@ -19,11 +19,13 @@ High-risk / high-return branch based on public multi-message amortization Code.
 
 ## Status
 
-Submitted to Kaggle.
+Complete.
 
 - SDK validate: passed.
 - Deterministic smoke: passed with score `0.00`.
 - Notebook embedded source hash: matches experiment `attack.py`.
 - Kernel: `junichiromorita/ai-agent-security-v088-mm16-safe65` version 1
 - Competition submission ref: `54761992`
-- Status: pending as of 2026-07-16
+- Public score: `3.990` as of 2026-07-17
+- Status: underperformed badly; do not continue this exact M16 multi-message
+  shape without new public evidence.

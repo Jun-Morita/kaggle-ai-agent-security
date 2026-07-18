@@ -4,6 +4,45 @@ Kaggle discussion から得た知識を要約する。
 
 ## Entries
 
+## 2026-07-17: Status Check After v087 / v088
+
+- Sources:
+  - Kaggle submissions checked with CLI on 2026-07-17
+  - Kaggle public Code list checked by `scoreDescending` and `dateRun`
+  - Saved notes from the throughput and runtime discussions
+- Current best: `v087_r1_008_safe94`, public `76.950`
+
+### Key Ideas
+
+- `v087=76.950` validates the discussion-derived throughput model after the
+  latest public Code sweep: score still comes primarily from replay-safe
+  single-message `SECRET_MARKER` exfiltration throughput.
+- `v088=3.990` is strong negative evidence against this repo's current
+  multi-message M16 amortization branch. The long-chain approach did not
+  produce more scored events per replay in hosted evaluation.
+- No new useful Kaggle discussion body was reliably accessible through the
+  browser during this check. The existing saved discussion notes still fit the
+  observed results:
+  - replay budget and per-candidate cost dominate;
+  - blank score can still mean evaluator/replay failure;
+  - prompt/template choices affect compliance and latency enough to move public
+    score materially.
+
+### Useful for This Competition
+
+- Treat `v087` as the active baseline.
+- Prefer single-message replay-safe variants over multi-turn or multi-message
+  experiments unless public Code provides a proven new mechanism.
+- The next experiment should test current public `0.99` replay-safe variants
+  under the same notebook/output discipline that made `v087` succeed.
+
+### Risks / Caveats
+
+- Discussion access remains incomplete. Do not assume the absence of a new
+  discussion finding is evidence that no new finding exists.
+- Public-score oriented single-message tuning may still be private-risky; final
+  selection should keep at least one robust, proven single-message slot.
+
 ## 2026-07-16: Post-v085 Strategy Update
 
 - Sources:

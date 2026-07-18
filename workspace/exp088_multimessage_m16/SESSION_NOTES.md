@@ -49,4 +49,9 @@ experiments showed chain length can cause evaluator instability.
 
 - Kernel: `junichiromorita/ai-agent-security-v088-mm16-safe65` version 1
 - Competition submission ref: `54761992`
-- Status: pending as of 2026-07-16
+- Status: complete as of 2026-07-17
+- Public score: `3.990`
+- Result: failed as a score-up path. The M16 multi-message amortization idea did
+  not transfer in this form; it likely replayed too slowly or caused much lower
+  per-message compliance than the single-message baseline. Avoid this exact
+  branch unless a new public notebook demonstrates a reproducible fix.
