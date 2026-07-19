@@ -26,4 +26,4 @@ EdgeFill v27 may improve over `v092=81.540` by reclaiming replay budget through 
 
 - Kernel: `junichiromorita/ai-agent-security-v093-edgefill-v27-safe982` version 1.
 - Competition submission ref: `54808421`.
-- Status: `PENDING` as of 2026-07-18 22:09 JST.
+- Result: public `84.600` as of 2026-07-19.

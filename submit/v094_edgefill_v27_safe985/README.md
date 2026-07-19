@@ -17,4 +17,4 @@
 
 - Validation passed: `py_compile`, SDK `validate`, deterministic SDK smoke, notebook format validation.
 - Kaggle kernel: `junichiromorita/ai-agent-security-v094-edgefill-v27-safe985` version 1.
-- Competition submission: ref `54808441`, status `PENDING` as of 2026-07-18 22:09 JST.
+- Competition submission: ref `54808441`, public `76.320` as of 2026-07-19.

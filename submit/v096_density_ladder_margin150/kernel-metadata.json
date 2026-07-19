@@ -1,0 +1,15 @@
+{
+  "id": "junichiromorita/ai-agent-security-v096-density-margin150",
+  "title": "ai-agent-security-v096-density-margin150",
+  "code_file": "density-ladder-margin150.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_internet": false,
+  "dataset_sources": [],
+  "competition_sources": [
+    "ai-agent-security-multi-step-tool-attacks"
+  ],
+  "kernel_sources": []
+}
