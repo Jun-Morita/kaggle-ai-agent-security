@@ -1,0 +1,15 @@
+{
+  "id": "junichiromorita/ai-agent-security-v097-tetsutani-v10",
+  "title": "ai-agent-security-v097-tetsutani-v10",
+  "code_file": "tetsutani-v10-exact.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_internet": false,
+  "dataset_sources": [],
+  "competition_sources": [
+    "ai-agent-security-multi-step-tool-attacks"
+  ],
+  "kernel_sources": []
+}
