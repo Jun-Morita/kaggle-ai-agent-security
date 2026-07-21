@@ -1,0 +1,15 @@
+{
+  "id": "junichiromorita/ai-agent-security-v101-rokaiya-rerun",
+  "title": "ai-agent-security-v101-rokaiya-rerun",
+  "code_file": "rokaiya-yusuke-rerun.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_internet": false,
+  "dataset_sources": [],
+  "competition_sources": [
+    "ai-agent-security-multi-step-tool-attacks"
+  ],
+  "kernel_sources": []
+}
