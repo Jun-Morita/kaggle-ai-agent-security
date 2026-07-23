@@ -12,7 +12,7 @@ Kaggle コンペ **AI Agent Security - Multi-Step Tool Attacks** 用の作業リ
 - Required class: `AttackAlgorithm`
 - Base class: `aicomp_sdk.attacks.AttackAlgorithmBase`
 - Method signature: `run(self, env, config: AttackRunConfig) -> list[AttackCandidate]`
-- Public-path default budget from SDK docs: `1800` seconds
+- Hosted evaluator budget from host discussion: `9000` seconds per model phase
 - Replay limits from SDK: `2000` findings, `32` messages per finding, `2000` chars per message
 - Public local parity command: `aicomp evaluate redteam attack.py --env gym`
 
@@ -82,58 +82,51 @@ Important knowledge files:
 
 ## Silver Strategy Snapshot
 
-Last updated: 2026-07-21.
+Last updated: 2026-07-23.
 
-Current confirmed public best is `v093_edgefill_v27_safe982` at `84.600`. It supersedes `v092=81.540`, `v087=76.950`, `v085=63.495`, and the older `v079=61.965` baseline. Recent exact public-version ports `v097=81.360`, `v098=74.745`, and `v099=81.945` completed below `v093`. The active Silver push is now `v100` / `v101`, both exact transfers or reruns of public 87+ sources and both pending.
+Current confirmed public best is `v102_canqiang_ea_b_exact` at `87.435`. It supersedes `v103=87.030`, `v093=84.600`, `v092=81.540`, and the older low-80s baselines. The active Silver push is now `v104` / `v105`: an exact rerun of `v102` and a one-knob `REPLAY_SAFE_FRAC=0.975` variant.
 
-A 2026-07-21 public leaderboard snapshot had `2176` teams. `v093=84.600` would rank about `272`; top 10% was around `85.410`, and top 5% was around `87.030`. Treat `87.030` as the current public Silver target estimate.
+A 2026-07-23 public leaderboard download had `2271` teams. `v102=87.435` ranked `136`; top 10% was around `86.490`, and top 5% was `87.705`. The remaining public Silver gap is only `0.270`, about three clean single-post `EXFILTRATION` findings at `0.09` points each.
 
 ### What Is Confirmed
 
-- `v087_r1_008_safe94` scored `76.950`, proving that aggressive replay-safe single-message fill can break the previous low-60s plateau.
-- `v089_r1_011_push99` and `v090_raw_weighted_push99` both completed with blank public scores. Treat both as replay failure / no-score evidence against over-aggressive `0.99` sizing when latency is underestimated or template variance is high.
-- `v091_jed_5tpl_exact099` was an exact transfer of the public 84.870 five-template `REPLAY_SAFE=0.99` `attack_code`; it scored `73.935`, below `v087`.
-- `v092_jed_5tpl_safe098` changed only `REPLAY_SAFE=0.99 -> 0.98` from `v091` and scored `81.540`, becoming the former best. This suggests `0.98` was a better hosted tradeoff than exact `0.99` for that wrapper and timing draw.
-- `v093_edgefill_v27_safe982` scored `84.600`, becoming the current best and improving over `v092=81.540` by `+3.060`.
-- `v094_edgefill_v27_safe985` scored `76.320`; the more aggressive `0.985` replay-safe setting underperformed, so `0.982` is the better current boundary point in this branch.
-- `v095_adaptive_density_ladder_exact` scored `73.980`, and `v096_density_ladder_margin150` scored `72.675`. Both are below `v093`; the `MARGIN_S=150.0` reserve cut is negative evidence.
-- Archive inspection showed the visible `86.175` on `tetsutani/ai-agent-security-adaptive-tool-call-throughput` belongs to version 10 (`v134_hybrid_single_dual_gate`), not the later `v136` source used by `v095`.
-- `v097_tetsutani_v10_exact` scored `81.360`; it was the corrected exact port of the public `86.175` version 10 source but did not beat `v093`.
-- `v098_yusuke_v52_exact` scored `74.745`; it was byte-identical to the Yusuke / Rokaiya `Another Approach` source lineage, showing substantial hosted variance.
-- `v099_yusuke_v52_plus_v097_singles` scored `81.945`; the controlled hybrid improved over `v097` / `v098` but still did not beat `v093`.
-- `v100_haodou_cb9_exact` was submitted on 2026-07-21 as an exact transfer of `haodou092/notebookcb9f3b04b6` version 6, public reference `87.660`, submission ref `54878070`, pending.
-- `v101_rokaiya_yusuke_rerun` was submitted on 2026-07-21 as an exact rerun of `rokaiyasomapti/ai-agent-sec-another-approach-resubmission`, public reference `87.705`, submission ref `54878082`, pending.
-- The important difference from failed `v089`: use all selected probe latencies for fill sizing, not successful-fire latencies only. Successful-only latency likely underestimates replay cost and returns too many candidates.
-- The larger raw-weighted template bank in `v090` appears riskier than the compact five-template public source.
+- `v102_canqiang_ea_b_exact` scored `87.435`, the current repo best and a successful transfer of `canqiang/aiagsec-ea-b-0721` public `88.560`.
+- `v103_tetsutani_v27_exact` scored `87.030`, confirming that the tetsutani v27 public `88.515` source also transfers into the high-80s, though below `v102`.
+- `v100_haodou_cb9_exact` and `v101_rokaiya_yusuke_rerun` both completed with blank public scores. Treat them as no-score / evaluator-failure evidence, not as stronger baselines.
+- `v104_canqiang_ea_b_rerun` was submitted on 2026-07-23 as an exact rerun of `v102`, submission ref `54928588`, pending.
+- `v105_canqiang_ea_b_safe975` was submitted on 2026-07-23 as a one-knob variant changing only `REPLAY_SAFE_FRAC=0.97 -> 0.975`, submission ref `54928618`, pending.
+- `v093_edgefill_v27_safe982` remains important historical evidence at `84.600`; pushing the same family to `v094` / `0.985` dropped to `76.320`.
+- `v097=81.360`, `v098=74.745`, and `v099=81.945` are useful transfers but no longer competitive against `v102`.
+- The important replay-sizing lesson still holds: use all selected probe latencies for fill sizing, not successful-fire latencies only. Successful-only latency likely underestimates replay cost and returns too many candidates.
+- Larger raw-weighted template banks remain riskier than compact, source-proven single-post portfolios near the timeout boundary.
 - Single-post `EXFILTRATION` is worth about `18 raw` per successful candidate: severity-5 exfil `16` plus one unique score cell `2`.
 - Kaggle host discussion confirms that attack generation, public replay, and private replay each have a `9000s` per-model budget, with a global `15h` job cap. Returned candidate count and message-chain length can still cause no-score failures during replay.
 
 ### Silver Gap
 
-The active baseline is fundamentally limited by successful single-post candidate count. To reach the current estimated Silver boundary around `87.030`, a single-post exfil submission needs roughly `87.030 / 0.09 ~= 967` successful candidates on average. `v093=84.600` implies roughly `940` successful single-post findings, so the remaining gap is about `27` additional successful findings or equivalent replay-latency savings.
+The active baseline is fundamentally limited by successful single-post candidate count. To reach the 2026-07-23 top-5% boundary around `87.705`, a single-post exfil submission needs roughly `87.705 / 0.09 ~= 975` successful candidates on average. `v102=87.435` implies about `972` successful single-post findings, so the remaining gap is only a few findings or equivalent replay-latency savings.
 
-Candidate count alone is still dangerous because replay timeout and hosted variance dominate near the boundary. Exact reruns of public 87+ code are justified because the scoring gap is small and the observed transfer variance is large; broad redesigns should wait until those reruns resolve.
+Candidate count alone is still dangerous because replay timeout and hosted variance dominate near the boundary. Exact reruns of public 88+ code are justified because the scoring gap is small and the observed transfer variance is large. Broad redesigns should wait until `v104` and `v105` resolve.
 
 Secondary directions are:
 
-- test `REPLAY_SAFE` around the successful `0.982` boundary, with `0.985` treated as negative evidence for this exact branch;
-- test tiny changes to the five-template bank only one at a time;
+- re-run the proven `v102` / canqiang branch to sample hosted upper-tail variance;
+- test tiny replay-safe fraction changes around `0.97` one at a time;
+- inspect any newly public code above `88.5` before deviating from the canqiang branch;
 - preserve a small private-risk hedge with mixed predicates for final selection.
 
 Multi-post severity stacking, multi-message amortization, and `EXFILTRATION + UNTRUSTED_TO_ACTION` stacking remain deprioritized. `v088=3.990` is strong negative evidence for the current multi-message shape.
 
 ### Next Research Direction
 
-The preferred next approach is controlled optimization around `v093` plus targeted evaluation of newly public high-scoring throughput branches:
+The preferred next approach is controlled optimization around `v102` plus targeted evaluation of newly public high-scoring throughput branches:
 
-1. Keep `v093=84.600` as the confirmed reference until a higher-scoring complete run appears.
-2. Treat `v094=76.320` as negative evidence for pushing the same EdgeFill v27 logic to `REPLAY_SAFE=0.985`.
-3. Treat `v095=73.980` and `v096=72.675` as negative evidence for the later `v136` density ladder and its lower-reserve variant.
-4. Treat `v097=81.360`, `v098=74.745`, and `v099=81.945` as useful but below-baseline transfers.
-5. Wait for `v100` and `v101`; if either beats `v093`, promote the winner to the active baseline, and if either exceeds about `87.030`, treat it as the Silver-candidate branch.
-6. If both miss, prefer another source-exact rerun or a conservative margin variant from the Haodou / Yusuke lineage over a new broad-template design.
-7. Keep all-latency or conservatively charged replay sizing. Avoid successful-only latency sizing unless a separate hard replay clamp is added.
-8. Avoid large unqualified template banks; require exact firing, holdout, and rolling fallback before a higher-density form can fill the portfolio.
+1. Keep `v102=87.435` as the confirmed reference until `v104` or `v105` resolves.
+2. If `v104` beats `87.705`, treat the canqiang exact branch as a Silver candidate and consider one more exact rerun rather than a new design.
+3. If `v105` beats `v104`, continue only with very small replay-safe fraction changes; avoid jumping to `0.99`.
+4. If both miss, archive and inspect newly public code above `88.5`; exact-port only the best-scoring version, not the latest source by title.
+5. Keep all-latency or conservatively charged replay sizing. Avoid successful-only latency sizing unless a separate hard replay clamp is added.
+6. Avoid large unqualified template banks; require exact firing, holdout, and rolling fallback before a higher-density form can fill the portfolio.
 
 The main lever is throughput, not payload novelty. Literal `SECRET_MARKER`, compact `.co` hosts, a short one-message candidate, and strict replay cost control remain the strongest confirmed combination.
 
