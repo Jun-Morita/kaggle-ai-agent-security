@@ -30,4 +30,5 @@ The Silver boundary is within normal hosted variance of the proven canqiang EA-B
 
 - Kernel: `junichiromorita/ai-agent-security-v104-canqiang-eab-rerun` version 1.
 - Competition submission ref: `54928588`.
-- Status as of 2026-07-23 22:11 JST: pending.
+- Status as of 2026-07-24: complete with blank public score; treat as no-score / evaluator failure.
+- Interpretation: `v104` is attack-code identical to scoring `v102`, so the failure is likely hosted replay variance or timeout rather than a notebook-output or attack-code defect.

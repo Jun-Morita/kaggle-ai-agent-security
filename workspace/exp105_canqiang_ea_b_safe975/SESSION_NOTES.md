@@ -30,4 +30,5 @@ The current best v102 score is only `0.270` below the observed Top 5% boundary. 
 
 - Kernel: `junichiromorita/ai-agent-security-v105-canqiang-eab-safe975` version 1.
 - Competition submission ref: `54928618`.
-- Status as of 2026-07-23 22:13 JST: pending.
+- Status as of 2026-07-24: complete with blank public score; treat as no-score / evaluator failure.
+- Interpretation: the `REPLAY_SAFE_FRAC=0.975` push may be too close to the replay boundary, but `v104` also blanked with exact `v102` code, so hosted replay variance is also implicated.
