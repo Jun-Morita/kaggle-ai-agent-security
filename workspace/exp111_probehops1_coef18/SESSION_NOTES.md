@@ -27,4 +27,6 @@ The current high-80s family is latency-bound. Probing each candidate at one tool
 
 - Kernel: `junichiromorita/ai-agent-security-v111-probehops1` version 1
 - Competition submission ref: `54988002`
-- Status: pending as of 2026-07-26 10:05 JST
+- Status: complete with Kaggle `incorrect format` error as of 2026-07-26
+- Public LB: blank
+- Readout: negative evidence for adding one probe hop with `REPLAY_COST_COEF=1.8` under the `v106` notebook/output envelope. Local syntax and SDK validation passed, so treat this as an evaluator/output-format failure triggered by the runtime/replay behavior rather than a Python import defect.

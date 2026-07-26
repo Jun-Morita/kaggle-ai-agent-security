@@ -21,4 +21,6 @@ The `v109` `SPLIT_CLASSIFY_N=4` latency cut was too aggressive and produced an i
 
 - Kernel: `junichiromorita/ai-agent-security-v110-classify6` version 1
 - Competition submission ref: `54975832`
-- Status: pending as of 2026-07-25 21:54 JST
+- Status: complete as of 2026-07-26
+- Public LB: `88.605`
+- Readout: new repo best. Moderate classification reduction (`8 -> 6`) improved over `v106=88.110` while avoiding the `v109` incorrect-format failure at `4`.

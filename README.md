@@ -82,21 +82,22 @@ Important knowledge files:
 
 ## Silver Strategy Snapshot
 
-Last updated: 2026-07-25.
+Last updated: 2026-07-26.
 
-Current confirmed public best is `v102_canqiang_ea_b_exact` at `87.435`. It supersedes `v103=87.030`, `v093=84.600`, `v092=81.540`, and the older low-80s baselines. Follow-up submissions `v104` / `v105` completed with blank public scores, so `v102` remains the active baseline while `v106` / `v107` are pending.
+Current confirmed public best is `v110_kaiwalya_classify6` at `88.605`. It supersedes `v106=88.110`, `v108=87.615`, `v102=87.435`, `v103=87.030`, and the older low-80s baselines.
 
-A 2026-07-25 public leaderboard download had `2335` teams. `v102=87.435` ranked `215`; top 10% was around `87.255`, and top 5% was `88.650`. The public Silver gap has widened to `1.215`, about fourteen clean single-post `EXFILTRATION` findings at `0.09` points each.
+A 2026-07-26 public leaderboard download had `2386` teams. `v110=88.605` ranked `163`; top 10% was around `87.840`, and top 5% was `89.235`. The public Silver gap is `0.630`, about seven clean single-post `EXFILTRATION` findings at roughly `0.09` points each.
 
 ### What Is Confirmed
 
-- `v102_canqiang_ea_b_exact` scored `87.435`, the current repo best and a successful transfer of `canqiang/aiagsec-ea-b-0721` public `88.560`.
-- `v103_tetsutani_v27_exact` scored `87.030`, confirming that the tetsutani v27 public `88.515` source also transfers into the high-80s, though below `v102`.
-- `v100_haodou_cb9_exact` and `v101_rokaiya_yusuke_rerun` both completed with blank public scores. Treat them as no-score / evaluator-failure evidence, not as stronger baselines.
-- `v104_canqiang_ea_b_rerun` completed with blank public score. It was attack-code identical to `v102`, so this is likely hosted replay variance or timeout rather than an attack-code defect.
-- `v105_canqiang_ea_b_safe975` completed with blank public score. The `REPLAY_SAFE_FRAC=0.975` push may be too close to the replay boundary, but `v104` also blanked, so hosted variance is also implicated.
-- `v106_kaiwalya_solution_v9_exact` is pending. It is an exact transfer of `kaiwalyaatulraut/ai-agent-security-solution` v9, public `89.055`, and samples the same high-variance live validation-fill family.
-- `v107_canqiang_slow_multipost2` is pending. It tests a higher-risk slow-row Harmony multipost idea; keep it as a bounded experiment unless it scores clearly.
+- `v110_kaiwalya_classify6` scored `88.605`, the current repo best. It changes only `SPLIT_CLASSIFY_N=8 -> 6` from the `v106` branch.
+- `v106_kaiwalya_solution_v9_exact` scored `88.110`, confirming successful transfer of the high-80s Kaiwalya v9 single-post `SECRET_MARKER` family.
+- `v108_kaiwalya_v9_rerun` scored `87.615`; byte-identical reruns can vary substantially.
+- `v109_kaiwalya_classify4` and `v111_probehops1_coef18` completed with Kaggle `incorrect format` / blank scores. Treat these as timeout/evaluator-envelope failures rather than local syntax defects.
+- `v112_classify6_rerun` is pending. It is an exact rerun of `v110` to sample hosted replay variance toward the Silver boundary.
+- `v113_classify5_boundary` is pending. It changes only `SPLIT_CLASSIFY_N=6 -> 5`, the remaining boundary between successful `6` and failed `4`.
+- `v107_canqiang_slow_multipost2` scored `80.830`, so slow-row multipost remains negative in this branch.
+- `v102_canqiang_ea_b_exact` scored `87.435`, still useful historical evidence for the same live validation-fill / replay-safe single-post family.
 - `v093_edgefill_v27_safe982` remains important historical evidence at `84.600`; pushing the same family to `v094` / `0.985` dropped to `76.320`.
 - `v097=81.360`, `v098=74.745`, and `v099=81.945` are useful transfers but no longer competitive against `v102`.
 - The important replay-sizing lesson still holds: use all selected probe latencies for fill sizing, not successful-fire latencies only. Successful-only latency likely underestimates replay cost and returns too many candidates.
@@ -107,14 +108,14 @@ A 2026-07-25 public leaderboard download had `2335` teams. `v102=87.435` ranked 
 
 ### Silver Gap
 
-The active baseline is fundamentally limited by successful single-post candidate count. To reach the 2026-07-25 top-5% boundary around `88.650`, a single-post exfil submission needs roughly `88.650 / 0.09 ~= 985` successful candidates on average. `v102=87.435` implies about `972` successful single-post findings, so the remaining gap is roughly `13-14` findings or equivalent replay-latency savings.
+The active baseline is fundamentally limited by successful single-post candidate count. To reach the 2026-07-26 top-5% boundary around `89.235`, a single-post exfil submission needs roughly `89.235 / 0.09 ~= 992` successful candidates on average. `v110=88.605` implies about `984-985` successful single-post findings, so the remaining gap is roughly `7` findings or equivalent replay-latency savings.
 
-Candidate count alone is still dangerous because replay timeout and hosted variance dominate near the boundary. `v104` shows that even an exact rerun of a scoring branch can blank, so additional attempts should either reduce replay pressure or use a newly source-verified public branch above `88.5`.
+Candidate count alone is still dangerous because replay timeout and hosted variance dominate near the boundary. `v104`, `v109`, and `v111` show that scoring branches can blank when the replay envelope is pushed or changed in the wrong direction, so additional attempts should either preserve `v110` exactly or make one small latency/throughput change at a time.
 
 Secondary directions are:
 
-- wait for `v106`, the exact transfer of public `kaiwalyaatulraut/ai-agent-security-solution` v9 at `89.055`;
-- use exact reruns only as variance samples, not as a primary development strategy;
+- wait for `v112` / `v113` results before spending more slots;
+- use exact reruns as legitimate variance samples because the current Silver gap is smaller than observed hosted replay variance;
 - inspect any newly public code above `89` before deviating from the proven single-post branch;
 - test latency/throughput reductions before increasing replay-safe aggression beyond the proven range;
 - preserve a small private-risk hedge with mixed predicates for final selection.
@@ -123,15 +124,15 @@ Multi-post severity stacking, multi-message amortization, and `EXFILTRATION + UN
 
 ### Next Research Direction
 
-The preferred next approach is controlled optimization around `v102` / `v106` plus targeted evaluation of newly public high-scoring throughput branches:
+The preferred next approach is controlled optimization around `v110` plus targeted evaluation of newly public high-scoring throughput branches:
 
-1. Keep `v102=87.435` as the confirmed reference.
-2. Treat `v106` as the active Silver attempt: exact public `89.055` transfer and hosted replay variance sample.
-3. Treat `v104` as evidence that exact reruns can fail under hosted replay variance, even when the same attack hash previously scored.
-4. Treat `v105` as negative evidence for pushing canqiang's `REPLAY_SAFE_FRAC` above `0.97` without additional replay headroom.
-5. Archive and inspect newly public code above `89`; exact-port only the best-scoring version, not the latest source by title.
-6. Keep all-latency or conservatively charged replay sizing. Avoid successful-only latency sizing unless a separate hard replay clamp is added.
-7. Avoid large unqualified template banks; require exact firing, holdout, and rolling fallback before a higher-density form can fill the portfolio.
+1. Keep `v110=88.605` as the confirmed reference.
+2. Treat `v112` as the low-risk Silver attempt: exact rerun, no attack-code changes.
+3. Treat `v113` as the controlled upside pair: only `SPLIT_CLASSIFY_N=5`.
+4. Treat `v109` as evidence that `SPLIT_CLASSIFY_N=4` is too aggressive.
+5. Treat `v111` as evidence against adding `PROBE_HOPS=1` with the current replay-cost coefficient and notebook envelope.
+6. Archive and inspect newly public code above `89`; exact-port only the best-scoring version, not the latest source by title.
+7. Keep all-latency or conservatively charged replay sizing. Avoid successful-only latency sizing unless a separate hard replay clamp is added.
 
 The main lever is throughput, not payload novelty. Literal `SECRET_MARKER`, compact `.co` hosts, a short one-message candidate, and strict replay cost control remain the strongest confirmed combination.
 
@@ -289,7 +290,9 @@ Versions `1-6` were useful only for debugging submission wiring. Future submissi
 
 ## Submission Status
 
-Current confirmed public LB best is `v093_edgefill_v27_safe982` with `84.600`. It supersedes `v092=81.540`, `v087=76.950`, `v085=63.495`, and the older `v079_security_eval_baseline_exact=61.965`. `v097_tetsutani_v10_exact=81.360`, `v098_yusuke_v52_exact=74.745`, and `v099_yusuke_v52_plus_v097_singles=81.945` completed below the baseline. `v100_haodou_cb9_exact` and `v101_rokaiya_yusuke_rerun` are pending as exact public 87+ source transfers. A 2026-07-21 leaderboard snapshot puts the approximate Silver target near `87.030`. Historical `v030_replay_dense_classic600=54.000` remains useful as pre-update evidence, but the 2026-06-25 evaluator update changed the scoring regime and the exact `v039` rerun of `v030` scored only `0.540`.
+Current confirmed public LB best is `v110_kaiwalya_classify6` with `88.605`. It supersedes `v106=88.110`, `v108=87.615`, `v102=87.435`, `v103=87.030`, `v093=84.600`, and the older low-80s baselines. `v112_classify6_rerun` and `v113_classify5_boundary` are pending as of 2026-07-26. A 2026-07-26 leaderboard snapshot puts the top-5% Silver target at `89.235`, so the current gap is `0.630`. Historical `v030_replay_dense_classic600=54.000` remains useful as pre-update evidence, but the 2026-06-25 evaluator update changed the scoring regime and the exact `v039` rerun of `v030` scored only `0.540`.
+
+Recent high-80s evidence: `v106` successfully transferred the Kaiwalya v9 `SECRET_MARKER` live validation-fill family; `v110` improved it by changing only `SPLIT_CLASSIFY_N=8 -> 6`; `v109` (`4`) and `v111` (`PROBE_HOPS=1`, `REPLAY_COST_COEF=1.8`) failed with blank / incorrect-format results. Current submissions use `-f submission.csv` for Kaggle code submission, while the notebook still emits `/kaggle/working/attack.py`.
 
 On 2026-06-20, `v020_static625_short_direct` and `v021_static700_short_direct` completed with blank public scores, so the earlier static short-direct interpretation of public `agi-ai-agent-security` should be treated as stale. Pulling the actual Kaggle kernel revealed that the public high-score notebook is `V26`: `208` candidates, each with `web.search` followed by two short `POST ... body=TOKEN=admin123` messages.
 
