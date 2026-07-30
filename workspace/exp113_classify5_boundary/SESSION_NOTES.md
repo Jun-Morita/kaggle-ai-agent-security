@@ -21,5 +21,7 @@
 
 - Kernel: `junichiromorita/ai-agent-security-v113-classify5` version 1
 - Competition submission ref: `54992805`
-- Status: pending as of 2026-07-26 14:47 JST
+- Status: complete as of 2026-07-27
+- Public LB: `87.390`
 - Note: Kaggle API now rejects code submissions with `-f attack.py`; this was submitted successfully with `-f submission.csv`, while the kernel output contains both `attack.py` and `submission.csv`.
+- Readout: `SPLIT_CLASSIFY_N=5` avoided format error but underperformed `v110=88.605`, so further classification reduction is not currently supported.

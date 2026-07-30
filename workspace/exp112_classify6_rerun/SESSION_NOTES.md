@@ -21,5 +21,7 @@
 
 - Kernel: `junichiromorita/ai-agent-security-v112-classify6-rerun` version 1
 - Competition submission ref: `54992796`
-- Status: pending as of 2026-07-26 14:47 JST
+- Status: complete as of 2026-07-27
+- Public LB: `87.840`
 - Note: Kaggle API now rejects code submissions with `-f attack.py`; this was submitted successfully with `-f submission.csv`, while the kernel output contains both `attack.py` and `submission.csv`.
+- Readout: exact rerun landed below original `v110=88.605`. This confirms hosted replay variance but does not provide a better final candidate.
