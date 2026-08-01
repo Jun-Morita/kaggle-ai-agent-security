@@ -14,4 +14,10 @@ Submission:
 
 - Kernel: `junichiromorita/ai-agent-security-v120-frame-rsf975` version 1
 - Competition submission ref: `55109720`
-- Status at submission time: pending
+- Result: complete, public `89.640` as of 2026-07-31
+
+Interpretation:
+
+- New repo best, improving over `v110=88.605` by `+1.035`.
+- The `nctuan` verbose frame plus a small `REPLAY_SAFE_FRAC=0.975` push completed successfully, unlike prior `0.978`/`0.982` experiments without this frame.
+- Next tests should be small: either exact rerun of `v120`, or a very narrow boundary step around `0.975`.
