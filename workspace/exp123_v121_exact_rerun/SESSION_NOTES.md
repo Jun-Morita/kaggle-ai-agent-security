@@ -18,4 +18,6 @@
 - Submitted on 2026-08-01.
 - Kernel: `junichiromorita/ai-agent-security-v123-v121-rerun` version 1.
 - Submission ref: `55151016`.
-- Current status: `PENDING`.
+- Current status: complete.
+- Public LB: `91.890`.
+- Result note: new repo best. On the 2026-08-02 full public leaderboard snapshot, this is rank `93 / 2648`; top-5% boundary is rank `133` at score `90.855`.

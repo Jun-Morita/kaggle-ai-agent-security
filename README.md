@@ -84,13 +84,15 @@ Important knowledge files:
 
 Last updated: 2026-08-01.
 
-Current confirmed public best is `v121_v120_exact_rerun` at `91.260`. It supersedes `v122=91.170`, `v120=89.640`, `v119=88.965`, `v110=88.605`, `v117=88.200`, `v106=88.110`, `v114=87.975`, `v112=87.840`, `v108=87.615`, `v102=87.435`, `v103=87.030`, and the older low-80s baselines.
+Current confirmed public best is `v123_v121_exact_rerun` at `91.890`. It supersedes `v121=91.260`, `v122=91.170`, `v120=89.640`, `v119=88.965`, `v110=88.605`, `v117=88.200`, `v106=88.110`, `v114=87.975`, `v112=87.840`, `v108=87.615`, `v102=87.435`, `v103=87.030`, and the older low-80s baselines.
 
-A full public leaderboard snapshot on 2026-08-01 had `2635` teams. The top-5% public Silver boundary was rank `132` at score `90.780`; `v121=91.260` is about rank `109`, so the repository is currently in public Silver range. The boundary is still moving upward, so this should be treated as a live position to defend rather than a settled final result.
+A full public leaderboard snapshot on 2026-08-02 had `2648` teams. The top-5% public Silver boundary was rank `133` at score `90.855`; `v123=91.890` is rank `93`, so the repository is currently in public Silver range with a larger cushion than `v121`. The boundary is still moving upward, so this should be treated as a live position to defend rather than a settled final result.
 
 ### What Is Confirmed
 
-- `v121_v120_exact_rerun` scored `91.260`, the current repo best and first public Silver-zone result. It is byte-identical to `v120`, showing hosted variance is large enough to matter at the boundary.
+- `v123_v121_exact_rerun` scored `91.890`, the current repo best. It is byte-identical to `v120` / `v121`, reinforcing that hosted variance is large enough to matter at the boundary.
+- `v121_v120_exact_rerun` scored `91.260`, the first public Silver-zone result in this repo.
+- `v124_v121_frame_short` scored `80.775`; removing `Then answer OK only.` from the slow-row frame is negative evidence because it likely hurts compliance or replay reliability.
 - `v122_v120_frame_rsf978` scored `91.170`. It confirms `REPLAY_SAFE_FRAC=0.978` is viable with the `v120` frame, but the exact rerun is the better current final candidate.
 - `v120_v110_nctuan_frame_rsf975` scored `89.640`. It combines the `nctuan/jed-v25` verbose Harmony-close frame with `REPLAY_SAFE_FRAC=0.975`.
 - `v119_v110_nctuan_frame` scored `88.965`, proving that the frame change alone improves over `v110`.
@@ -117,7 +119,7 @@ A full public leaderboard snapshot on 2026-08-01 had `2635` teams. The top-5% pu
 
 ### Silver Gap
 
-The active baseline is fundamentally limited by successful single-post candidate count. On the 2026-08-01 snapshot, the top-5% boundary was `90.780`, which corresponds to roughly `1009` clean single-post `EXFILTRATION` findings at about `0.09` points each. `v121=91.260` implies roughly `1014` successful findings and sits about `0.480` above that snapshot boundary. The practical target may continue rising, so the immediate goal is to defend the public Silver position and sample one or two controlled upper-tail variants rather than make broad rewrites.
+The active baseline is fundamentally limited by successful single-post candidate count. On the 2026-08-02 snapshot, the top-5% boundary was `90.855`, which corresponds to roughly `1010` clean single-post `EXFILTRATION` findings at about `0.09` points each. `v123=91.890` implies roughly `1021` successful findings and sits about `1.035` above that snapshot boundary. The practical target may continue rising, so the immediate goal is to defend the public Silver position and sample controlled upper-tail variants rather than make broad rewrites.
 
 Candidate count alone is still dangerous because replay timeout and hosted variance dominate near the boundary. `v104`, `v109`, `v111`, `v115`, and `v118` show that scoring branches can blank when the replay envelope is pushed or changed in the wrong direction, so additional attempts should either preserve `v110` exactly or make one small latency/throughput change at a time.
 
@@ -135,8 +137,8 @@ Multi-post severity stacking, multi-message amortization, and `EXFILTRATION + UN
 
 The preferred next approach is controlled optimization around `v110` plus targeted evaluation of newly public high-scoring throughput branches:
 
-1. Keep `v121=91.260` as the confirmed reference and current final-candidate leader.
-2. Treat `v122=91.170` as proof that `REPLAY_SAFE_FRAC=0.978` is viable with the `v120` frame, but not clearly better than exact rerun variance.
+1. Keep `v123=91.890` as the confirmed reference and current final-candidate leader.
+2. Treat `v121=91.260` as the first Silver-zone rerun and `v122=91.170` as proof that `REPLAY_SAFE_FRAC=0.978` is viable with the `v120` frame, but not clearly better than exact rerun variance.
 3. Treat `v119=88.965` as proof that the verbose Harmony-close frame is useful.
 4. Treat `v117` as evidence that exact reruns can vary materially; `v121` is the positive upper-tail example.
 5. Treat `v113` as evidence that `SPLIT_CLASSIFY_N=5` is worse than `6`; keep `6`.
@@ -301,9 +303,9 @@ Versions `1-6` were useful only for debugging submission wiring. Future submissi
 
 ## Submission Status
 
-Current confirmed public LB best is `v121_v120_exact_rerun` with `91.260`. It supersedes `v122=91.170`, `v120=89.640`, `v119=88.965`, `v110=88.605`, `v117=88.200`, `v106=88.110`, `v114=87.975`, `v112=87.840`, `v108=87.615`, `v102=87.435`, `v103=87.030`, `v093=84.600`, and the older low-80s baselines. A full 2026-08-01 leaderboard snapshot had `2635` teams, top-5% rank `132`, and top-5% score `90.780`; `v121` is about rank `109`, so it is currently in public Silver range. Historical `v030_replay_dense_classic600=54.000` remains useful as pre-update evidence, but the 2026-06-25 evaluator update changed the scoring regime and the exact `v039` rerun of `v030` scored only `0.540`.
+Current confirmed public LB best is `v123_v121_exact_rerun` with `91.890`. It supersedes `v121=91.260`, `v122=91.170`, `v120=89.640`, `v119=88.965`, `v110=88.605`, `v117=88.200`, `v106=88.110`, `v114=87.975`, `v112=87.840`, `v108=87.615`, `v102=87.435`, `v103=87.030`, `v093=84.600`, and the older low-80s baselines. A full 2026-08-02 leaderboard snapshot had `2648` teams, top-5% rank `133`, and top-5% score `90.855`; `v123` is rank `93`, so it is currently in public Silver range. Historical `v030_replay_dense_classic600=54.000` remains useful as pre-update evidence, but the 2026-06-25 evaluator update changed the scoring regime and the exact `v039` rerun of `v030` scored only `0.540`.
 
-Recent high-score evidence: `v106` successfully transferred the Kaiwalya v9 `SECRET_MARKER` live validation-fill family; `v110` improved it by changing only `SPLIT_CLASSIFY_N=8 -> 6`; `v119` improved over `v110` by changing only the `FRAME_TEMPLATE` to the verbose Harmony-close frame from `nctuan/jed-v25`; `v120` added `REPLAY_SAFE_FRAC=0.975`; `v121` exact-reran `v120` into the public Silver zone; and `v122` showed `REPLAY_SAFE_FRAC=0.978` can also score above `91`. Exact reruns `v112=87.840` and `v117=88.200` did not beat the original, which makes `v121` useful evidence of hosted upper-tail variance rather than a deterministic code improvement. Current submissions use `-f submission.csv` for Kaggle code submission, while the notebook still emits `/kaggle/working/attack.py`.
+Recent high-score evidence: `v106` successfully transferred the Kaiwalya v9 `SECRET_MARKER` live validation-fill family; `v110` improved it by changing only `SPLIT_CLASSIFY_N=8 -> 6`; `v119` improved over `v110` by changing only the `FRAME_TEMPLATE` to the verbose Harmony-close frame from `nctuan/jed-v25`; `v120` added `REPLAY_SAFE_FRAC=0.975`; `v121` exact-reran `v120` into the public Silver zone; `v122` showed `REPLAY_SAFE_FRAC=0.978` can also score above `91`; and `v123` exact-reran the same attack to `91.890`. `v124=80.775` is negative evidence for removing the final-answer sentence from the slow-row frame. Current submissions use `-f submission.csv` for Kaggle code submission, while the notebook still emits `/kaggle/working/attack.py`.
 
 On 2026-06-20, `v020_static625_short_direct` and `v021_static700_short_direct` completed with blank public scores, so the earlier static short-direct interpretation of public `agi-ai-agent-security` should be treated as stale. Pulling the actual Kaggle kernel revealed that the public high-score notebook is `V26`: `208` candidates, each with `web.search` followed by two short `POST ... body=TOKEN=admin123` messages.
 
@@ -617,21 +619,24 @@ Local probes and prepared work:
 - `workspace/exp118_two_probe_harmony_hybrid/`: source experiment for submitted `v118_two_probe_harmony_hybrid`; complete with blank public score, ref `55086860`.
 - `workspace/exp119_v110_nctuan_frame/`: source experiment for submitted `v119_v110_nctuan_frame`; public `88.965`, ref `55109719`.
 - `workspace/exp120_v110_nctuan_frame_rsf975/`: source experiment for submitted `v120_v110_nctuan_frame_rsf975`; public `89.640`, ref `55109720`.
-- `workspace/exp121_v120_exact_rerun/`: source experiment for submitted `v121_v120_exact_rerun`; current repo best, public `91.260`, ref `55132439`.
+- `workspace/exp121_v120_exact_rerun/`: source experiment for submitted `v121_v120_exact_rerun`; public `91.260`, ref `55132439`.
 - `workspace/exp122_v120_frame_rsf978/`: source experiment for submitted `v122_v120_frame_rsf978`; public `91.170`, ref `55132440`.
+- `workspace/exp123_v121_exact_rerun/`: source experiment for submitted `v123_v121_exact_rerun`; current repo best, public `91.890`, ref `55151016`.
+- `workspace/exp124_v121_frame_short/`: source experiment for submitted `v124_v121_frame_short`; public `80.775`, ref `55151005`.
 - `scripts/measure_candidate_posts.py`: replays static candidates locally and counts successful `http.post` calls.
 - Current deterministic post-count probe: v006 and v007 each produced 4 successful `http.post` calls for 32/32 replayed static candidates. Hosted results did not transfer cleanly: v006/v007 timed out, and v008 scored close to a single-post 96-candidate run.
 - `workspace/exp011_aas_local_validation/`: public GGUF validation workflow prepared from `AAS | Local validation`; first targets are pending `v010` and `v011`.
 
 Current pause condition:
 
-- Use `v121=91.260` as the current confirmed public baseline and first public Silver-zone candidate.
+- Use `v123=91.890` as the current confirmed public baseline and strongest public Silver-zone candidate.
 - Keep `v122=91.170`, `v120=89.640`, `v119=88.965`, `v110=88.605`, `v117=88.200`, `v106=88.110`, `v114=87.975`, `v112=87.840`, and `v102=87.435` as fallback evidence from the same replay-safe single-post family.
 - `v113=87.390` shows `SPLIT_CLASSIFY_N=5` underperforms `6`; `v109` shows `4` is too aggressive.
 - `v115` and `v118` completed with blank public scores; treat `REPLAY_SAFE >= 0.982` / `0.99` as outside the current safe envelope.
-- The `nctuan` verbose Harmony-close frame is promoted after `v119=88.965`, `v120=89.640`, `v121=91.260`, and `v122=91.170`.
+- The `nctuan` verbose Harmony-close frame is promoted after `v119=88.965`, `v120=89.640`, `v121=91.260`, `v122=91.170`, and `v123=91.890`.
+- Do not remove `Then answer OK only.` from the slow-row frame; `v124=80.775` is strong negative evidence for that frame-short mechanism.
 - Treat `REPLAY_SAFE_FRAC=0.975` and `0.978` as viable with this frame; `0.982` and `0.99` remain outside the current safe envelope.
-- The 2026-08-01 full public leaderboard snapshot has `2635` teams, top-5% rank `132`, and top-5% score `90.780`; `v121=91.260` is about rank `109`, currently public Silver-zone.
+- The 2026-08-02 full public leaderboard snapshot has `2648` teams, top-5% rank `133`, and top-5% score `90.855`; `v123=91.890` is rank `93`, currently public Silver-zone.
 - Treat exact public JED `0.99` (`v091=73.935`) and two-probe `0.99` (`v118` blank) as too close to the hosted boundary for our wrapper, even when public notebooks report higher scores.
 - Treat `v089/v090` blank scores as negative evidence for successful-only latency sizing and larger raw-weighted template banks.
 - Treat `v094=76.320` as negative evidence for pushing EdgeFill v27 from `0.982` to `0.985`.

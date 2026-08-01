@@ -22,4 +22,6 @@ The slow `gpt_oss` row remains latency-gated. Removing the plain-English final-a
 - Submitted on 2026-08-01.
 - Kernel: `junichiromorita/ai-agent-security-v124-frame-short` version 1.
 - Submission ref: `55151005`.
-- Current status: `PENDING`.
+- Current status: complete.
+- Public LB: `80.775`.
+- Result note: large drop versus `v121=91.260` and `v123=91.890`. Removing `Then answer OK only.` from the slow-row frame likely hurts compliance or replay reliability; do not promote this frame-short mechanism.
