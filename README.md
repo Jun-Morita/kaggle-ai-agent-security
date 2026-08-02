@@ -82,15 +82,17 @@ Important knowledge files:
 
 ## Silver Strategy Snapshot
 
-Last updated: 2026-08-01.
+Last updated: 2026-08-02.
 
 Current confirmed public best is `v123_v121_exact_rerun` at `91.890`. It supersedes `v121=91.260`, `v122=91.170`, `v120=89.640`, `v119=88.965`, `v110=88.605`, `v117=88.200`, `v106=88.110`, `v114=87.975`, `v112=87.840`, `v108=87.615`, `v102=87.435`, `v103=87.030`, and the older low-80s baselines.
 
-A full public leaderboard snapshot on 2026-08-02 had `2648` teams. The top-5% public Silver boundary was rank `133` at score `90.855`; `v123=91.890` is rank `93`, so the repository is currently in public Silver range with a larger cushion than `v121`. The boundary is still moving upward, so this should be treated as a live position to defend rather than a settled final result.
+A full public leaderboard snapshot on 2026-08-02 had `2669` teams. The top-5% public Silver boundary was rank `134` at score `90.900`; `v123=91.890` is rank `95`, so the repository is currently in public Silver range with a `+0.990` cushion. The rank-100 score is `91.800`, only `0.090` below `v123`, so the public position is good but still exposed to leaderboard movement and replay variance.
 
 ### What Is Confirmed
 
 - `v123_v121_exact_rerun` scored `91.890`, the current repo best. It is byte-identical to `v120` / `v121`, reinforcing that hosted variance is large enough to matter at the boundary.
+- `v125_v123_exact_rerun` scored `89.505`; byte-identical reruns can also land far below the best draw, so reruns are not a reliable standalone improvement mechanism.
+- `v126_v123_rsf976` scored `87.840`; raising `REPLAY_SAFE_FRAC` from `0.975` to `0.976` under the `v123` frame is negative evidence and should not be promoted.
 - `v121_v120_exact_rerun` scored `91.260`, the first public Silver-zone result in this repo.
 - `v124_v121_frame_short` scored `80.775`; removing `Then answer OK only.` from the slow-row frame is negative evidence because it likely hurts compliance or replay reliability.
 - `v122_v120_frame_rsf978` scored `91.170`. It confirms `REPLAY_SAFE_FRAC=0.978` is viable with the `v120` frame, but the exact rerun is the better current final candidate.
@@ -119,14 +121,14 @@ A full public leaderboard snapshot on 2026-08-02 had `2648` teams. The top-5% pu
 
 ### Silver Gap
 
-The active baseline is fundamentally limited by successful single-post candidate count. On the 2026-08-02 snapshot, the top-5% boundary was `90.855`, which corresponds to roughly `1010` clean single-post `EXFILTRATION` findings at about `0.09` points each. `v123=91.890` implies roughly `1021` successful findings and sits about `1.035` above that snapshot boundary. The practical target may continue rising, so the immediate goal is to defend the public Silver position and sample controlled upper-tail variants rather than make broad rewrites.
+The active baseline is fundamentally limited by successful single-post candidate count. On the 2026-08-02 snapshot, the top-5% boundary was `90.900`, which corresponds to roughly `1010` clean single-post `EXFILTRATION` findings at about `0.09` points each. `v123=91.890` implies roughly `1021` successful findings and sits about `0.990` above that snapshot boundary. The practical target may continue rising, so the immediate goal is to defend the public Silver position and sample controlled upper-tail variants rather than make broad rewrites.
 
-Candidate count alone is still dangerous because replay timeout and hosted variance dominate near the boundary. `v104`, `v109`, `v111`, `v115`, and `v118` show that scoring branches can blank when the replay envelope is pushed or changed in the wrong direction, so additional attempts should either preserve `v110` exactly or make one small latency/throughput change at a time.
+Candidate count alone is still dangerous because replay timeout and hosted variance dominate near the boundary. `v104`, `v109`, `v111`, `v115`, and `v118` show that scoring branches can blank when the replay envelope is pushed or changed in the wrong direction. `v125` and `v126` add newer evidence that even byte-identical reruns or tiny replay-safe changes can land below the Silver boundary. Additional attempts should preserve the `v123` proven frame unless a single, well-scoped latency/throughput change is being tested.
 
 Secondary directions are:
 
 - promote `v120` as the new baseline and test only narrow follow-ups;
-- use exact reruns as legitimate variance samples, but do not expect reruns alone to close the now-larger Silver gap;
+- use exact reruns as legitimate variance samples, but do not rely on reruns alone now that `v125` underperformed;
 - inspect newly public Code such as `nctuan/jed-v25`, but transplant only one portable component at a time into the proven single-post branch;
 - test latency/throughput reductions before increasing replay-safe aggression beyond the proven `0.97` range;
 - preserve a small private-risk hedge with mixed predicates for final selection.
@@ -138,14 +140,15 @@ Multi-post severity stacking, multi-message amortization, and `EXFILTRATION + UN
 The preferred next approach is controlled optimization around `v110` plus targeted evaluation of newly public high-scoring throughput branches:
 
 1. Keep `v123=91.890` as the confirmed reference and current final-candidate leader.
-2. Treat `v121=91.260` as the first Silver-zone rerun and `v122=91.170` as proof that `REPLAY_SAFE_FRAC=0.978` is viable with the `v120` frame, but not clearly better than exact rerun variance.
+2. Treat `v121=91.260` and `v122=91.170` as final-candidate fallbacks from the same family.
 3. Treat `v119=88.965` as proof that the verbose Harmony-close frame is useful.
 4. Treat `v117` as evidence that exact reruns can vary materially; `v121` is the positive upper-tail example.
 5. Treat `v113` as evidence that `SPLIT_CLASSIFY_N=5` is worse than `6`; keep `6`.
 6. Treat `v115` and `v118` as evidence against `REPLAY_SAFE >= 0.982` / `0.99` in this wrapper.
-7. Test only narrow follow-ups around `v121`: exact rerun, tiny replay-safe boundary adjustment, or a single frame/terminal-word tweak.
-8. Archive and inspect newly public code above `90` when available; exact-port only the best-scoring version, not the latest source by title.
-9. Keep all-latency or conservatively charged replay sizing. Avoid successful-only latency sizing unless a separate hard replay clamp is added.
+7. Treat `v125=89.505` and `v126=87.840` as negative evidence for naive rerun-only defense and `REPLAY_SAFE_FRAC=0.976`.
+8. Test only narrow follow-ups around `v123`: exact frame preservation, tiny latency-template changes, or public-code imports with one portable component at a time.
+9. Archive and inspect newly public code above `90` when available; exact-port only the best-scoring version, not the latest source by title.
+10. Keep all-latency or conservatively charged replay sizing. Avoid successful-only latency sizing unless a separate hard replay clamp is added.
 
 The main lever is throughput, not payload novelty. Literal `SECRET_MARKER`, compact `.co` hosts, a short one-message candidate, and strict replay cost control remain the strongest confirmed combination.
 
