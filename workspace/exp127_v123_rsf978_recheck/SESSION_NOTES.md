@@ -25,5 +25,8 @@ high-value mechanics from the active `v123` baseline.
 
 - Kernel: `junichiromorita/ai-agent-security-v127-rsf978-recheck` version 1.
 - Competition submission ref: `55182814`.
-- Status: pending Kaggle evaluation as of 2026-08-02.
+- Status: complete.
+- Public LB: `84.060` as of 2026-08-03.
+- Result: underperformed `v123=91.890`, `v122=91.170`, and `v121=91.260`;
+  do not promote this `0.978` recheck.
 - Attack SHA-256: `3d5bc0fced00` (identical to scored `v122`).

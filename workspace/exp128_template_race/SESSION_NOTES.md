@@ -28,7 +28,10 @@ candidate throughput without increasing the replay budget.
 
 - Kernel: `junichiromorita/ai-agent-security-v128-template-race` version 1.
 - Competition submission ref: `55182815`.
-- Status: pending Kaggle evaluation as of 2026-08-02.
+- Status: complete.
+- Public LB: `89.505` as of 2026-08-03.
 - Attack SHA-256: `a04933506595`.
+- Result: tied `v125=89.505` and underperformed `v123=91.890`; the template
+  race did not recover enough throughput to defend Silver.
 - Risk: template selection can choose the wrong branch under noisy early probes,
   but it does not widen the known replay envelope.
