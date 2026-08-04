@@ -8,7 +8,7 @@ dependencies = [
   "gymnasium>=1.3.0",
   "ipykernel",
   "jupyterlab",
-  "kaggle",
+  "kaggle>=2.2.2",
   "matplotlib",
   "numpy",
   "pandas",
