@@ -194,6 +194,42 @@ Kaggle discussion から得た知識を要約する。
 - Prefer one known-good public single-post exfil slot and one diversified private-hedge slot when final submission selection matters.
 - Avoid increasing candidate count unless a nearby lower-count profile has already completed.
 
+## 2026-08-10: Evaluation Updates and Leaderboard Refresh
+
+- Source: https://www.kaggle.com/competitions/ai-agent-security-multi-step-tool-attacks/discussion/733058
+- Fetched at: 2026-08-10
+- Author: MartynaPlomecka, Competition Host
+- Competition: AI Agent Security - Multi-Step Tool Attacks
+
+### Key Ideas
+
+- The new evaluator / dataset update was reported live as of `2026-08-05 10:49 AM PT`.
+- Gemma tool-call parsing was updated to normalize some malformed tool calls, especially cases where Gemma wrapped subsequent tool-call responses in `{}`.
+- Replay timeouts now preserve the score accumulated before timeout. A timeout during `attack.py` / attack generation still terminates the submission.
+- The current leaderboard was invalidated because old and new evaluator results are not directly comparable.
+- Teams could select two historical submissions for rerun by `2026-08-07 9:00 AM PT`; otherwise the two highest old public scores were selected by default.
+- Hosts explicitly warned that harness-specific implementation behavior may not carry over to final rankings.
+
+### Useful for This Competition
+
+- Treat `2026-08-05 10:49 AM PT` as a new scoring-regime boundary. Do not compare pre-refresh and post-refresh scores as if they were the same metric.
+- Replay timeout is no longer an automatic zero, so high-candidate-count approaches deserve reconsideration if `AttackAlgorithm.run()` returns quickly.
+- Static / no-interact candidate banks become more attractive because the attack-generation phase must still complete cleanly.
+- Exact reruns remain useful for variance, but old high scores are not enough for current Silver because the refreshed leaderboard boundary moved upward.
+
+### Risks / Caveats
+
+- Community comments on 2026-08-08 to 2026-08-09 report that Gemma double-brace tool-call behavior may still reproduce and that the hosted scorer may not fully reflect the local `aicomp-sdk v3.1.2` parser fix.
+- Multi-post or multi-line Gemma-dependent strategies remain risky; single-post replay-dense breadth is still the safer public-LB baseline.
+- The public leaderboard now has fewer valid teams because many old submissions are invalidated or pending rerun, so medal boundaries can move sharply as reruns finish.
+- Some old submissions now appear as `ERROR` while retaining historical `publicScore`; interpret that as reset/invalidation state rather than proof that the original notebook source was invalid.
+
+### Experiment Candidates
+
+- Re-evaluate the current best exact family under the new regime, but only after confirming rerun/default-selection results.
+- Try static, fast-return candidate-count pushes where replay truncation can preserve partial score.
+- Keep one private-robust final candidate that does not rely only on parser quirks or harness-specific behavior.
+
 ## 2026-06-25: Evaluator Update and FAQ
 
 - Source: https://www.kaggle.com/competitions/ai-agent-security-multi-step-tool-attacks/discussion/712642

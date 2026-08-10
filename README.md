@@ -82,15 +82,17 @@ Important knowledge files:
 
 ## Silver Strategy Snapshot
 
-Last updated: 2026-08-02.
+Last updated: 2026-08-10.
 
-Current confirmed public best is `v123_v121_exact_rerun` at `91.890`. It supersedes `v121=91.260`, `v122=91.170`, `v120=89.640`, `v119=88.965`, `v110=88.605`, `v117=88.200`, `v106=88.110`, `v114=87.975`, `v112=87.840`, `v108=87.615`, `v102=87.435`, `v103=87.030`, and the older low-80s baselines.
+The 2026-08-05 evaluator / leaderboard refresh is a new scoring regime. Old and new public scores are not directly comparable. Historical best `v123_v121_exact_rerun=91.890` remains the best pre-refresh evidence, but the current refreshed leaderboard row is `junta1104` rank `81 / 966` at `91.770`.
 
-A full public leaderboard snapshot on 2026-08-02 had `2669` teams. The top-5% public Silver boundary was rank `134` at score `90.900`; `v123=91.890` is rank `95`, so the repository is currently in public Silver range with a `+0.990` cushion. The rank-100 score is `91.800`, only `0.090` below `v123`, so the public position is good but still exposed to leaderboard movement and replay variance.
+A refreshed public leaderboard snapshot on 2026-08-10 had `966` valid-scored teams. The top-5% public Silver boundary was rank `49` at score `94.645`; the top-10% boundary was rank `97` at score `90.800`. The current score `91.770` is no longer public Silver, so the immediate target is a post-refresh score above `95`, with a practical safety target closer to `100+`.
 
 ### What Is Confirmed
 
 - `v123_v121_exact_rerun` scored `91.890`, the current repo best. It is byte-identical to `v120` / `v121`, reinforcing that hosted variance is large enough to matter at the boundary.
+- `v135_static_breadth1800_partial` and `v136_static_breadth1200_safe` are pending post-refresh probes. Both return static no-interact single-post `SECRET_MARKER` candidate banks to test whether replay-timeout partial scoring makes high candidate counts viable.
+- `v131_frame_say_ok` and `v132_frame_ok_period` now show `ERROR` under the refreshed submissions table while retaining historical public scores `89.865` and `84.105`. Treat this as leaderboard invalidation / rerun state, not as proof that their source artifacts were invalid.
 - `v125_v123_exact_rerun` scored `89.505`; byte-identical reruns can also land far below the best draw, so reruns are not a reliable standalone improvement mechanism.
 - `v126_v123_rsf976` scored `87.840`; raising `REPLAY_SAFE_FRAC` from `0.975` to `0.976` under the `v123` frame is negative evidence and should not be promoted.
 - `v121_v120_exact_rerun` scored `91.260`, the first public Silver-zone result in this repo.
@@ -121,9 +123,9 @@ A full public leaderboard snapshot on 2026-08-02 had `2669` teams. The top-5% pu
 
 ### Silver Gap
 
-The active baseline is fundamentally limited by successful single-post candidate count. On the 2026-08-02 snapshot, the top-5% boundary was `90.900`, which corresponds to roughly `1010` clean single-post `EXFILTRATION` findings at about `0.09` points each. `v123=91.890` implies roughly `1021` successful findings and sits about `0.990` above that snapshot boundary. The practical target may continue rising, so the immediate goal is to defend the public Silver position and sample controlled upper-tail variants rather than make broad rewrites.
+The active baseline is fundamentally limited by successful single-post candidate count. Under the 2026-08-10 refreshed snapshot, the top-5% boundary is `94.645`, which corresponds to roughly `1052` clean single-post `EXFILTRATION` findings at about `0.09` points each. A safe public Silver buffer likely requires `100+`, or about `1112` successful findings.
 
-Candidate count alone is still dangerous because replay timeout and hosted variance dominate near the boundary. `v104`, `v109`, `v111`, `v115`, and `v118` show that scoring branches can blank when the replay envelope is pushed or changed in the wrong direction. `v125` and `v126` add newer evidence that even byte-identical reruns or tiny replay-safe changes can land below the Silver boundary. Additional attempts should preserve the `v123` proven frame unless a single, well-scoped latency/throughput change is being tested.
+Candidate count alone used to be all-or-nothing dangerous because replay timeout and hosted variance dominated near the boundary. The 2026-08-05 update changes this: replay timeouts should now preserve accumulated partial score, while attack-generation timeout still fails. This makes fast-return static breadth worth probing again, which is why `v135` and `v136` were submitted before broad new mechanism work.
 
 Secondary directions are:
 
@@ -306,9 +308,11 @@ Versions `1-6` were useful only for debugging submission wiring. Future submissi
 
 ## Submission Status
 
-Current confirmed public LB best is `v123_v121_exact_rerun` with `91.890`. It supersedes `v121=91.260`, `v122=91.170`, `v120=89.640`, `v119=88.965`, `v110=88.605`, `v117=88.200`, `v106=88.110`, `v114=87.975`, `v112=87.840`, `v108=87.615`, `v102=87.435`, `v103=87.030`, `v093=84.600`, and the older low-80s baselines. A full 2026-08-02 leaderboard snapshot had `2648` teams, top-5% rank `133`, and top-5% score `90.855`; `v123` is rank `93`, so it is currently in public Silver range. Historical `v030_replay_dense_classic600=54.000` remains useful as pre-update evidence, but the 2026-06-25 evaluator update changed the scoring regime and the exact `v039` rerun of `v030` scored only `0.540`.
+Current confirmed pre-refresh public LB best is `v123_v121_exact_rerun` with `91.890`. It supersedes `v121=91.260`, `v122=91.170`, `v120=89.640`, `v119=88.965`, `v110=88.605`, `v117=88.200`, `v106=88.110`, `v114=87.975`, `v112=87.840`, `v108=87.615`, `v102=87.435`, `v103=87.030`, `v093=84.600`, and the older low-80s baselines. After the 2026-08-05 evaluator / leaderboard refresh, the current downloaded 2026-08-10 leaderboard row is `junta1104` rank `81 / 966` at `91.770`; the top-5% boundary is `94.645`, so the repo is currently outside public Silver. Historical `v030_replay_dense_classic600=54.000` remains useful as pre-update evidence, but the 2026-06-25 evaluator update changed the scoring regime and the exact `v039` rerun of `v030` scored only `0.540`.
 
-Recent high-score evidence: `v106` successfully transferred the Kaiwalya v9 `SECRET_MARKER` live validation-fill family; `v110` improved it by changing only `SPLIT_CLASSIFY_N=8 -> 6`; `v119` improved over `v110` by changing only the `FRAME_TEMPLATE` to the verbose Harmony-close frame from `nctuan/jed-v25`; `v120` added `REPLAY_SAFE_FRAC=0.975`; `v121` exact-reran `v120` into the public Silver zone; `v122` showed `REPLAY_SAFE_FRAC=0.978` can also score above `91`; and `v123` exact-reran the same attack to `91.890`. `v124=80.775` is negative evidence for removing the final-answer sentence from the slow-row frame. Current submissions use `-f submission.csv` for Kaggle code submission, while the notebook still emits `/kaggle/working/attack.py`.
+Recent high-score evidence: `v106` successfully transferred the Kaiwalya v9 `SECRET_MARKER` live validation-fill family; `v110` improved it by changing only `SPLIT_CLASSIFY_N=8 -> 6`; `v119` improved over `v110` by changing only the `FRAME_TEMPLATE` to the verbose Harmony-close frame from `nctuan/jed-v25`; `v120` added `REPLAY_SAFE_FRAC=0.975`; `v121` exact-reran `v120` into the old public Silver zone; `v122` showed `REPLAY_SAFE_FRAC=0.978` can also score above `91`; and `v123` exact-reran the same attack to `91.890`. `v124=80.775` is negative evidence for removing the final-answer sentence from the slow-row frame. Current submissions use `-f submission.csv` for Kaggle code submission, while the notebook still emits `/kaggle/working/attack.py`.
+
+Post-refresh submissions: `v135_static_breadth1800_partial` and `v136_static_breadth1200_safe` are pending as of 2026-08-10. They are intentionally simple no-interact static banks designed to test the new replay-timeout partial-credit behavior before spending more slots on complex search.
 
 On 2026-06-20, `v020_static625_short_direct` and `v021_static700_short_direct` completed with blank public scores, so the earlier static short-direct interpretation of public `agi-ai-agent-security` should be treated as stale. Pulling the actual Kaggle kernel revealed that the public high-score notebook is `V26`: `208` candidates, each with `web.search` followed by two short `POST ... body=TOKEN=admin123` messages.
 
@@ -632,14 +636,15 @@ Local probes and prepared work:
 
 Current pause condition:
 
-- Use `v123=91.890` as the current confirmed public baseline and strongest public Silver-zone candidate.
+- Use `v123=91.890` as the strongest pre-refresh public baseline, but do not assume it is enough after the 2026-08-05 evaluator / leaderboard refresh.
 - Keep `v122=91.170`, `v120=89.640`, `v119=88.965`, `v110=88.605`, `v117=88.200`, `v106=88.110`, `v114=87.975`, `v112=87.840`, and `v102=87.435` as fallback evidence from the same replay-safe single-post family.
 - `v113=87.390` shows `SPLIT_CLASSIFY_N=5` underperforms `6`; `v109` shows `4` is too aggressive.
 - `v115` and `v118` completed with blank public scores; treat `REPLAY_SAFE >= 0.982` / `0.99` as outside the current safe envelope.
 - The `nctuan` verbose Harmony-close frame is promoted after `v119=88.965`, `v120=89.640`, `v121=91.260`, `v122=91.170`, and `v123=91.890`.
 - Do not remove `Then answer OK only.` from the slow-row frame; `v124=80.775` is strong negative evidence for that frame-short mechanism.
 - Treat `REPLAY_SAFE_FRAC=0.975` and `0.978` as viable with this frame; `0.982` and `0.99` remain outside the current safe envelope.
-- The 2026-08-02 full public leaderboard snapshot has `2648` teams, top-5% rank `133`, and top-5% score `90.855`; `v123=91.890` is rank `93`, currently public Silver-zone.
+- The 2026-08-10 refreshed public leaderboard snapshot has `966` valid-scored teams, top-5% rank `49`, and top-5% score `94.645`; `junta1104` is rank `81` at `91.770`, currently outside public Silver.
+- Wait for `v135` / `v136` to determine whether post-refresh static breadth with replay partial credit can cross the new boundary.
 - Treat exact public JED `0.99` (`v091=73.935`) and two-probe `0.99` (`v118` blank) as too close to the hosted boundary for our wrapper, even when public notebooks report higher scores.
 - Treat `v089/v090` blank scores as negative evidence for successful-only latency sizing and larger raw-weighted template banks.
 - Treat `v094=76.320` as negative evidence for pushing EdgeFill v27 from `0.982` to `0.985`.

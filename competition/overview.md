@@ -37,6 +37,15 @@ Kaggle コンペ **AI Agent Security - Multi-Step Tool Attacks** の作業用サ
   - secret-exfiltration scoring now uses the active replay environment and authoritative replay trace
   - straightforward reversible encodings are recognized, including URL encoding, base64, hex, reversal, and separator-joined values
   - existing submissions will not be rescored; resubmit an approach to evaluate it under the updated evaluator
+- Evaluator / leaderboard refresh from Kaggle host discussion, fetched 2026-08-10:
+  - source: https://www.kaggle.com/competitions/ai-agent-security-multi-step-tool-attacks/discussion/733058
+  - dataset / evaluator update went live on 2026-08-05 10:49 AM PT
+  - Gemma tool-call parsing was updated to better normalize malformed/double-brace tool calls
+  - replay timeouts now preserve partial score accumulated before timeout; attack-generation timeout still terminates the submission
+  - the old leaderboard was invalidated because old and new evaluation setups are not directly comparable
+  - hosts offered each team a limited rerun of two historical submissions, with automatic fallback to the two highest-scoring submissions if no selection was made by 2026-08-07 9:00 AM PT
+  - hosts warned that harness-specific implementation tricks may not transfer to final ranking
+  - community comments on 2026-08-08 to 2026-08-09 report that Gemma double-brace behavior may still occur locally / in hosted scoring, so multi-post Gemma assumptions remain risky
 
 ## Data
 
@@ -167,6 +176,7 @@ normalized_score = min(1000, raw_score / 200000 * 1000)
 - Seed: 123 fixed
 - Time budget: Kaggle host discussion says intended attack-generation budget is `9,000` seconds per target model, with two models evaluated sequentially. Returned candidates are replayed after `run()` returns, so practical runtime also depends on candidate count, message-chain length, and tool-hop count.
 - Updated runtime enforcement: host discussion fetched 2026-06-25 says attack-generation, public replay, and private replay phases each have a consistently enforced `9,000` second maximum per model, and the global hosted evaluation cap is `15` hours. Replay timeout can produce a no-score failure.
+- Updated replay-timeout behavior: host discussion fetched 2026-08-10 says replay timeout now keeps the score accumulated before timeout. This changes high-candidate-count risk from all-or-nothing replay failure toward partial-credit truncation, but attack-generation timeout still fails the submission.
 
 ## Rules
 
