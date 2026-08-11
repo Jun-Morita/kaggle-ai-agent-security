@@ -24,4 +24,5 @@ The 2026-08-05 evaluator preserves partial score during replay timeouts. A fast-
 - Submitted on 2026-08-10.
 - Kernel: `junichiromorita/ai-agent-security-v135-static-breadth1800` version 1.
 - Submission ref: `55404860`.
-- Status after submission: `PENDING`.
+- Result: `COMPLETE`, public `56.340` as of 2026-08-11.
+- Interpretation: partial scoring works well enough to produce a numeric score, but raw static breadth with this template is far below the refreshed Silver boundary. Do not scale this exact static template as the main path.
