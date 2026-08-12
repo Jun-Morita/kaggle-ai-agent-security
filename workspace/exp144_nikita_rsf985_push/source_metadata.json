@@ -1,0 +1,191 @@
+{
+  "kernel_slug": "ai-security-0011",
+  "owner_slug": "nikitagajbhiye30",
+  "selected_version": {
+    "best_submission_score_for_kernel": {
+      "kernelSessionUrl": "/code/nikitagajbhiye30/ai-security-0011?scriptVersionId=340442178",
+      "kernelVersionNumber": 20,
+      "scoreFormatted": "89.280"
+    },
+    "date_created": "2026-08-05T20:14:33.933Z",
+    "kernel_id": 126135105,
+    "kernel_session_id": 340442178,
+    "kernel_slug": "ai-security-0011",
+    "language": "LANGUAGE_PYTHON",
+    "owner_slug": "nikitagajbhiye30",
+    "public_lb": "89.280",
+    "public_lb_numeric": 89.28,
+    "selection_reason": "explicit version 20",
+    "status": "COMPLETE",
+    "title": "AI security 0011",
+    "version_id": 203082986,
+    "version_name": null,
+    "version_number": 20
+  },
+  "source": {
+    "bytes": 29591,
+    "path": "/tmp/kaggle-aas-nikita-v20/v020__scriptVersionId-340442178/source.ipynb"
+  },
+  "versions": [
+    {
+      "date_created": "2026-07-06T12:36:45.357Z",
+      "public_lb": null,
+      "public_lb_numeric": null,
+      "status": "COMPLETE",
+      "title": "AI security 0011",
+      "version_number": 1
+    },
+    {
+      "date_created": "2026-07-08T10:19:28.560Z",
+      "public_lb": null,
+      "public_lb_numeric": null,
+      "status": "COMPLETE",
+      "title": "AI security 0011",
+      "version_number": 2
+    },
+    {
+      "date_created": "2026-07-08T10:21:27.100Z",
+      "public_lb": null,
+      "public_lb_numeric": null,
+      "status": "COMPLETE",
+      "title": "AI security 0011",
+      "version_number": 3
+    },
+    {
+      "date_created": "2026-07-09T12:01:45.410Z",
+      "public_lb": null,
+      "public_lb_numeric": null,
+      "status": "COMPLETE",
+      "title": "AI security 0011",
+      "version_number": 4
+    },
+    {
+      "date_created": "2026-07-12T14:35:40.937Z",
+      "public_lb": null,
+      "public_lb_numeric": null,
+      "status": "COMPLETE",
+      "title": "AI security 0011",
+      "version_number": 5
+    },
+    {
+      "date_created": "2026-07-13T15:32:25.503Z",
+      "public_lb": null,
+      "public_lb_numeric": null,
+      "status": "COMPLETE",
+      "title": "AI security 0011",
+      "version_number": 6
+    },
+    {
+      "date_created": "2026-07-18T14:40:14.620Z",
+      "public_lb": "85.275",
+      "public_lb_numeric": 85.275,
+      "status": "COMPLETE",
+      "title": "AI security 0011",
+      "version_number": 7
+    },
+    {
+      "date_created": "2026-07-20T13:27:44.573Z",
+      "public_lb": "76.590",
+      "public_lb_numeric": 76.59,
+      "status": "COMPLETE",
+      "title": "AI security 0011",
+      "version_number": 8
+    },
+    {
+      "date_created": "2026-07-21T09:33:23.287Z",
+      "public_lb": "80.685",
+      "public_lb_numeric": 80.685,
+      "status": "COMPLETE",
+      "title": "AI security 0011",
+      "version_number": 9
+    },
+    {
+      "date_created": "2026-07-22T11:24:17.070Z",
+      "public_lb": null,
+      "public_lb_numeric": null,
+      "status": "COMPLETE",
+      "title": "AI security 0011",
+      "version_number": 10
+    },
+    {
+      "date_created": "2026-07-22T19:01:19.693Z",
+      "public_lb": "76.455",
+      "public_lb_numeric": 76.455,
+      "status": "COMPLETE",
+      "title": "AI security 0011",
+      "version_number": 11
+    },
+    {
+      "date_created": "2026-07-23T13:10:54.830Z",
+      "public_lb": null,
+      "public_lb_numeric": null,
+      "status": "COMPLETE",
+      "title": "AI security 0011",
+      "version_number": 12
+    },
+    {
+      "date_created": "2026-07-24T11:18:38.353Z",
+      "public_lb": "87.120",
+      "public_lb_numeric": 87.12,
+      "status": "COMPLETE",
+      "title": "AI security 0011",
+      "version_number": 13
+    },
+    {
+      "date_created": "2026-07-29T18:00:05.400Z",
+      "public_lb": null,
+      "public_lb_numeric": null,
+      "status": "COMPLETE",
+      "title": "AI security 0011",
+      "version_number": 14
+    },
+    {
+      "date_created": "2026-07-29T18:02:28.183Z",
+      "public_lb": "79.245",
+      "public_lb_numeric": 79.245,
+      "status": "COMPLETE",
+      "title": "AI security 0011",
+      "version_number": 15
+    },
+    {
+      "date_created": "2026-07-31T22:11:15.820Z",
+      "public_lb": null,
+      "public_lb_numeric": null,
+      "status": "COMPLETE",
+      "title": "AI security 0011",
+      "version_number": 16
+    },
+    {
+      "date_created": "2026-07-31T22:16:06.557Z",
+      "public_lb": null,
+      "public_lb_numeric": null,
+      "status": "COMPLETE",
+      "title": "AI security 0011",
+      "version_number": 17
+    },
+    {
+      "date_created": "2026-08-02T21:30:47.813Z",
+      "public_lb": "87.570",
+      "public_lb_numeric": 87.57,
+      "status": "COMPLETE",
+      "title": "AI security 0011",
+      "version_number": 18
+    },
+    {
+      "date_created": "2026-08-04T02:20:08.740Z",
+      "public_lb": null,
+      "public_lb_numeric": null,
+      "status": "COMPLETE",
+      "title": "AI security 0011",
+      "version_number": 19
+    },
+    {
+      "date_created": "2026-08-05T20:14:33.933Z",
+      "public_lb": "89.280",
+      "public_lb_numeric": 89.28,
+      "status": "COMPLETE",
+      "title": "AI security 0011",
+      "version_number": 20
+    }
+  ]
+}

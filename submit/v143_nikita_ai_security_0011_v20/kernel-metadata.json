@@ -1,0 +1,18 @@
+{
+  "id": "junichiromorita/ai-agent-security-v143-nikita-0011-v20",
+  "title": "ai-agent-security-v143-nikita-0011-v20",
+  "code_file": "ai-security-0011-v20.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "competition_sources": [
+    "ai-agent-security-multi-step-tool-attacks"
+  ],
+  "model_sources": [],
+  "machine_shape": "NvidiaTeslaT4"
+}
