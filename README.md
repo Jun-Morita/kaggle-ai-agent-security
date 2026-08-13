@@ -82,11 +82,11 @@ Important knowledge files:
 
 ## Silver Strategy Snapshot
 
-Last updated: 2026-08-12.
+Last updated: 2026-08-13.
 
 The 2026-08-05 evaluator / leaderboard refresh is a new scoring regime. Old and new public scores are not directly comparable. Historical best `v123_v121_exact_rerun=91.890` remains the best pre-refresh evidence, but the current confirmed post-refresh best is `v140_v128_template_race_postrefresh_rerun=87.705`.
 
-A refreshed public leaderboard snapshot on 2026-08-12 had `1242` valid-scored teams. The top-5% public Silver boundary was rank `63` at score `94.465`; the top-10% boundary was rank `125` at score `90.800`. The current post-refresh best `87.705` is still outside public Silver, so the immediate target remains a post-refresh score above `95`, with a practical safety target closer to `100+`.
+A refreshed public leaderboard snapshot on 2026-08-13 had `1312` valid-scored teams. The top-5% public Silver boundary was rank `66` at score `94.465`; the top-10% boundary was rank `132` at score `90.805`. The current post-refresh best `87.705` is still outside public Silver, so the immediate target remains a post-refresh score above `95`, with a practical safety target closer to `100+`.
 
 ### What Is Confirmed
 
@@ -95,7 +95,10 @@ A refreshed public leaderboard snapshot on 2026-08-12 had `1242` valid-scored te
 - `v137_v123_postrefresh_rerun` completed at `85.590`, showing the former best `v123=91.890` family dropped under the refreshed evaluator.
 - `v138_v130_terminal_o_postrefresh_rerun` completed at `86.130`, `v139_v131_frame_say_ok_postrefresh_rerun` at `71.910`, `v140_v128_template_race_postrefresh_rerun` at `87.705`, and `v141_v122_frame_rsf978_postrefresh_rerun` at `75.960`.
 - `v140=87.705` is the current confirmed post-refresh best; adaptive template racing survived the refresh better than the exact `v123`, terminal wording, and old `0.978` boundary reruns.
-- `v142_v140_template_race_rerun`, `v143_nikita_ai_security_0011_v20`, and `v144_nikita_rsf985_push` are pending as of 2026-08-12. `v142` samples hosted variance around `v140`; `v143` transfers public Nikita v20 (`89.280` source score); `v144` is a high-risk `REPLAY_SAFE_FRAC=0.985` boundary push from `v143`.
+- `v142_v140_template_race_rerun` completed at `87.705`, matching `v140`; the exact rerun did not provide a better hosted draw.
+- `v143_nikita_ai_security_0011_v20` completed at `82.980`, and `v144_nikita_rsf985_push` completed at `79.425`. The visible public Nikita v20 score did not transfer here, and pushing its `REPLAY_SAFE_FRAC` to `0.985` is negative evidence.
+- `v145_dimong4_v16_exact` and `v146_v140_short_frame_graft` are pending as of 2026-08-13. `v145` is a public Dimong4 v16 exact-style transfer; `v146` grafts only the Dimong4 short frame into the `v140` branch.
+- `v147_v140_three_arm_race` is prepared but not yet submitted because Codex-side Kaggle push was blocked by approval review. It keeps `v140` and adds the Dimong4 short frame as a third classifier arm rather than replacing the slow-row frame outright.
 - `v131_frame_say_ok` and `v132_frame_ok_period` now show `ERROR` under the refreshed submissions table while retaining historical public scores `89.865` and `84.105`. Treat this as leaderboard invalidation / rerun state, not as proof that their source artifacts were invalid.
 - `v125_v123_exact_rerun` scored `89.505`; byte-identical reruns can also land far below the best draw, so reruns are not a reliable standalone improvement mechanism.
 - `v126_v123_rsf976` scored `87.840`; raising `REPLAY_SAFE_FRAC` from `0.975` to `0.976` under the `v123` frame is negative evidence and should not be promoted.
@@ -127,9 +130,9 @@ A refreshed public leaderboard snapshot on 2026-08-12 had `1242` valid-scored te
 
 ### Silver Gap
 
-The active baseline is fundamentally limited by successful single-post candidate count. Under the 2026-08-12 refreshed snapshot, the top-5% boundary is `94.465`, which corresponds to roughly `1050` clean single-post `EXFILTRATION` findings at about `0.09` points each. A safe public Silver buffer likely requires `100+`, or about `1112` successful findings.
+The active baseline is fundamentally limited by successful single-post candidate count. Under the 2026-08-13 refreshed snapshot, the top-5% boundary is `94.465`, which corresponds to roughly `1050` clean single-post `EXFILTRATION` findings at about `0.09` points each. A safe public Silver buffer likely requires `100+`, or about `1112` successful findings.
 
-Candidate count alone used to be all-or-nothing dangerous because replay timeout and hosted variance dominated near the boundary. The 2026-08-05 update changes this: replay timeouts should now preserve accumulated partial score, while attack-generation timeout still fails. This made fast-return static breadth worth probing again, but `v135=56.340` and `v136=61.065` show the simple static bank is not enough. The current highest-value information comes from `v142` through `v144`, which test whether the `v140` template-race lineage or public Nikita v20 branch can recover enough post-refresh throughput.
+Candidate count alone used to be all-or-nothing dangerous because replay timeout and hosted variance dominated near the boundary. The 2026-08-05 update changes this: replay timeouts should now preserve accumulated partial score, while attack-generation timeout still fails. This made fast-return static breadth worth probing again, but `v135=56.340` and `v136=61.065` show the simple static bank is not enough. The current highest-value information comes from public high-score transfers and narrow grafts around the `v140` template-race lineage, especially whether Dimong4's short Harmony frame helps as an exact branch, a direct replacement, or a conditional third arm.
 
 Secondary directions are:
 
@@ -152,7 +155,7 @@ The preferred next approach is controlled optimization around `v110` plus target
 5. Treat `v113` as evidence that `SPLIT_CLASSIFY_N=5` is worse than `6`; keep `6`.
 6. Treat `v115` and `v118` as evidence against `REPLAY_SAFE >= 0.982` / `0.99` in this wrapper.
 7. Treat `v125=89.505` and `v126=87.840` as negative evidence for naive rerun-only defense and `REPLAY_SAFE_FRAC=0.976`.
-8. Test only narrow follow-ups around the best refreshed rerun: exact frame preservation, tiny latency-template changes, public-code imports with one portable component at a time, or a single replay-safe boundary knob.
+8. Test only narrow follow-ups around the best refreshed rerun: exact frame preservation, tiny latency-template changes, public-code imports with one portable component at a time, or a conditional template arm.
 9. Archive and inspect newly public code above `90` when available; exact-port only the best-scoring version, not the latest source by title.
 10. Keep all-latency or conservatively charged replay sizing. Avoid successful-only latency sizing unless a separate hard replay clamp is added.
 
@@ -316,7 +319,7 @@ Current confirmed pre-refresh public LB best is `v123_v121_exact_rerun` with `91
 
 Recent high-score evidence: `v106` successfully transferred the Kaiwalya v9 `SECRET_MARKER` live validation-fill family; `v110` improved it by changing only `SPLIT_CLASSIFY_N=8 -> 6`; `v119` improved over `v110` by changing only the `FRAME_TEMPLATE` to the verbose Harmony-close frame from `nctuan/jed-v25`; `v120` added `REPLAY_SAFE_FRAC=0.975`; `v121` exact-reran `v120` into the old public Silver zone; `v122` showed `REPLAY_SAFE_FRAC=0.978` can also score above `91`; and `v123` exact-reran the same attack to `91.890`. `v124=80.775` is negative evidence for removing the final-answer sentence from the slow-row frame. Current submissions use `-f submission.csv` for Kaggle code submission, while the notebook still emits `/kaggle/working/attack.py`.
 
-Post-refresh submissions: `v135_static_breadth1800_partial` scored `56.340`, and `v136_static_breadth1200_safe` scored `61.065`. These intentionally simple no-interact static banks show that replay-timeout partial credit exists, but the static bank's per-candidate success rate / per-model balance is not enough by itself. The controlled 2026-08-11 reruns returned `v137=85.590`, `v138=86.130`, `v139=71.910`, `v140=87.705`, and `v141=75.960`; the template-race branch is the strongest confirmed post-refresh line. On 2026-08-12 we submitted `v142` as a `v140` exact rerun, `v143` as a close transfer of public Nikita v20 (`89.280` source public), and `v144` as a high-risk Nikita `REPLAY_SAFE_FRAC=0.985` boundary push.
+Post-refresh submissions: `v135_static_breadth1800_partial` scored `56.340`, and `v136_static_breadth1200_safe` scored `61.065`. These intentionally simple no-interact static banks show that replay-timeout partial credit exists, but the static bank's per-candidate success rate / per-model balance is not enough by itself. The controlled 2026-08-11 reruns returned `v137=85.590`, `v138=86.130`, `v139=71.910`, `v140=87.705`, and `v141=75.960`; the template-race branch is the strongest confirmed post-refresh line. On 2026-08-12 / 2026-08-13, `v142` matched `v140` at `87.705`, while public Nikita transfers `v143=82.980` and `v144=79.425` underperformed. Current pending probes are `v145` Dimong4 v16 exact-style transfer and `v146` short-frame graft; `v147` is prepared as a three-arm conditional template race.
 
 On 2026-06-20, `v020_static625_short_direct` and `v021_static700_short_direct` completed with blank public scores, so the earlier static short-direct interpretation of public `agi-ai-agent-security` should be treated as stale. Pulling the actual Kaggle kernel revealed that the public high-score notebook is `V26`: `208` candidates, each with `web.search` followed by two short `POST ... body=TOKEN=admin123` messages.
 
@@ -647,7 +650,7 @@ Current pause condition:
 - The `nctuan` verbose Harmony-close frame is promoted after `v119=88.965`, `v120=89.640`, `v121=91.260`, `v122=91.170`, and `v123=91.890`.
 - Do not remove `Then answer OK only.` from the slow-row frame; `v124=80.775` is strong negative evidence for that frame-short mechanism.
 - Treat `REPLAY_SAFE_FRAC=0.975` and `0.978` as viable with this frame; `0.982` and `0.99` remain outside the current safe envelope.
-- The 2026-08-12 refreshed public leaderboard snapshot has `1242` valid-scored teams, top-5% rank `63`, and top-5% score `94.465`; `v140=87.705` is the current confirmed post-refresh best and remains outside public Silver.
+- The 2026-08-13 refreshed public leaderboard snapshot has `1312` valid-scored teams, top-5% rank `66`, and top-5% score `94.465`; `v140/v142=87.705` is the current confirmed post-refresh best and remains outside public Silver.
 - `v135=56.340` and `v136=61.065` are negative evidence for raw static breadth. The next serious attempts should recover live validation-fill / per-model template quality rather than only increasing candidate count.
 - Treat exact public JED `0.99` (`v091=73.935`) and two-probe `0.99` (`v118` blank) as too close to the hosted boundary for our wrapper, even when public notebooks report higher scores.
 - Treat `v089/v090` blank scores as negative evidence for successful-only latency sizing and larger raw-weighted template banks.
