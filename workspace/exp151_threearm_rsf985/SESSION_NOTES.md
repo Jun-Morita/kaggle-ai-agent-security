@@ -50,5 +50,16 @@ Everything else (the 2+2+2 three-arm classifier, `SPLIT_CLASSIFY_N=6`,
   `junichiromorita/ai-agent-security-v151-threearm-rsf985`, kernel completed
   (`KernelWorkerStatus.COMPLETE`), hosted `attack.py` verified to contain
   `REPLAY_SAFE_FRAC = 0.985`, submitted to the competition (submission
-  description "v151 three-arm classifier x replay-safe-frac 0.985"). Public
-  score pending as of end of day 2026-08-18.
+  description "v151 three-arm classifier x replay-safe-frac 0.985").
+
+## Result (2026-08-19)
+
+Public `87.885`. This lands between `v147=87.930` and just below
+`v148=88.245` -- **the "readout" expectation of additive stacking did not
+hold.** The two levers do not combine cleanly; most likely the three-arm
+classifier's extra probe candidates (2+2+2 vs `v148`'s implicit two-arm
+race) eat into the tighter `REPLAY_SAFE_FRAC=0.985` fill budget differently
+than either lever does alone. Conclusion: keep `v148`'s simpler base as the
+current best; do not promote `v151`. Future combination attempts should
+budget the classifier probes and the replay-safe margin together rather
+than assuming independence.

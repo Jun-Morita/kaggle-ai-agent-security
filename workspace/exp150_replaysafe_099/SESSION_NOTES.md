@@ -45,7 +45,9 @@ Everything else unchanged.
   The GPU worker queue was congested (only 2 concurrent GPU kernel sessions
   allowed account-wide); after ~50 minutes still `KernelWorkerStatus.QUEUED`,
   the polling wait was cancelled by user request, and the kernel itself
-  transitioned to `KernelWorkerStatus.CANCEL_ACKNOWLEDGED`. **Not submitted
-  to the competition** -- the kernel never reached `COMPLETE`, so no
-  `submission.csv` was ever produced or uploaded. Re-push and retry on a
-  future session when the GPU queue is less congested.
+  transitioned to `KernelWorkerStatus.CANCEL_ACKNOWLEDGED`. Not submitted
+  that day.
+- 2026-08-19: re-pushed (kernel version 2). The queue was clear this time;
+  it went `RUNNING` -> `COMPLETE` in under a minute. Hosted `attack.py`
+  verified to contain `REPLAY_SAFE_FRAC = 0.99`. Submitted to the
+  competition. Public score pending as of this writing.
