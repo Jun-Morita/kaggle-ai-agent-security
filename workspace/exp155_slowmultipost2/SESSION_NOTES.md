@@ -65,5 +65,15 @@ Everything else (`REPLAY_SAFE_FRAC=0.985`, `SPLIT_CLASSIFY_N=6`,
 ## Submission
 
 - 2026-08-19: pushed to Kaggle as
-  `junichiromorita/ai-agent-security-v155-slowmultipost2`, submitted. Public
-  score pending as of this writing.
+  `junichiromorita/ai-agent-security-v155-slowmultipost2`, submitted.
+
+## Result (2026-08-20)
+
+Public `81.365`. Regressed below `v148=88.245`. Combined with `v152`'s
+similar collapse for a different compound-instruction shape, this is now
+the second piece of evidence that asking the model to perform two actions
+in one message reliably costs more fire-rate than the extra
+severity/amortization gains it. Retired; keep `SLOW_MULTIPOST_N=1`. See
+`exp156_confdeputy_compound/SESSION_NOTES.md` for the follow-up test of
+whether this compound-instruction penalty applies even to a fully benign
+second action (clean `email.send`, no dangerous content).

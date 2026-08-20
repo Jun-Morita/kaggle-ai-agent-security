@@ -70,5 +70,13 @@ value used in `v111`. Everything else (`REPLAY_SAFE_FRAC=0.985`,
 ## Submission
 
 - 2026-08-19: pushed to Kaggle as
-  `junichiromorita/ai-agent-security-v154-probehops1`, submitted. Public
-  score pending as of this writing.
+  `junichiromorita/ai-agent-security-v154-probehops1`, submitted.
+
+## Result (2026-08-20)
+
+Public `77.580`. Regressed below `v148=88.245`. The post-refresh
+softened-timeout-penalty theory did not rescue this knob: the 1-hop probe's
+fire prediction apparently diverges enough from the real hops=8 replay
+outcome that `REPLAY_SAFE_SIZING`'s `REPLAY_COST_COEF=1.8` calibration
+either over- or under-charges in practice, producing a worse net outcome
+than the proven `PROBE_HOPS=0` baseline. Retired; keep `PROBE_HOPS=0`.

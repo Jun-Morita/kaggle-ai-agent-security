@@ -50,4 +50,12 @@ Everything else unchanged.
 - 2026-08-19: re-pushed (kernel version 2). The queue was clear this time;
   it went `RUNNING` -> `COMPLETE` in under a minute. Hosted `attack.py`
   verified to contain `REPLAY_SAFE_FRAC = 0.99`. Submitted to the
-  competition. Public score pending as of this writing.
+  competition.
+
+## Result (2026-08-20)
+
+Public `76.815`. Regressed well below `v148=88.245`. Confirms `0.985` sits
+at or past the local optimum for this frame -- pushing further overshoots
+into replay-side failure faster than it gains from fill-side throughput.
+Conclusion: do not push `REPLAY_SAFE_FRAC` past `0.985` for this template
+family; treat `0.985` as the current ceiling.
