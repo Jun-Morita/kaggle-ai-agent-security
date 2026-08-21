@@ -74,4 +74,8 @@ live-fill-and-verify loop structure) is unchanged from `v148`.
 
 ## Submission
 
-- Pending user confirmation before Kaggle push (external/visible action).
+- Submitted 2026-08-20 as ref `55647219`.
+- Result checked 2026-08-21: public `20.715`.
+- Readout: CONFUSED_DEPUTY can score, but its public value / throughput is far
+  too low to compete with the `v148=88.245` EXFILTRATION baseline. Keep this
+  family only as a diagnostic or private-risk hedge.

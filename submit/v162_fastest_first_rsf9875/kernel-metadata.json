@@ -1,0 +1,18 @@
+{
+  "id": "junichiromorita/ai-agent-security-v162-fastfirst-rsf9875",
+  "title": "ai-agent-security-v162-fastfirst-rsf9875",
+  "code_file": "ai-agent-security-solution-v9.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "competition_sources": [
+    "ai-agent-security-multi-step-tool-attacks"
+  ],
+  "model_sources": [],
+  "machine_shape": "NvidiaTeslaT4"
+}

@@ -2,11 +2,11 @@
 
 ## Context
 
-Follow-up to `exp156_confdeputy_compound`/`exp157_confdeputy_only` (both
-submitted 2026-08-20, still `SubmissionStatus.PENDING`). User asked to
-reconsider approaches toward the Silver medal zone; two candidate levers were
-proposed and both were checked against the downloaded SDK source before
-committing engineering time:
+Follow-up to `exp156_confdeputy_compound`/`exp157_confdeputy_only`, both
+submitted 2026-08-20 and scored by 2026-08-21 (`v156=49.390`,
+`v157=20.715`). At design time the user asked to reconsider approaches toward
+the Silver medal zone; two candidate levers were proposed and both were checked
+against the downloaded SDK source before committing engineering time:
 
 1. **URL-domain diversification** -- checked `aicomp_sdk/core/cells.py`:
    `_bucket_url()` already returns the full host, and the existing
@@ -111,4 +111,8 @@ Fork of `v157_confdeputy_only`:
 
 ## Submission
 
-- Pending user confirmation to push to Kaggle.
+- Submitted 2026-08-20 as ref `55647543`.
+- Result checked 2026-08-21: complete with blank public score.
+- Readout: negative. The two-turn warm-up structure did not produce a usable
+  score under hosted replay. Retire this shape for now; the extra interaction
+  cost is not justified without new public evidence.

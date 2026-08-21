@@ -118,4 +118,9 @@ guardrail-confirmed blocked).
 
 ## Submission
 
-- Pending user confirmation before Kaggle push (external/visible action).
+- Submitted 2026-08-20 as ref `55647215`.
+- Result checked 2026-08-21: public `49.390`.
+- Readout: negative. The source-level predicate analysis was correct, but the
+  one-message compound `http.post` + clean notify-email shape collapses far
+  below `v148=88.245`. Retire compound predicate stacking as a public-score
+  path unless new public evidence shows a materially different construction.
