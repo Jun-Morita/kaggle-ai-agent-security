@@ -28,4 +28,6 @@ The current best family has material hosted variance. A byte-equivalent rerun of
 - Submitted 2026-08-21.
 - Kernel: `junichiromorita/ai-agent-security-v161-v148-exact-rerun` v1
 - Submission ref: `55669672`
-- Status at submission time: `PENDING`
+- Result: complete, public `80.370` as of 2026-08-22
+- Readout: byte-equivalent rerun landed far below `v148=88.245`; rerun-only is
+  not a reliable Silver path.

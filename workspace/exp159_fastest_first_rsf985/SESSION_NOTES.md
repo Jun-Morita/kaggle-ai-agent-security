@@ -39,4 +39,6 @@ is a cheap, local optimization surface.
 - Submitted 2026-08-21.
 - Kernel: `junichiromorita/ai-agent-security-v159-fastest-first-rsf985` v1
 - Submission ref: `55669483`
-- Status at submission time: `PENDING`
+- Result: complete, public `87.570` as of 2026-08-22
+- Readout: fastest-first ordering did not improve over `v148=88.245`; live
+  elapsed sorting is not a reliable replay-value proxy.

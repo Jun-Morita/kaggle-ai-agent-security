@@ -178,7 +178,7 @@ The preferred next approach is controlled optimization around `v110` plus target
 8. Return to the `v148` family for public-score attempts. Do not add second actions or extra turns unless a new public notebook proves a different construction.
 9. Archive and inspect newly public code above `90` when available; exact-port only the best-scoring version, not the latest source by title, and SHA-256-diff it against prior submissions before spending a slot.
 10. Optimize the leading scored slice: discussion reports suggest very large returned sets may only have the first `200-250` candidates effectively scored, so candidate ordering and early-branch reliability matter more than blind count increases.
-11. Submitted next candidates: `v159_fastest_first_rsf985` (ref `55669483`) sorts `v148`'s returned fired candidates by measured live elapsed time; `v160_probe_only_fastest_first` (ref `55669526`) additionally excludes classifier probes from the returned list; `v161_v148_exact_rerun` (ref `55669672`) samples hosted variance with a byte-equivalent best rerun; `v162_fastest_first_rsf9875` (ref `55669708`) adds a midpoint `REPLAY_SAFE_FRAC=0.9875` push. All are pending.
+11. `v159=87.570`, `v160=87.885`, `v161=80.370`, and `v162=78.795` all landed below `v148=88.245`; fastest-first ordering, probe-only prefixes, exact rerun-only, and `REPLAY_SAFE_FRAC=0.9875` are not reliable Silver paths. `v163_fastfirst_terminal_short` (ref `55679512`) remains pending and tests a one-line terminal wording shrink.
 
 The main lever is throughput, not payload novelty. Literal `SECRET_MARKER`, compact `.co` hosts, a short one-message candidate, and strict replay cost control remain the strongest confirmed combination.
 

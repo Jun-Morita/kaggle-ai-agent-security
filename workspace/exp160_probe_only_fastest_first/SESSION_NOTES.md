@@ -40,4 +40,6 @@ budget but keep the replay list as homogeneous and low-latency as possible.
 - Submitted 2026-08-21.
 - Kernel: `junichiromorita/ai-agent-security-v160-probe-only-fastfirst` v1
 - Submission ref: `55669526`
-- Status at submission time: `PENDING`
+- Result: complete, public `87.885` as of 2026-08-22
+- Readout: probe-only fastest-first stayed below `v148=88.245`; classification
+  probes are not the binding issue.

@@ -30,4 +30,6 @@ while preserving enough prefix quality under partial replay scoring.
 - Submitted 2026-08-21.
 - Kernel: `junichiromorita/ai-agent-security-v162-fastfirst-rsf9875` v1
 - Submission ref: `55669708`
-- Status at submission time: `PENDING`
+- Result: complete, public `78.795` as of 2026-08-22
+- Readout: midpoint `REPLAY_SAFE_FRAC=0.9875` regressed badly; do not push
+  beyond `0.985` in this family.
