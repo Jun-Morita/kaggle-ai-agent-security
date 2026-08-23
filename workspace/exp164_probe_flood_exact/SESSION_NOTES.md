@@ -35,4 +35,12 @@ post-`v159` negative results.
 - Submitted 2026-08-22.
 - Kaggle kernel: `junichiromorita/ai-agent-security-v164-probe-flood-exact` v1
 - Competition submission ref: `55684830`
-- Status: pending as of 2026-08-22 15:23 JST
+- Status: complete as of 2026-08-23
+- Public LB: `88.830`
+
+## Readout
+
+- The public `probe-and-flood-strategy` source transferred, and slightly exceeded
+  its checked source score `88.695`.
+- It did not beat `v163=88.920`, so the current best remains the
+  fastest-first terminal-compactness branch.

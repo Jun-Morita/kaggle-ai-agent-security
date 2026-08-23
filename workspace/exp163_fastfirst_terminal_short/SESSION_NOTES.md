@@ -33,4 +33,12 @@ only the terminal answer instruction.
 - Submitted 2026-08-22.
 - Kernel: `junichiromorita/ai-agent-security-v163-fastfirst-terminal-short` v1
 - Submission ref: `55679512`
-- Status at submission time: `PENDING`
+- Status: complete as of 2026-08-22
+- Public LB: `88.920`
+
+## Readout
+
+- New confirmed post-refresh best, improving over `v148=88.245` by `+0.675`.
+- Compact terminal wording is a real positive lever.
+- The result is still below the 2026-08-22 public top-10% boundary `89.550` by
+  `0.630` and below the top-5% boundary `91.710` by `2.790`.

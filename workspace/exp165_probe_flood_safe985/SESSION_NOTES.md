@@ -31,4 +31,13 @@ structure while avoiding the replay-safe overshoot.
 - Submitted 2026-08-22.
 - Kaggle kernel: `junichiromorita/ai-agent-security-v165-probe-flood-safe985` v1
 - Competition submission ref: `55684828`
-- Status: pending as of 2026-08-22 15:23 JST
+- Status: complete as of 2026-08-23
+- Public LB: `87.255`
+
+## Readout
+
+- Lowering `REPLAY_SAFE_FRAC` from `0.99` to `0.985` hurt this public
+  probe/flood source.
+- This is additional evidence that replay-safe knobs are source-family-specific;
+  do not blindly apply the `v163` / `v148` safety setting to every public
+  transfer.
