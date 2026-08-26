@@ -3,9 +3,9 @@
 ## Hypothesis
 
 `v169_replay_costcoef095` improved the `Then say OK.` anchor to public `89.685`.
-The current top-10% boundary moved to `89.830`, so a small additional candidate
-count increase may be enough to recover the medal boundary. This experiment keeps
-the proven `v169` shape and pushes replay-cost optimism one rung further.
+The top-10% boundary had moved slightly above it, so a small additional candidate
+count increase looked worth testing. This experiment kept the proven `v169` shape
+and pushed replay-cost optimism one rung further.
 
 ## Base
 
@@ -39,6 +39,14 @@ the proven `v169` shape and pushes replay-cost optimism one rung further.
 - Kernel: `junichiromorita/ai-agent-security-v173-thenok-costcoef0925`.
 - Version 1 status: pushed, stayed `QUEUED` too long, then stopped.
 - Version 1 final status after stop: `CANCEL_ACKNOWLEDGED`.
-- Version 2 status: re-pushed, still `QUEUED` after polling.
-- Competition submission: not submitted yet because `submission.csv` output is
-  unavailable until the kernel completes.
+- Version 2 status: completed and produced `attack.py` / `submission.csv`.
+- Competition submission ref: `55769486`
+- Status: complete as of 2026-08-26.
+- Public score: `72.135`
+
+## Result
+
+This is strong negative evidence. `REPLAY_COST_COEF=0.925` underperformed the
+current best `v169=89.685` by a wide margin, so further cost-coefficient
+aggression should be retired unless a new public Code lead shows a different
+safe envelope.
