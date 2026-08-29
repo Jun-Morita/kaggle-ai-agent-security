@@ -97,11 +97,11 @@ Important knowledge files:
 
 ## Silver Strategy Snapshot
 
-Last updated: 2026-08-26.
+Last updated: 2026-08-27.
 
 The 2026-08-05 evaluator / leaderboard refresh is a new scoring regime. Old and new public scores are not directly comparable. Historical best `v123_v121_exact_rerun=91.890` remains useful pre-refresh evidence, but the current confirmed post-refresh best is `v169_replay_costcoef095=89.685` (2026-08-23). It improves over `v163_fastfirst_terminal_short=88.920` by keeping the same `Then say OK.` terminal wording and changing only `REPLAY_COST_COEF=1.0 -> 0.95`.
 
-A refreshed public leaderboard snapshot on 2026-08-26 had `4086` valid-scored teams. Our team is rank `447` at score `89.685`; the top-5% public Silver proxy is rank `204` at score `92.475`, and the top-10% boundary is rank `408` at `89.945`. The active gap to top-10% is `+0.260`; the active gap to public Silver/top-5% is `+2.790`, roughly equivalent to `31` more successful single-post `EXFILTRATION` findings at about `0.09` points per firing candidate.
+A refreshed public leaderboard snapshot on 2026-08-27 had `4132` scored teams. Our team is rank `466` at score `89.685`; the top-5% public Silver proxy is rank `207` at score `92.955`, and the top-10% boundary is rank `414` at `90.135`. The active gap to top-10% is `+0.450`; the active gap to public Silver/top-5% is `+3.270`, roughly equivalent to `37` more successful single-post `EXFILTRATION` findings at about `0.09` points per firing candidate.
 
 ### What Is Confirmed
 
@@ -110,7 +110,10 @@ A refreshed public leaderboard snapshot on 2026-08-26 had `4086` valid-scored te
 - `v171_sayok_router` scored `88.695`, negative evidence for adaptive terminal routing. Spreading the six probe budget across `Say OK.` / `Then say OK.` variants underperformed the static `v166` and replay-cost `v169`.
 - `v172_sayok_costcoef095=64.350` and `v174_sayok_costcoef0925=77.895` are strong negative evidence. The `Say OK.` terminal wording can work by itself (`v166=89.235`), but combining it with replay-cost optimism collapses the branch.
 - `v173_thenok_costcoef0925=72.135`, `v175_v169_exact_rerun=73.620`, and `v178_replay_costcoef0975_fixed=88.785` all underperformed `v169=89.685`. The `REPLAY_COST_COEF=0.925/0.975` rungs and one exact rerun did not produce the needed upper-tail draw.
-- `v181_v169_exact_cpu_rerun`, `v182_deputy_tail_cpu_hedge`, `v183_v166_exact_cpu_rerun`, and `v184_deputy_tail40_cpu_hedge` are pending as of 2026-08-26. These were submitted as CPU kernels after the GPU-output kernels `v179` / `v180` stayed queued and were cancelled.
+- `v181_v169_exact_cpu_rerun=82.800` and `v183_v166_exact_cpu_rerun=82.830` show that CPU exact reruns did not repeat the upper-tail results from `v169` or `v166`; rerun-only is not a public-score strategy.
+- `v182_deputy_tail_cpu_hedge=81.195` and `v184_deputy_tail40_cpu_hedge=84.480` show that 160- and 40-candidate `CONFUSED_DEPUTY` tails consume too much public replay capacity. Keep any private hedge very small.
+- `v185_mixed_anchor_frontload=87.975` shows that front-loading a mixed portfolio of terminal anchors does not improve over the single `Then say OK.` branch.
+- `v186`-`v189` were submitted on 2026-08-27 after CPU-kernel output verification: narrow `REPLAY_COST_COEF` rungs (`0.945`, `0.955`), an isolated `Say OK.` anchor at `0.95`, and a 10-candidate deputy hedge. They are pending.
 - `v176_v169_exact_rerun2` and `v177_replay_costcoef0975` completed with blank public scores because their hosted outputs lacked `attack.py`. This was caused by losing the notebook first-cell `%%writefile /kaggle/working/attack.py` wrapper during local sync, so neither attack idea was actually evaluated.
 - `v123_v121_exact_rerun` scored `91.890`, the best pre-refresh repo score. It is byte-identical to `v120` / `v121`, reinforcing that hosted variance is large enough to matter at the boundary.
 - `v135_static_breadth1800_partial` completed at `56.340`, and `v136_static_breadth1200_safe` completed at `61.065`. The no-interact static banks receive partial score, but simple static breadth is far below the old live-fill family and not competitive for Silver.
@@ -157,7 +160,7 @@ A refreshed public leaderboard snapshot on 2026-08-26 had `4086` valid-scored te
 
 ### Silver Gap
 
-The active baseline is fundamentally limited by successful single-post candidate count. Under the 2026-08-26 refreshed snapshot (`4086` teams), the top-5% boundary is `92.475` at rank `204`, which is `+2.790` above the confirmed best `v169=89.685` -- roughly `31` more successful single-post `EXFILTRATION` findings at about `0.09` points each. Top-10% is closer at `89.945`, `+0.260` above `v169`. A safe public medal buffer still likely requires several additional points because the leaderboard is moving.
+The active baseline is fundamentally limited by successful single-post candidate count. Under the 2026-08-27 refreshed snapshot (`4132` teams), the top-5% boundary is `92.955` at rank `207`, which is `+3.270` above the confirmed best `v169=89.685` -- roughly `37` more successful single-post `EXFILTRATION` findings at about `0.09` points each. Top-10% is `90.135`, `+0.450` above `v169`. A safe public medal buffer still likely requires several additional points because the leaderboard is moving.
 
 Candidate count alone used to be all-or-nothing dangerous because replay timeout and hosted variance dominated near the boundary. The 2026-08-05 update changes this: replay timeouts should now preserve accumulated partial score, while attack-generation timeout still fails. This made fast-return static breadth worth probing again, but `v135=56.340` and `v136=61.065` show the simple static bank is not enough. The current positive path is narrow: compact terminal wording (`v166=89.235`) and mildly optimistic replay-cost sizing (`v169=89.685`). `v171=88.695` shows adaptive terminal routing is not worth the probe-budget spread in the current form; `v172=64.350` and `v174=77.895` show the `Say OK.` wording does not combine with replay-cost aggression; `v173=72.135`, `v175=73.620`, and `v178=88.785` show yesterday's cost-coefficient / rerun attempts also failed to beat `v169`. `v149=58.585`, `v152=59.190`, `v156=49.390`, and `v158` blank show that multi-predicate / multi-turn constructions are currently losing too much throughput or compliance to help public score.
 
@@ -191,7 +194,8 @@ The preferred next approach is controlled optimization around `v169` plus target
 14. `v169_replay_costcoef095=89.685` is the current confirmed post-refresh best. It keeps the proven `v163` wording and changes only `REPLAY_COST_COEF=1.0 -> 0.95`.
 15. `v172_sayok_costcoef095=64.350` and `v174_sayok_costcoef0925=77.895` show the `Say OK.` anchor is fragile when combined with replay-cost optimism. Do not continue this branch without a new independent reason.
 16. `v173_thenok_costcoef0925=72.135`, `v175_v169_exact_rerun=73.620`, and `v178_replay_costcoef0975_fixed=88.785` failed to beat `v169`; retire further cost-coefficient tuning unless a new public Code lead proves a different envelope.
-17. `v181_v169_exact_cpu_rerun`, `v182_deputy_tail_cpu_hedge`, `v183_v166_exact_cpu_rerun`, and `v184_deputy_tail40_cpu_hedge` are pending as of 2026-08-26. `v181` / `v183` sample hosted variance from two strong anchors; `v182` / `v184` test separate `CONFUSED_DEPUTY` tails as private shake-down hedges.
+17. `v181=82.800`, `v182=81.195`, `v183=82.830`, `v184=84.480`, and `v185=87.975` retire rerun-only, broad deputy-tail, and mixed-anchor-frontload variants as public-score paths.
+18. `v186`-`v189` are the active 2026-08-27 controlled set: cost-estimate neighbours `0.945` / `0.955`, isolated `Say OK.` at `0.95`, and a 10-candidate private hedge. Promote only a result above `v169=89.685`.
 
 The main lever is throughput, not payload novelty. Literal `SECRET_MARKER`, compact `.co` hosts, a short one-message candidate, and strict replay cost control remain the strongest confirmed combination.
 

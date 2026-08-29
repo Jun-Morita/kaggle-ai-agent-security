@@ -1,0 +1,15 @@
+{
+  "id": "junichiromorita/ai-agent-security-v194-slowrow-multipost2",
+  "title": "ai-agent-security-v194-slowrow-multipost2",
+  "code_file": "ai-agent-security-solution-v9.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_internet": false,
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "competition_sources": [
+    "ai-agent-security-multi-step-tool-attacks"
+  ]
+}
