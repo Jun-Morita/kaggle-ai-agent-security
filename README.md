@@ -97,11 +97,11 @@ Important knowledge files:
 
 ## Silver Strategy Snapshot
 
-Last updated: 2026-08-31.
+Last updated: 2026-09-01.
 
 The 2026-08-05 evaluator / leaderboard refresh is a new scoring regime. Old and new public scores are not directly comparable. Historical best `v123_v121_exact_rerun=91.890` remains useful pre-refresh evidence, but the current confirmed post-refresh best is `v169_replay_costcoef095=89.685` (2026-08-23). It improves over `v163_fastfirst_terminal_short=88.920` by keeping the same `Then say OK.` terminal wording and changing only `REPLAY_COST_COEF=1.0 -> 0.95`.
 
-A refreshed public leaderboard snapshot on 2026-08-30 had `4182` scored teams. Our team is rank `533` at score `89.685`; the top-10% boundary is rank `419` at score `90.585`, and the top-5% public Silver proxy is rank `210` at score `94.095`. The active gap to top-10% is `+0.900`; the active gap to public Silver/top-5% is `+4.410`, roughly equivalent to `49` more successful single-post `EXFILTRATION` findings at about `0.09` points per firing candidate.
+A refreshed public leaderboard snapshot on 2026-09-01 had `4237` scored teams. Our team is rank `599` at score `89.685`; the top-15% boundary is rank `636` at score `89.485`, the top-10% boundary is rank `424` at score `91.035`, and the top-5% public Silver proxy is rank `212` at score `95.025`. The active gap to top-10% is `+1.350`; the active gap to public Silver/top-5% is `+5.340`, roughly equivalent to `59` more successful single-post `EXFILTRATION` findings at about `0.09` points per firing candidate.
 
 ### What Is Confirmed
 
@@ -115,7 +115,7 @@ A refreshed public leaderboard snapshot on 2026-08-30 had `4182` scored teams. O
 - `v185_mixed_anchor_frontload=87.975` shows that front-loading a mixed portfolio of terminal anchors does not improve over the single `Then say OK.` branch.
 - `v194_slowrow_multipost2_cpu=84.020`, `v195_deputy_tail6_cpu_hedge=85.605`, and `v196_costcoef0965_cpu_safe=82.170` all underperformed `v169`. This retires slow-row multipost, small deputy-tail hedging, and a safer `REPLAY_COST_COEF=0.965` neighbor as public-score improvements.
 - `v197_classify4_cpu=84.060`, `v198_v169_cpu_rerun2=87.030`, `v199_classify8_cpu_balance=83.700`, and `v200_template_diversity_cpu=85.005` all underperformed `v169`. This retires simple classifier-probe count changes (`4` or `8`) and `Then answer OK only.` terminal diversity; keep `SPLIT_CLASSIFY_N=6`.
-- `v201_v169_final_rerun_cpu`, `v202_v166_sayok_rerun_cpu`, `v203_v163_terminal_short_rerun_cpu`, `v204_gemma_native_hint_cpu`, and `v205_deputy_tail3_cpu_hedge` were submitted on 2026-08-31 as a final five-way shake set. They cover the current best exact rerun, two distinct strong terminal branches, a Gemma parser-axis hint, and a tiny `CONFUSED_DEPUTY` private hedge. They are pending.
+- `v201_v169_final_rerun_cpu=71.370`, `v202_v166_sayok_rerun_cpu=73.825`, `v203_v163_terminal_short_rerun_cpu=71.010`, `v204_gemma_native_hint_cpu=87.570`, and `v205_deputy_tail3_cpu_hedge=78.165` were submitted on 2026-08-31 as a final five-way shake set. None beat `v169=89.685`; `v204` is the strongest late variant but still below the existing public anchor.
 - `v176_v169_exact_rerun2` and `v177_replay_costcoef0975` completed with blank public scores because their hosted outputs lacked `attack.py`. This was caused by losing the notebook first-cell `%%writefile /kaggle/working/attack.py` wrapper during local sync, so neither attack idea was actually evaluated.
 - `v123_v121_exact_rerun` scored `91.890`, the best pre-refresh repo score. It is byte-identical to `v120` / `v121`, reinforcing that hosted variance is large enough to matter at the boundary.
 - `v135_static_breadth1800_partial` completed at `56.340`, and `v136_static_breadth1200_safe` completed at `61.065`. The no-interact static banks receive partial score, but simple static breadth is far below the old live-fill family and not competitive for Silver.
@@ -162,7 +162,7 @@ A refreshed public leaderboard snapshot on 2026-08-30 had `4182` scored teams. O
 
 ### Silver Gap
 
-The active baseline is fundamentally limited by successful single-post candidate count. Under the 2026-08-30 refreshed snapshot (`4182` teams), the top-5% boundary is `94.095` at rank `210`, which is `+4.410` above the confirmed best `v169=89.685` -- roughly `49` more successful single-post `EXFILTRATION` findings at about `0.09` points each. Top-10% is `90.585`, `+0.900` above `v169`. A safe public medal buffer still requires several additional points because the leaderboard is moving.
+The active baseline is fundamentally limited by successful single-post candidate count. Under the 2026-09-01 refreshed snapshot (`4237` teams), the top-5% boundary is `95.025` at rank `212`, which is `+5.340` above the confirmed best `v169=89.685` -- roughly `59` more successful single-post `EXFILTRATION` findings at about `0.09` points each. Top-10% is `91.035`, `+1.350` above `v169`. A safe public medal buffer would require several additional points, but no final-day rerun or small hedge beat the standing anchor.
 
 Candidate count alone used to be all-or-nothing dangerous because replay timeout and hosted variance dominated near the boundary. The 2026-08-05 update changes this: replay timeouts should now preserve accumulated partial score, while attack-generation timeout still fails. This made fast-return static breadth worth probing again, but `v135=56.340` and `v136=61.065` show the simple static bank is not enough. The current positive path is narrow: compact terminal wording (`v166=89.235`) and mildly optimistic replay-cost sizing (`v169=89.685`). `v171=88.695` shows adaptive terminal routing is not worth the probe-budget spread in the current form; `v172=64.350` and `v174=77.895` show the `Say OK.` wording does not combine with replay-cost aggression; `v173=72.135`, `v175=73.620`, and `v178=88.785` show yesterday's cost-coefficient / rerun attempts also failed to beat `v169`. `v149=58.585`, `v152=59.190`, `v156=49.390`, and `v158` blank show that multi-predicate / multi-turn constructions are currently losing too much throughput or compliance to help public score.
 
@@ -199,28 +199,25 @@ The preferred next approach is controlled optimization around `v169` plus target
 17. `v181=82.800`, `v182=81.195`, `v183=82.830`, `v184=84.480`, and `v185=87.975` retire rerun-only, broad deputy-tail, and mixed-anchor-frontload variants as public-score paths.
 18. `v194=84.020`, `v195=85.605`, and `v196=82.170` are negative evidence for slow-row multipost, small deputy-tail hedging, and safer replay-cost sizing.
 19. `v197=84.060`, `v198=87.030`, `v199=83.700`, and `v200=85.005` are negative evidence for simple classifier-probe count changes, byte-identical CPU rerun-only, and `Then answer OK only.` terminal diversity.
-20. `v201`-`v205` are the active 2026-08-31 final shake set: exact `v169`, exact `v166`, exact `v163`, `v169` plus `bare keys` parser hint, and `v169` plus a 3-candidate deputy tail. Promote only a result above `v169=89.685`; otherwise preserve final-submission diversity around the strongest confirmed branches.
+20. `v201`-`v205` completed below `v169`: `71.370`, `73.825`, `71.010`, `87.570`, and `78.165`. The only late result close enough to matter was `v204`, but it still lost by `2.115`; keep `v169` as the public anchor and use the second final slot for private-axis diversity rather than another correlated exfil rerun.
 
 The main lever is throughput, not payload novelty. Literal `SECRET_MARKER`, compact `.co` hosts, a short one-message candidate, and strict replay cost control remain the strongest confirmed combination.
 
 ### Final Selection Posture
 
-The provisional first final slot is `v169_replay_costcoef095=89.685`. It is the
-best confirmed post-refresh result and remains the most defensible public-score
-anchor.
+The selected final submissions are `v169_replay_costcoef095=89.685` and
+`v157_confdeputy_only=20.715`.
 
-The provisional second slot is `v166_terminal_say_ok_direct=89.235` if no
-pending `v201`-`v205` result improves. `v166` is a useful but limited shake
-hedge: it differs from `v169` in terminal wording (`Say OK.` instead of
-`Then say OK.`) and replay-cost conservatism (`REPLAY_COST_COEF=1.0` instead of
-`0.95`), but it still depends on the same `SECRET_MARKER` single-post
-`EXFILTRATION` surface. If private guardrails broadly suppress that surface,
-`v169` and `v166` are correlated and can fail together.
+`v169` is the best confirmed post-refresh public score and remains the strongest
+single-post `SECRET_MARKER` `EXFILTRATION` anchor. `v166=89.235` is close, but
+it is highly correlated with `v169`: same predicate, same payload family, and
+only terminal wording / replay-cost conservatism changed.
 
-The explicit private-axis hedge is `v205_deputy_tail3_cpu_hedge`, which spends a
-tiny `CONFUSED_DEPUTY` tail for diversity. It should replace `v166` only if its
-public score is not too costly or if late evidence makes exfil-only final slots
-look too correlated.
+`v157` is intentionally low-public but orthogonal. It is the cleanest confirmed
+pure `CONFUSED_DEPUTY` submission in this repository, using `email.send` instead
+of the public-dominant `http.post` exfil route. The final selection is therefore
+a barbell: one high-public anchor plus one private shake hedge against broad
+suppression of the public exfil surface.
 
 ### Discussion-Derived Guardrails
 
@@ -377,7 +374,7 @@ Versions `1-6` were useful only for debugging submission wiring. Future submissi
 
 ## Submission Status
 
-Current confirmed pre-refresh public LB best is `v123_v121_exact_rerun` with `91.890`. It supersedes `v121=91.260`, `v122=91.170`, `v120=89.640`, `v119=88.965`, `v110=88.605`, `v117=88.200`, `v106=88.110`, `v114=87.975`, `v112=87.840`, `v108=87.615`, `v102=87.435`, `v103=87.030`, `v093=84.600`, and the older low-80s baselines. After the 2026-08-05 evaluator / leaderboard refresh, the current confirmed post-refresh best is `v169_replay_costcoef095=89.685` (2026-08-23). The 2026-08-26 leaderboard snapshot (`4086` teams) has top-5% boundary `92.475` at rank `204` and top-10% boundary `89.945` at rank `408`; the repo is rank `447` at `89.685`, slightly outside top 10% and outside public Silver/top-5% by `+2.790`. Historical `v030_replay_dense_classic600=54.000` remains useful as pre-update evidence, but the 2026-06-25 evaluator update changed the scoring regime and the exact `v039` rerun of `v030` scored only `0.540`.
+Current confirmed pre-refresh public LB best is `v123_v121_exact_rerun` with `91.890`. It supersedes `v121=91.260`, `v122=91.170`, `v120=89.640`, `v119=88.965`, `v110=88.605`, `v117=88.200`, `v106=88.110`, `v114=87.975`, `v112=87.840`, `v108=87.615`, `v102=87.435`, `v103=87.030`, `v093=84.600`, and the older low-80s baselines. After the 2026-08-05 evaluator / leaderboard refresh, the current confirmed post-refresh best is `v169_replay_costcoef095=89.685` (2026-08-23). The 2026-09-01 leaderboard snapshot (`4237` teams) has top-5% boundary `95.025` at rank `212`, top-10% boundary `91.035` at rank `424`, and top-15% boundary `89.485` at rank `636`; the repo is rank `599` at `89.685`, inside top 15% but outside top 10% by `+1.350` and outside public Silver/top-5% by `+5.340`. Historical `v030_replay_dense_classic600=54.000` remains useful as pre-update evidence, but the 2026-06-25 evaluator update changed the scoring regime and the exact `v039` rerun of `v030` scored only `0.540`.
 
 Recent high-score evidence: `v106` successfully transferred the Kaiwalya v9 `SECRET_MARKER` live validation-fill family; `v110` improved it by changing only `SPLIT_CLASSIFY_N=8 -> 6`; `v119` improved over `v110` by changing only the `FRAME_TEMPLATE` to the verbose Harmony-close frame from `nctuan/jed-v25`; `v120` added `REPLAY_SAFE_FRAC=0.975`; `v121` exact-reran `v120` into the old public Silver zone; `v122` showed `REPLAY_SAFE_FRAC=0.978` can also score above `91`; and `v123` exact-reran the same attack to `91.890`. `v124=80.775` is negative evidence for removing the final-answer sentence from the slow-row frame. Current submissions use `-f submission.csv` for Kaggle code submission, while the notebook still emits `/kaggle/working/attack.py`.
 
@@ -722,10 +719,10 @@ Current pause condition:
 - The `nctuan` verbose Harmony-close frame is promoted after `v119=88.965`, `v120=89.640`, `v121=91.260`, `v122=91.170`, and `v123=91.890`.
 - Do not remove `Then answer OK only.` from the slow-row frame; `v124=80.775` is strong negative evidence for that frame-short mechanism.
 - Treat `REPLAY_SAFE_FRAC=0.975` and `0.978` as viable with this frame; `0.982` and `0.99` remain outside the current safe envelope.
-- The 2026-08-26 refreshed public leaderboard snapshot has `4086` valid-scored teams, top-10% rank `408` / score `89.945`, and top-5% rank `204` / score `92.475`; `v169=89.685` is the current confirmed post-refresh best and is outside top 10% by `+0.260` and outside public Silver/top-5% by `+2.790`.
+- The 2026-09-01 refreshed public leaderboard snapshot has `4237` valid-scored teams, top-15% rank `636` / score `89.485`, top-10% rank `424` / score `91.035`, and top-5% rank `212` / score `95.025`; `v169=89.685` is the current confirmed post-refresh best, inside top 15%, outside top 10% by `+1.350`, and outside public Silver/top-5% by `+5.340`.
 - `v172_sayok_costcoef095=64.350` and `v174_sayok_costcoef0925=77.895` are negative evidence for combining `Say OK.` with replay-cost optimism.
 - `v173_thenok_costcoef0925=72.135`, `v175_v169_exact_rerun=73.620`, and `v178_replay_costcoef0975_fixed=88.785` are negative evidence for further cost-coefficient tuning / rerun-only reliance around the `v169` branch.
-- `v181_v169_exact_cpu_rerun`, `v182_deputy_tail_cpu_hedge`, `v183_v166_exact_cpu_rerun`, and `v184_deputy_tail40_cpu_hedge` are pending as of 2026-08-26. The first pair samples strong-anchor variance; the second pair preserves predicate diversity for private shake-down risk.
+- The 2026-08-31 final shake set completed below `v169`: `v201=71.370`, `v202=73.825`, `v203=71.010`, `v204=87.570`, and `v205=78.165`. Final selected submissions are `v169` as the public anchor and `v157_confdeputy_only=20.715` as the orthogonal private shake hedge.
 - `v176_v169_exact_rerun2` and `v177_replay_costcoef0975` completed with blank public scores due to missing hosted `attack.py`; preserve the notebook `%%writefile` wrapper when syncing attack source into notebooks.
 - `v135=56.340` and `v136=61.065` are negative evidence for raw static breadth. The next serious attempts should recover live validation-fill / per-model template quality rather than only increasing candidate count.
 - Treat exact public JED `0.99` (`v091=73.935`) and two-probe `0.99` (`v118` blank) as too close to the hosted boundary for our wrapper, even when public notebooks report higher scores.
