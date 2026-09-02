@@ -97,14 +97,20 @@ Important knowledge files:
 
 ## Silver Strategy Snapshot
 
-Last updated: 2026-09-01.
+Last updated: 2026-09-03.
 
-The 2026-08-05 evaluator / leaderboard refresh is a new scoring regime. Old and new public scores are not directly comparable. Historical best `v123_v121_exact_rerun=91.890` remains useful pre-refresh evidence, but the current confirmed post-refresh best is `v169_replay_costcoef095=89.685` (2026-08-23). It improves over `v163_fastfirst_terminal_short=88.920` by keeping the same `Then say OK.` terminal wording and changing only `REPLAY_COST_COEF=1.0 -> 0.95`.
+The final private leaderboard confirmed a Silver medal: rank `132` of `4251`
+teams, private score `20.235`. The final selected submissions were
+`v169_replay_costcoef095` and `v157_confdeputy_only`.
 
-A refreshed public leaderboard snapshot on 2026-09-01 had `4237` scored teams. Our team is rank `599` at score `89.685`; the top-15% boundary is rank `636` at score `89.485`, the top-10% boundary is rank `424` at score `91.035`, and the top-5% public Silver proxy is rank `212` at score `95.025`. The active gap to top-10% is `+1.350`; the active gap to public Silver/top-5% is `+5.340`, roughly equivalent to `59` more successful single-post `EXFILTRATION` findings at about `0.09` points per firing candidate.
+The 2026-08-05 evaluator / leaderboard refresh was a separate scoring regime. Old and new public scores are not directly comparable. Historical best `v123_v121_exact_rerun=91.890` remains useful pre-refresh evidence, but the confirmed post-refresh public best is `v169_replay_costcoef095=89.685` (2026-08-23). It improves over `v163_fastfirst_terminal_short=88.920` by keeping the same `Then say OK.` terminal wording and changing only `REPLAY_COST_COEF=1.0 -> 0.95`.
+
+Before private reveal, a refreshed public leaderboard snapshot on 2026-09-01 had `4237` scored teams. Our team was rank `599` at score `89.685`; the top-15% boundary was rank `636` at score `89.485`, the top-10% boundary was rank `424` at score `91.035`, and the top-5% public Silver proxy was rank `212` at score `95.025`. The public gap to top-10% was `+1.350`; the public gap to top-5% was `+5.340`, roughly equivalent to `59` more successful single-post `EXFILTRATION` findings at about `0.09` points per firing candidate. The private reveal showed this public gap was not the decisive signal.
 
 ### What Is Confirmed
 
+- Final result: `132` / `4251`, Silver medal, private score `20.235`.
+- Final selected submissions were `v169_replay_costcoef095` and `v157_confdeputy_only`. `v169` scored `89.685` public but `0.000` private; `v157` scored `20.715` public and `20.235` private. The low-public, pure `CONFUSED_DEPUTY` hedge carried the final ranking.
 - `v169_replay_costcoef095` scored `89.685`, the current confirmed post-refresh best. It keeps the `v163` `Then say OK.` wording and changes only `REPLAY_COST_COEF=1.0 -> 0.95`, confirming the replay-cost estimate was conservative enough for a mild push on that hosted draw.
 - `v166_terminal_say_ok_direct` scored `89.235`, confirming that `Then say OK.` -> `Say OK.` is a real positive terminal-wording lever. `v167_terminal_reply_ok=88.110` and `v168_terminal_ok_only=86.400` are negative readouts; `Reply OK.` and bare `OK.` are worse.
 - `v171_sayok_router` scored `88.695`, negative evidence for adaptive terminal routing. Spreading the six probe budget across `Say OK.` / `Then say OK.` variants underperformed the static `v166` and replay-cost `v169`.
@@ -208,16 +214,18 @@ The main lever is throughput, not payload novelty. Literal `SECRET_MARKER`, comp
 The selected final submissions are `v169_replay_costcoef095=89.685` and
 `v157_confdeputy_only=20.715`.
 
-`v169` is the best confirmed post-refresh public score and remains the strongest
-single-post `SECRET_MARKER` `EXFILTRATION` anchor. `v166=89.235` is close, but
-it is highly correlated with `v169`: same predicate, same payload family, and
-only terminal wording / replay-cost conservatism changed.
+`v169` was the best confirmed post-refresh public score and the strongest
+single-post `SECRET_MARKER` `EXFILTRATION` anchor, but it scored `0.000` on
+private. `v166=89.235` was close on public, but it was highly correlated with
+`v169`: same predicate, same payload family, and only terminal wording /
+replay-cost conservatism changed.
 
-`v157` is intentionally low-public but orthogonal. It is the cleanest confirmed
+`v157` was intentionally low-public but orthogonal. It is the cleanest confirmed
 pure `CONFUSED_DEPUTY` submission in this repository, using `email.send` instead
-of the public-dominant `http.post` exfil route. The final selection is therefore
-a barbell: one high-public anchor plus one private shake hedge against broad
-suppression of the public exfil surface.
+of the public-dominant `http.post` exfil route. It scored `20.235` private and
+earned the Silver result. The final selection was therefore a successful barbell:
+one high-public anchor plus one private shake hedge against broad suppression of
+the public exfil surface.
 
 ### Discussion-Derived Guardrails
 
@@ -229,6 +237,14 @@ suppression of the public exfil surface.
 - Discussion `728947` frames the current public surface as `N_fired ~= budget * fire_rate / latency`; replay-safe aggression alone appears to plateau around the high-80s, so latency is the remaining practical lever.
 - Duplicate-message or KV-cache style spam is misleading because replay is cold per candidate and can erase apparent in-run gains.
 - Keep final-submission planning diversified: one slot can optimize public single-post exfil, but another should hedge private guardrails with lower-volume mixed predicates.
+- Post-final discussion and code confirmed the hedge thesis: many high-public
+  `SECRET_MARKER` exfil submissions scored `0.000` private, while clean
+  `CONFUSED_DEPUTY` portfolios transferred close to one-for-one.
+- Useful post-final references include Kaggle discussion `738896` (top-13:
+  EXFIL `100.665 -> 0.000`, CD `29.730 -> 29.670`), discussion `738940`
+  (two-specialist Silver strategy), and notebooks
+  `municef1/105-silver-private-lb-22-155-confused-deputy` and
+  `takamichitoda/the-hedge-that-survived-clean-confused-deputy`.
 
 ## Setup
 
