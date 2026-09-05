@@ -97,7 +97,7 @@ Important knowledge files:
 
 ## Silver Strategy Snapshot
 
-Last updated: 2026-09-03.
+Last updated: 2026-09-05.
 
 The final private leaderboard confirmed a Silver medal: rank `132` of `4251`
 teams, private score `20.235`. The final selected submissions were
@@ -245,6 +245,15 @@ the public exfil surface.
   (two-specialist Silver strategy), and notebooks
   `municef1/105-silver-private-lb-22-155-confused-deputy` and
   `takamichitoda/the-hedge-that-survived-clean-confused-deputy`.
+- The post-final CD notebooks clarify the implementation details that mattered:
+  avoid `send` / `email` / `upload` in the final user message, use neutral
+  "messaging tool" wording, keep `email.send` arguments valid (`to`, `subject`,
+  `body`), consider empty bodies for payload-inspection safety, and treat
+  recipient variation as the cell-diversity lever.
+- The missed upside was not another exfil rerun; it was earlier promotion of
+  `CONFUSED_DEPUTY` from a small tail hedge to a full specialist. Public
+  examples after the reveal show private `22-29` CD scores, above our
+  `v157=20.235`, while mixed exfil+deputy tails remained less efficient.
 
 ## Setup
 
